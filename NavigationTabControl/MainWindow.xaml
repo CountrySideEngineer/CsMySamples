@@ -8,10 +8,20 @@
         mc:Ignorable="d"
         Title="NavigationTabControl" 
         MinHeight="350" MinWidth="240"
-        Height="450" Width="800">
+        Height="450" Width="800"
+        Background="Black"
+        >
     <Window.DataContext>
         <vm:NavigationTabControlViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="./Resource/ResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid>
         <Grid Margin="10,10,10,10" Grid.ColumnSpan="2" >
             <Grid.RowDefinitions>
@@ -55,11 +65,31 @@
                     <TextBlock Text="5"/>
                 </TabItem>
             </TabControl>
-            <Button Content="Button1" Grid.Row="0" Grid.Column="0" Command="{Binding Path=ChangeCurrentTabCommand}" CommandParameter="0" />
-            <Button Content="Button2" Grid.Row="1" Grid.Column="0" Command="{Binding Path=ChangeCurrentTabCommand}" CommandParameter="1" />
-            <Button Content="Button3" Grid.Row="2" Grid.Column="0" Command="{Binding Path=ChangeCurrentTabCommand}" CommandParameter="2" />
-            <Button Content="Button4" Grid.Row="3" Grid.Column="0" Command="{Binding Path=ChangeCurrentTabCommand}" CommandParameter="3" />
-            <Button Content="Button5" Grid.Row="4" Grid.Column="0" Command="{Binding Path=ChangeCurrentTabCommand}" CommandParameter="4" />
+            <Button x:Name="ChangeTabIndexButton_001"
+                    Style="{StaticResource TabButtonMouseAction}"
+                    Content="Button1" 
+                    Grid.Row="0" Grid.Column="0" 
+                    Command="{Binding Path=ChangeCurrentTabCommand}" CommandParameter="0" />
+            <Button x:Name="ChangeTabIndexButton_002"
+                    Style="{StaticResource TabButtonMouseAction}"
+                    Content="Button2" 
+                    Grid.Row="1" Grid.Column="0" 
+                    Command="{Binding Path=ChangeCurrentTabCommand}" CommandParameter="1" />
+            <Button x:Name="ChangeTabIndexButton_003"
+                    Style="{StaticResource TabButtonMouseAction}"
+                    Content="Button3" 
+                    Grid.Row="2" Grid.Column="0" 
+                    Command="{Binding Path=ChangeCurrentTabCommand}" CommandParameter="2" />
+            <Button x:Name="ChangeTabIndexButton_004"
+                    Style="{StaticResource TabButtonMouseAction}"
+                    Content="Button4" 
+                    Grid.Row="3" Grid.Column="0" 
+                    Command="{Binding Path=ChangeCurrentTabCommand}" CommandParameter="3" />
+            <Button x:Name="ChangeTabIndexButton_005"
+                    Style="{StaticResource TabButtonMouseAction}"
+                    Content="Button5" 
+                    Grid.Row="4" Grid.Column="0" 
+                    Command="{Binding Path=ChangeCurrentTabCommand}" CommandParameter="4" />
         </Grid>
     </Grid>
 </Window>
