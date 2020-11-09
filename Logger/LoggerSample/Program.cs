@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using CSEng;
@@ -12,6 +14,14 @@ namespace LoggerSample
 	{
 		static void Main(string[] args)
 		{
+			IEnumerable<string> logLevels = Logger.AvailableLogLevelList;
+			int index = 0;
+			foreach (var logLevel in logLevels)
+			{
+				Console.WriteLine($"{index} : {logLevel}");
+				index++;
+			}
+
 			using (var logStream = new StreamWriter(@"./log.txt", false, Encoding.UTF8))
 			{
 				Logger.AddStream(logStream);
