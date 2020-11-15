@@ -44,6 +44,20 @@ namespace CSEng
 		/// List of TextWriter to output log message.
 		/// </summary>
 		private static readonly IEnumerable<TextWriter> TextStreams = new List<TextWriter>();
+
+		/// <summary>
+		/// List of available log level.
+		/// </summary>
+		public static readonly IEnumerable<string> AvailableLogLevelList = new List<string>
+		{
+			LogLevel.TRACE.ToString(),
+			LogLevel.DEBUG.ToString(),
+			LogLevel.INFO.ToString(),
+			LogLevel.WARN.ToString(),
+			LogLevel.ERROR.ToString(),
+			LogLevel.FATAL.ToString(),
+			LogLevel.NONE.ToString()
+		};
 		#endregion
 
 		#region public library interface.
