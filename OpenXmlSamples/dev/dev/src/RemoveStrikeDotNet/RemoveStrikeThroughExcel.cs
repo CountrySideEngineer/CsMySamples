@@ -1,4 +1,5 @@
-﻿using DocumentFormat.OpenXml.Packaging;
+﻿using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using System;
 using System.Collections.Generic;
@@ -27,72 +28,45 @@ namespace RemoveStrikeDotNet
 				}
 				var worksheetPart = (WorksheetPart)workbookPart.GetPartById(sheet.Id);
 				var cells = worksheetPart.Worksheet.Descendants<Cell>();
-				foreach (var cell in cells)
+				var sharedStringCells = cells.Where(cellItem => (null != cellItem.DataType) && (cellItem.DataType.Value == CellValues.SharedString));
+				foreach (var sharedStringCell in sharedStringCells)
 				{
-					if (cell.DataType.Value != CellValues.SharedString)
-					{
-						continue;
-					}
-
 					string cellInnerText = string.Empty;
-					int itemIndex = int.Parse(cell.InnerText);
+					int itemIndex = int.Parse(sharedStringCell.InnerText);
 					SharedStringItem item = workbookPart.SharedStringTablePart.SharedStringTable.Elements<SharedStringItem>().ElementAt(itemIndex);
-					if (item.HasChildren)
+					try
 					{
-						//Runクラス(r要素)
-						var childrenTypeRun = item.ChildElements.Where(itemChildren => itemChildren is Run);
-						if (0 < childrenTypeRun.Count())
+						var runElements = item.Elements<Run>();
+						if (0 < runElements.Count())
 						{
-							foreach (var childTypeRun in childrenTypeRun)
+							/*
+							 * Check the format informations have strikethrough element
+							 * if one or more r element can be found.
+							 */
+							foreach (var runElement in runElements)
 							{
-								//RunPropertyクラス(rPr要素)の有無を確認する。
-								var childrenTypeRunProperty = childTypeRun.ChildElements.Where(childTypeRunItem => childTypeRunItem is RunProperties);
-								if (0 < childrenTypeRunProperty.Count())
+								var runPropertyElements = runElement.RunProperties;
+								var strikeElements = runPropertyElements.Elements<Strike>();
+								if (0 < strikeElements.Count())
 								{
-									foreach (var childTypeRunProperty in childrenTypeRunProperty)
-									{
-										//Strikeクラス(strike要素)の有無の判定
-										var childrenTypeStrike = childTypeRunProperty.ChildElements.Where(childTypeRunPropertyItem => childTypeRunPropertyItem is Strike);
-										if (0 < childrenTypeStrike.Count())
-										{
-											//打消し線アリ：スキップする。
-											continue;
-										}
-										else
-										{
-											//打消し線ナシ：RunPropertyの文字列を、有効な文字列と判断して、保持する。
-											cellInnerText += childTypeRun.InnerText;
-										}
-									}
+									continue;
 								}
 								else
 								{
-									/*
-									 * RunPropertiesクラス(rPr要素)が無い場合、Runクラスの文字列がセル内の文字列の一部となる。
-									 */
-									cellInnerText += childTypeRun.InnerText;
-									continue;
+									cellInnerText += runElement.InnerText;
 								}
-
 							}
 						}
 						else
 						{
-							/*
-							 * Runクラス(r要素)が無い場合、特に編集情報を持たない。
-							 * そのため、SharedStringItemの文字列が、そのままセルの文字列となる。
-							 */
-							cellInnerText = item.InnerText;
+							cellInnerText += item.InnerText;
 						}
 					}
-					else
+					catch (Exception)
 					{
-						/*
-						 * 子要素が無い場合、セルの内部テキストを表示する。
-						 */
-						cellInnerText = item.InnerText;
+						cellInnerText += item.InnerText;
 					}
-					Console.WriteLine($"{cell.CellReference} : {cellInnerText}({item.InnerText})");
+					Console.WriteLine($"{sharedStringCell.CellReference} : {cellInnerText}({item.InnerText})");
 				}
 			}
 			return;
