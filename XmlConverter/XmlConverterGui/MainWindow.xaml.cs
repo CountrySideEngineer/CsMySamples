@@ -51,9 +51,9 @@ namespace XmlConverterGui
 		/// </summary>
 		/// <param name="sender">Object this event has sent.</param>
 		/// <param name="e">Event argumetn.</param>
-		private void OnNotifyNg(object sender, EventArgs e)
+		private void OnNotifyOk(object sender, EventArgs e)
 		{
-			Console.WriteLine(nameof(OnNotifyNg));
+			MessageBox.Show("変換しました。", "XML変換", MessageBoxButton.OK);
 		}
 
 		/// <summary>
@@ -61,9 +61,9 @@ namespace XmlConverterGui
 		/// </summary>
 		/// <param name="sender">Object this event has sent.</param>
 		/// <param name="e">Event argument</param>
-		private void OnNotifyOk(object sender, EventArgs e)
+		private void OnNotifyNg(object sender, EventArgs e)
 		{
-			Console.WriteLine(nameof(OnNotifyOk));
+			MessageBox.Show("変換できませんでした。", "XML変換", MessageBoxButton.OK, MessageBoxImage.Exclamation);
 		}
 
 		/// <summary>
