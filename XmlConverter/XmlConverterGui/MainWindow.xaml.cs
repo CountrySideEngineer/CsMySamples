@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSEng.XmlConverterGui.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,14 +16,65 @@ using System.Windows.Shapes;
 
 namespace XmlConverterGui
 {
-	/// <summary>
-	/// MainWindow.xaml の相互作用ロジック
-	/// </summary>
 	public partial class MainWindow : Window
 	{
 		public MainWindow()
 		{
 			InitializeComponent();
+		}
+
+		private void TextBox_Drop(object sender, DragEventArgs e)
+		{
+			string[] dropFiles = e.Data.GetData(System.Windows.DataFormats.FileDrop) as string[];
+			if (null != dropFiles)
+			{
+				this.inputFilePath.Text = dropFiles[0];
+			}
+		}
+
+		private void InputFilePath_PreviewDragOver(object sender, DragEventArgs e)
+		{
+			if (e.Data.GetDataPresent(System.Windows.DataFormats.FileDrop, true))
+			{
+				e.Effects = System.Windows.DragDropEffects.Copy;
+			}
+			else
+			{
+				e.Effects = System.Windows.DragDropEffects.None;
+			}
+			e.Handled = true;
+		}
+
+		/// <summary>
+		/// Show message to notify the convertion has finished successfully.
+		/// </summary>
+		/// <param name="sender">Object this event has sent.</param>
+		/// <param name="e">Event argumetn.</param>
+		private void OnNotifyNg(object sender, EventArgs e)
+		{
+			Console.WriteLine(nameof(OnNotifyNg));
+		}
+
+		/// <summary>
+		/// Show message to notify the convertoin has failed.
+		/// </summary>
+		/// <param name="sender">Object this event has sent.</param>
+		/// <param name="e">Event argument</param>
+		private void OnNotifyOk(object sender, EventArgs e)
+		{
+			Console.WriteLine(nameof(OnNotifyOk));
+		}
+
+		/// <summary>
+		/// Event handler to handle the data context changing.
+		/// </summary>
+		/// <param name="sender">Object sender.</param>
+		/// <param name="e">Event arguments.</param>
+		private void Window_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+		{
+			var newViewModel = (XmlConverterViewModel)e.NewValue;
+			newViewModel.ConvertOkEventHandler += this.OnNotifyOk;
+			newViewModel.ConvertNgEventHandler += this.OnNotifyNg;
 		}
 	}
 }

@@ -4,9 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:XmlConverterGui"
+        xmlns:vm="clr-namespace:CSEng.XmlConverterGui.ViewModel"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
+        
         Title="XmlConverter" Height="160" Width="520">
+    <Window.DataContext>
+        <vm:XmlConverterViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="16" />
@@ -29,7 +34,7 @@
                VerticalContentAlignment="Center"
                HorizontalContentAlignment="Right"
                />
-        <TextBox x:Name="textBox" 
+        <TextBox x:Name="inputFilePath" 
                  Grid.Row="1"
                  Grid.Column="2"
                  Grid.ColumnSpan="2"
@@ -40,14 +45,15 @@
                  TextAlignment="Left"
                  VerticalContentAlignment="Center"
                  ToolTip="変換対象のXMLファイルのパス"
-                 TextWrapping="NoWrap"
+                 TextWrapping="NoWrap" 
+                 Drop="TextBox_Drop" PreviewDragOver="InputFilePath_PreviewDragOver"
                  />
         <Button x:Name="button" 
                 Grid.Column="3"
                 Grid.Row="2"
                 Content="変換" 
                 Margin="16, 8"
-                
+                Command="{Binding ConvertCommand}"
                 />
 
     </Grid>
