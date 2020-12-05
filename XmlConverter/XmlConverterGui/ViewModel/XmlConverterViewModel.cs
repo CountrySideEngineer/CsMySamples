@@ -11,7 +11,7 @@ namespace CSEng.XmlConverterGui.ViewModel
 	/// <summary>
 	/// View Model class of XmlConverter, GUI type.
 	/// </summary>
-	public class XmlConverterViewModel : ViewModelBase
+	public class XmlConverterViewModel : CommonViewModelBase
 	{
 		#region Private fields and constants
 		/// <summary>
@@ -25,17 +25,10 @@ namespace CSEng.XmlConverterGui.ViewModel
 		private DelegateCommand convertCommand;
 		#endregion
 
-		#region Events
-		/// <summary>
-		/// Event handler to notify the convertion has finished successfully.
-		/// </summary>
-		public event EventHandler ConvertOkEventHandler;
-
-		/// <summary>
-		/// Event handler to notify the converton has failed.
-		/// </summary>
-		public event EventHandler ConvertNgEventHandler;
-		#endregion
+		public XmlConverterViewModel()
+		{
+			this.SrcFilePath = string.Empty;
+		}
 
 		#region Public properties
 		/// <summary>
@@ -51,8 +44,14 @@ namespace CSEng.XmlConverterGui.ViewModel
 			{
 				this.srcFilePath = value;
 				this.RaisePropertyChanged(nameof(SrcFilePath));
+				this.RaisePropertyChanged(nameof(CanConvert));
 			}
 		}
+
+		/// <summary>
+		/// Property of the convert can be executed or not.
+		/// </summary>
+		public bool CanConvert => this.CanConvertCommandExecute();
 		#endregion
 
 		#region Other methods and private properties in calling order
@@ -65,7 +64,7 @@ namespace CSEng.XmlConverterGui.ViewModel
 			{
 				if (null == this.convertCommand)
 				{
-					this.convertCommand = new DelegateCommand(this.ConvertCommandExecute);
+					this.convertCommand = new DelegateCommand(this.ConvertCommandExecute, this.CanConvertCommandExecute);
 				}
 				return this.convertCommand;
 			}
@@ -76,6 +75,32 @@ namespace CSEng.XmlConverterGui.ViewModel
 		/// </summary>
 		protected virtual void ConvertCommandExecute()
 		{
+			try
+			{
+				var converter = new XmlConverter.Model.XmlConverter();
+				var convertResult = converter.Convert(this.srcFilePath);
+				base.RaiseCommandOkEvent(this, null);
+			}
+			catch (Exception)
+			{
+				base.RaiseCommandNgEvent(this, null);
+			}
+		}
+
+		/// <summary>
+		/// Return whether a command to convert xml file can be executed or not.
+		/// </summary>
+		/// <returns>Returns true if the command can be executed, otherwise returns false.</returns>
+		protected virtual bool CanConvertCommandExecute()
+		{
+			if ((string.IsNullOrEmpty(this.SrcFilePath)) || (string.IsNullOrWhiteSpace(this.SrcFilePath)))
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
 		}
 		#endregion
 	}

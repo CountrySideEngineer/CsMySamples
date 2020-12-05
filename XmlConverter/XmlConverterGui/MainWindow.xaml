@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         
-        Title="XmlConverter" Height="160" Width="520">
+        Title="XmlConverter" Height="160" Width="520" DataContextChanged="Window_DataContextChanged">
     <Window.DataContext>
         <vm:XmlConverterViewModel/>
     </Window.DataContext>
@@ -21,7 +21,8 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="32"/>
-            <ColumnDefinition Width="96"/>
+            <ColumnDefinition Width="78"/>
+            <ColumnDefinition Width="18"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="96"/>
             <ColumnDefinition Width="32"/>
@@ -32,11 +33,11 @@
                Content="ファイル：" 
                Margin="8"
                VerticalContentAlignment="Center"
-               HorizontalContentAlignment="Right"
+               HorizontalContentAlignment="Right" Grid.ColumnSpan="2"
                />
         <TextBox x:Name="inputFilePath" 
                  Grid.Row="1"
-                 Grid.Column="2"
+                 Grid.Column="3"
                  Grid.ColumnSpan="2"
                  HorizontalAlignment="Stretch"
                  VerticalAlignment="Center"
@@ -45,15 +46,17 @@
                  TextAlignment="Left"
                  VerticalContentAlignment="Center"
                  ToolTip="変換対象のXMLファイルのパス"
+                 Text="{Binding SrcFilePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  TextWrapping="NoWrap" 
                  Drop="TextBox_Drop" PreviewDragOver="InputFilePath_PreviewDragOver"
                  />
         <Button x:Name="button" 
-                Grid.Column="3"
+                Grid.Column="4"
                 Grid.Row="2"
                 Content="変換" 
                 Margin="16, 8"
                 Command="{Binding ConvertCommand}"
+                IsEnabled="{Binding CanConvert}"
                 />
 
     </Grid>

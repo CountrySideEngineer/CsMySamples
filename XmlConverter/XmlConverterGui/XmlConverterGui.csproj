@@ -62,6 +62,7 @@
       <Link>model\XmlConverter.cs</Link>
     </Compile>
     <Compile Include="Command\DelegateCommand.cs" />
+    <Compile Include="ViewModel\CommonViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\XmlConverterViewModel.cs" />
     <Page Include="MainWindow.xaml">

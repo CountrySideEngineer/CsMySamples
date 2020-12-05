@@ -1,4 +1,5 @@
-﻿using CSEng.XmlConverterGui.ViewModel;
+﻿using CSEng.ViewModel;
+using CSEng.XmlConverterGui.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,9 +73,9 @@ namespace XmlConverterGui
 		/// <param name="e">Event arguments.</param>
 		private void Window_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
 		{
-			var newViewModel = (XmlConverterViewModel)e.NewValue;
-			newViewModel.ConvertOkEventHandler += this.OnNotifyOk;
-			newViewModel.ConvertNgEventHandler += this.OnNotifyNg;
+			var newViewModel = (CommonViewModelBase)e.NewValue;
+			newViewModel.CommandOkEventHandler += this.OnNotifyOk;
+			newViewModel.CommandNgEventHandler += this.OnNotifyNg;
 		}
 	}
 }
