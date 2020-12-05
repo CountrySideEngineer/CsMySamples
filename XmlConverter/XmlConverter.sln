@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlConverter", "XmlConverter\XmlConverter.csproj", "{B9A10DC9-4105-48B3-9D5D-877C972B43C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlConverterGui", "XmlConverterGui\XmlConverterGui.csproj", "{8281E38A-E2E0-464C-8FF5-F39F1CADE314}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B9A10DC9-4105-48B3-9D5D-877C972B43C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9A10DC9-4105-48B3-9D5D-877C972B43C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9A10DC9-4105-48B3-9D5D-877C972B43C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8281E38A-E2E0-464C-8FF5-F39F1CADE314}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8281E38A-E2E0-464C-8FF5-F39F1CADE314}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8281E38A-E2E0-464C-8FF5-F39F1CADE314}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8281E38A-E2E0-464C-8FF5-F39F1CADE314}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
