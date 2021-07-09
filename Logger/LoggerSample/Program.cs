@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
-using CSEng;
+using CSEngineer;
 
 namespace LoggerSample
 {
@@ -88,7 +89,12 @@ namespace LoggerSample
 				Logger.WARN("This is WARN level message");
 				Logger.ERROR("This is ERROR level message");
 				Logger.FATAL("This is FATAL level message");
+
+				bool removeResult = Logger.RemoveStream(logStream);
+				Debug.WriteLine($"Remove result = {removeResult}");
 			}
+
+			Logger.TRACE("This is TRACE level message");
 			return;
 		}
 	}
