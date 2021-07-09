@@ -23,6 +23,13 @@ namespace LoggerSample
 				index++;
 			}
 
+			Logger.TRACE("This is TRACE level message before initializing stream");
+			Logger.DEBUG("This is DEBUG level message before initializing stream");
+			Logger.INFO("This is INFO level message before initializing stream");
+			Logger.WARN("This is WARN level message before initializing stream");
+			Logger.ERROR("This is ERROR level message before initializing stream");
+			Logger.FATAL("This is FATAL level message before initializing stream");
+
 			using (var logStream = new StreamWriter(@"./log.txt", false, Encoding.UTF8))
 			{
 				Logger.AddStream(logStream);
