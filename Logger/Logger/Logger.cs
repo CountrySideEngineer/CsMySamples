@@ -6,7 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.ComTypes;
 
-namespace CSEng
+namespace CSEngineer
 {
 	/// <summary>
 	/// Logger class to output log class.
@@ -68,6 +68,16 @@ namespace CSEng
 		public static void AddStream(TextWriter textStream)
 		{
 			((List<TextWriter>)Logger.TextStreams).Add(textStream);
+		}
+
+		/// <summary>
+		/// Remove TextWriter object to list of text stream.
+		/// </summary>
+		/// <param name="textStream">Object to remove from the list.</param>
+		/// <returns>Result of remove.</returns>
+		public static bool RemoveStream(TextWriter textStream)
+		{
+			return ((List<TextWriter>)Logger.TextStreams).Remove(textStream);
 		}
 
 		/// <summary>
