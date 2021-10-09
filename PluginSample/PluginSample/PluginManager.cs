@@ -1,4 +1,5 @@
-﻿using PluginSdk;
+﻿using LiteDB;
+using PluginSdk;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,52 @@ namespace PluginSample
 				plugins.Add(plugin);
 			});
 			return plugins.ToArray();
+		}
+
+		public IPlugin Load(Plugin plugin)
+		{
+			string pluginPath = $@"./{plugin.FileName}";
+			var assembly = Assembly.LoadFrom(pluginPath);
+			var ifType = assembly.GetTypes()
+				.Where(t => t.IsClass && t.IsPublic && !t.IsAbstract && (t.GetInterface(nameof(IPlugin)) != null))
+				.FirstOrDefault();
+			if (null == ifType)
+			{
+				return null;
+			}
+			IPlugin pluginInstance = (IPlugin)Activator.CreateInstance(ifType);
+			return pluginInstance;
+		}
+
+		public void RegistSampleData()
+		{
+			using (var db = new LiteDatabase(@"./../db/PluginDb.db"))
+			{
+				var col = db.GetCollection<Plugin>("plugindb");
+				var pluginA = new Plugin()
+				{
+					Title = "PluginA",
+					FileName = "PluginA.dll"
+				};
+				col.Insert(pluginA);
+				var pluginB = new Plugin()
+				{
+					Title = "PluginB",
+					FileName = "PluginB.dll"
+				};
+				col.Insert(pluginB);
+			}
+		}
+
+		public Plugin[] GetPluginInfos()
+		{
+			using (var db = new LiteDatabase(@"./../db/PluginDb.db"))
+			{
+				var col = db.GetCollection<Plugin>("plugindb");
+
+				var query = col.Query().ToEnumerable().ToArray();
+				return query;
+			}
 		}
 	}
 }

@@ -11,13 +11,16 @@ namespace PluginSample
     {
         public static void Main()
 		{
-            PluginManager load = new PluginManager();
-            IPlugin[] plugins = load.Load();
-            foreach (var plugin in plugins)
-			{
-                PluginOutput output = plugin.PluginFunction(plugin.GetType().FullName);
-                Console.WriteLine(output.message);
-			}
+            PluginManager manager = new PluginManager();
+            Plugin[] pluginDatas = manager.GetPluginInfos();
+
+            IPlugin plugin = manager.Load(pluginDatas[0]);
+            PluginOutput pluginOutput = plugin.PluginFunction("PLUGIN MANAGE SAMPLE");
+            Console.WriteLine(pluginOutput.message);
+
+            plugin = manager.Load(pluginDatas[1]);
+            pluginOutput = plugin.PluginFunction("PLUGIN MANAGE SAMPLE");
+            Console.WriteLine(pluginOutput.message);
 
             return;
 		}
