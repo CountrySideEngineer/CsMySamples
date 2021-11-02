@@ -53,6 +53,26 @@ namespace PluginSample
 			return pluginInstance;
 		}
 
+		/// <summary>
+		/// Load plugin from data base.
+		/// </summary>
+		/// <param name="index">Index of plugin </param>
+		/// <returns>Plugin object loaded load from plugin DLL file.</returns>
+		/// <exception cref="IndexOutOfRangeException">Argument <para>index</para> is out of range.</exception>
+		public IPlugin Load(int index)
+		{
+			try
+			{
+				IPlugin[] plugins = this.Load();
+				IPlugin plugin = plugins[index];
+				return plugin;
+			}
+			catch (IndexOutOfRangeException)
+			{
+				throw;
+			}
+		}
+
 		public void RegistSampleData()
 		{
 			using (var db = new LiteDatabase(@"./../db/PluginDb.db"))
