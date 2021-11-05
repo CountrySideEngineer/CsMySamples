@@ -97,11 +97,10 @@ namespace PluginSampleGui.ViewModel
 		/// Body of command to execute menu command.
 		/// </summary>
 		/// <param name="index">Selected item index in menu bar.</param>
-		public void MenuExecuteCommandExecute(int index)
+		public void MenuExecuteCommandExecute(int id)
 		{
 			PluginManager pluginManager = new PluginManager();
-			Plugin[] plugins = pluginManager.GetPluginInfos();
-			IPlugin plugin = pluginManager.Load(plugins[index]);
+			IPlugin plugin = pluginManager.Load(id);
 			PluginOutput output = plugin.PluginFunction("message");
 
 			EventArgs eventArgs = new NotifyMessageEventArgs(output.message);

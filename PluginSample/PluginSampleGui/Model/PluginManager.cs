@@ -59,13 +59,17 @@ namespace PluginSample
 		/// <param name="index">Index of plugin </param>
 		/// <returns>Plugin object loaded load from plugin DLL file.</returns>
 		/// <exception cref="IndexOutOfRangeException">Argument <para>index</para> is out of range.</exception>
-		public IPlugin Load(int index)
+		public IPlugin Load(int id)
 		{
 			try
 			{
-				IPlugin[] plugins = this.Load();
-				IPlugin plugin = plugins[index];
-				return plugin;
+				Plugin[] plugins = this.GetPluginInfos();
+				Plugin plugin = plugins
+					.Where(item => item.Id == id)
+					.FirstOrDefault();
+				IPlugin pluginObject = this.Load(plugin);
+
+				return pluginObject;
 			}
 			catch (IndexOutOfRangeException)
 			{

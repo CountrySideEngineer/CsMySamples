@@ -30,6 +30,7 @@
                       Height="48"
                       VerticalAlignment="Stretch"
                       VerticalContentAlignment="Center"
+                      Command="{Binding MenuExecuteCommand}"
                       />
         </Menu>
 

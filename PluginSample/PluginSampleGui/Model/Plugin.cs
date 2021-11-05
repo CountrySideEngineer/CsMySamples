@@ -8,7 +8,7 @@ namespace PluginSample
 {
 	public class Plugin
 	{
-		public int id { get; set; }
+		public int Id { get; set; }
 
 		public string Title { get; set; }
 

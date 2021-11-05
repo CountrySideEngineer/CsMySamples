@@ -81,22 +81,20 @@ namespace PluginSampleGui
 		/// <summary>
 		/// Load menu item.
 		/// </summary>
-		/// <param name="menuItemTitles">Collection of menu item data.</param>
-		private void LoadMenuItem(IEnumerable<Plugin> menuItemTitles)
+		/// <param name="plugins">Collection of menu item data.</param>
+		private void LoadMenuItem(IEnumerable<Plugin> plugins)
 		{
 			MenuItem rootMenuItem = (MenuItem)this.FindName("PluginRoot");
 			rootMenuItem.Items.Clear();
-			int index = 0;
-			foreach (var menuTitle in menuItemTitles)
+			foreach (var pluginItem in plugins)
 			{
 				var menuItem = new MenuItem()
 				{
-					Header = menuTitle.Title,
+					Header = pluginItem.Title,
 					Command = ((PluginSampleGuiViewModel)this.DataContext).MenuExecuteCommand,
-					CommandParameter = index
+					CommandParameter = pluginItem.Id
 				};
 				rootMenuItem.Items.Add(menuItem);
-				index++;
 			}
 		}
 
