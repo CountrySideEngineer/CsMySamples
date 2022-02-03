@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace CountrySideEngineer.ProgressWindow
 {
     public class ProgressWindow
-    {
+	{
         public void Start(IAsyncTask<ProgressInfo> task)
 		{
             var viewModel = new ProgressWindowsViewModel()

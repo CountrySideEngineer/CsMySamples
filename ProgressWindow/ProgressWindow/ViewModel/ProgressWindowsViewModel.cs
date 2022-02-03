@@ -100,6 +100,7 @@ namespace CountrySideEngineer.ProgressWindow.ViewModel
 			{
 				_numerator = value;
 				RaisePropertyChanged(nameof(Numerator));
+				RaisePropertyChanged(nameof(ProgressValue));
 			}
 		}
 
@@ -123,9 +124,24 @@ namespace CountrySideEngineer.ProgressWindow.ViewModel
 			{
 				_denominator = value;
 				RaisePropertyChanged(nameof(Denominator));
+				RaisePropertyChanged(nameof(ProgressValue));
 			}
 		}
 
+		public string ProgressValue
+		{
+			get
+			{
+				try
+				{
+					return $"{Numerator} / {Denominator}";
+				}
+				catch (DivideByZeroException)
+				{
+					return "- / -";
+				}
+			}
+		}
 		/// <summary>
 		/// Default constructor.
 		/// </summary>

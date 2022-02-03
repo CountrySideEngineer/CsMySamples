@@ -39,9 +39,12 @@ namespace CountrySideEngineer.ProgressWindow.View
 			SetWindowLong(handle, GWL_STYLE, style);
 		}
 
+		/// <summary>
+		/// Default constructor.
+		/// </summary>
 		public ProgressWindow()
 		{
-			//InitializeComponent();
+			InitializeComponent();
 		}
 
 		/// <summary>
@@ -63,7 +66,26 @@ namespace CountrySideEngineer.ProgressWindow.View
 		/// <param name="e">Event argument.</param>
 		private void OnWindowClose(object sender, EventArgs e)
 		{
-			Close();
+			//Add delegate to thread queue manager, called "dispatch".
+			this.Dispatcher.Invoke(new System.EventHandler(this.OnCloseDispatch), this, null);
+		}
+
+		/// <summary>
+		/// Close event handler dispatched from dispatcher.
+		/// </summary>
+		/// <param name="sender">Event sender.</param>
+		/// <param name="e">Event argument.</param>
+		private void OnCloseDispatch(object sender, EventArgs e)
+		{
+			try
+			{
+				var progressWindow = sender as ProgressWindow;
+				progressWindow.Close();
+			}
+			catch (NullReferenceException)
+			{
+				this.Close();
+			}
 		}
 
 		/// <summary>
