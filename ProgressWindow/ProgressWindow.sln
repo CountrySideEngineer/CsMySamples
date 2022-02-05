@@ -20,6 +20,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgressWindow.Sample.GUI",
 		{0CC87A2F-7E2D-4C97-A888-54675991CBE9} = {0CC87A2F-7E2D-4C97-A888-54675991CBE9}
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProgressWindow.Core", "ProgressWindow.Core\ProgressWindow.Core.csproj", "{DB0230BB-1041-4062-924F-80FB013471A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgressWindow.Sample.Core.GUI", "ProgressWindow.Sample.Core.GUI\ProgressWindow.Sample.Core.GUI.csproj", "{7D82F52C-C897-4FF9-B54E-1F039A2923AF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DB0230BB-1041-4062-924F-80FB013471A5} = {DB0230BB-1041-4062-924F-80FB013471A5}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +45,14 @@ Global
 		{4587D5B3-F28E-47EB-8E31-1E47BF38B514}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4587D5B3-F28E-47EB-8E31-1E47BF38B514}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4587D5B3-F28E-47EB-8E31-1E47BF38B514}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB0230BB-1041-4062-924F-80FB013471A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB0230BB-1041-4062-924F-80FB013471A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB0230BB-1041-4062-924F-80FB013471A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB0230BB-1041-4062-924F-80FB013471A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D82F52C-C897-4FF9-B54E-1F039A2923AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D82F52C-C897-4FF9-B54E-1F039A2923AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D82F52C-C897-4FF9-B54E-1F039A2923AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D82F52C-C897-4FF9-B54E-1F039A2923AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

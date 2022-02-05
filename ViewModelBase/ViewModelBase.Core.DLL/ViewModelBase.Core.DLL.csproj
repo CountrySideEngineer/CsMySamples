@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>CountrySideEngineer.ViewModel.Base</RootNamespace>
+    <Description>Base of CS GUI application using WPF, .NET Core.</Description>
+    <AssemblyName>CountrySideEngineer.ViewModel.Base</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\ViewModelBase.DLL\ViewModelBase\NotificationViewModelBase.cs" Link="ViewModelBase\NotificationViewModelBase.cs" />
+    <Compile Include="..\ViewModelBase.DLL\ViewModelBase\ViewModelBase.cs" Link="ViewModelBase\ViewModelBase.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModelBase\" />
+  </ItemGroup>
+
+</Project>
