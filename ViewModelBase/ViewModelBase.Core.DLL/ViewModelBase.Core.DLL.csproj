@@ -5,6 +5,7 @@
     <UseWPF>true</UseWPF>
     <RootNamespace>CountrySideEngineer.ViewModel.Base</RootNamespace>
     <Description>Base of CS GUI application using WPF, .NET Core.</Description>
+    <AssemblyName>CountrySideEngineer.ViewModel.Base</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
