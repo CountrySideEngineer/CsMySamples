@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\ProgressWindow.Sample.GUI\Command\DelegateCommand.cs" Link="Command\DelegateCommand.cs" />
+    <Compile Include="..\ProgressWindow.Sample.GUI\Command\ExecuteAsyncCommand.cs" Link="Command\ExecuteAsyncCommand.cs" />
+    <Compile Include="..\ProgressWindow.Sample.GUI\MainWindow.xaml.cs" Link="MainWindow.xaml.cs" />
+    <Compile Include="..\ProgressWindow.Sample.GUI\ViewModel\ProgressWindowSampleViewModel.cs" Link="ViewModel\ProgressWindowSampleViewModel.cs" />
+    <Compile Include="..\ProgressWindow.Sample\HeavyTask.cs" Link="Model\HeavyTask.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Command\" />
+    <Folder Include="Model\" />
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="..\ProgressWindow.Sample.GUI\MainWindow.xaml" Link="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CountrySideEngineer.ViewModel.Base">
+      <HintPath>..\bin\netcoreapp3.1\CountrySideEngineer.ViewModel.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="ProgressWindow.Core">
+      <HintPath>..\bin\netcoreapp3.1\ProgressWindow.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
