@@ -5,7 +5,8 @@
     <UseWPF>true</UseWPF>
     <AssemblyName>ContentWindow</AssemblyName>
     <RootNamespace>CountrySideEngineer.ContentWindow</RootNamespace>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
+    <Copyright>Copyright ©  2022</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
