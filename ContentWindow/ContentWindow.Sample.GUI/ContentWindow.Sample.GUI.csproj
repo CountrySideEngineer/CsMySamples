@@ -36,7 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ContentWindow">
-      <HintPath>..\ContentWindow\bin\ContentWindow.dll</HintPath>
+      <HintPath>..\bin\ContentWindow.dll</HintPath>
     </Reference>
     <Reference Include="CountrySideEngineer.ViewModel.Base">
       <HintPath>..\lib\CountrySideEngineer.ViewModel.Base.dll</HintPath>
