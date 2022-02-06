@@ -18,8 +18,8 @@ namespace ContentWindow.Sample.GUI.Command
 		public void Execute()
 		{
 			_contentWindow = new CountrySideEngineer.ContentWindow.ContentWindow("Sample Content");
-			this.ContentReceivedEventHandler += _contentWindow.OnDataReceived;
-			_contentWindow.Open();
+			this.ContentReceivedEventHandler += _contentWindow.OnContentReceived;
+			_contentWindow.Start();
 
 			var timer = new DispatcherTimer();
 			timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
@@ -42,7 +42,7 @@ namespace ContentWindow.Sample.GUI.Command
 			}
 			else
 			{
-				_contentWindow.Close();
+				_contentWindow.Finish();
 			}
 		}
 	}

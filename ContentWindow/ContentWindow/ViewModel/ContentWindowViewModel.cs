@@ -34,6 +34,12 @@ namespace CountrySideEngineer.ContentWindow.ViewModel
 			}
 		}
 
+		public delegate void StartContentReceiveEventHandler(object sender, EventArgs e);
+		public StartContentReceiveEventHandler StartContentReceiveEvent;
+
+		public delegate void FinisContentReceiveEventHandler(object sender, EventArgs e);
+		public FinisContentReceiveEventHandler FinishContentReceiveEvent;
+
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
@@ -65,14 +71,77 @@ namespace CountrySideEngineer.ContentWindow.ViewModel
 			Content += item;
 		}
 
+		public void Refresh()
+		{
+			Content = string.Empty;
+		}
+
 		/// <summary>
 		/// Data received event handler
 		/// </summary>
 		/// <param name="sender">Event sender</param>
 		/// <param name="e">Event argument.</param>
-		public void OnDataReceived(object sender, ContentReceivedEventArgs e)
+		public void OnContentReceived(object sender, ContentReceivedEventArgs e)
 		{
 			Append(e.Data);
+		}
+
+		/// <summary>
+		/// Data received event handler
+		/// </summary>
+		/// <param name="sender">Event sender.</param>
+		/// <param name="e">Event argument.</param>
+		public void OnDataReceived(object sender, DataReceivedEventArgs e)
+		{
+			Append(e.Data);
+		}
+
+		/// <summary>
+		/// Start receiving data event handler.
+		/// </summary>
+		/// <param name="sender">Event sender.</param>
+		/// <param name="e">Event argument.</param>
+		public void OnDataReceiveStart(object sender, EventArgs e)
+		{
+			StartContentReceiveEvent?.Invoke(this, e);
+		}
+
+		/// <summary>
+		/// Refresh received data event handler.
+		/// </summary>
+		/// <param name="sender">Event sender.</param>
+		/// <param name="e">Event argument.</param>
+		public void OnDataRefresh(object sender, EventArgs e)
+		{
+			Refresh();
+		}
+
+		/// <summary>
+		/// Finish receiving data event handler.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		public void OnDataFinished(object sender, EventArgs e)
+		{
+			FinishContentReceiveEvent?.Invoke(sender, e);
+		}
+
+		/// <summary>
+		/// Raise event to start data receiving.
+		/// </summary>
+		/// <param name="e">Event argument.</param>
+		public void RaiseDataReceiveStartEvent(EventArgs e)
+		{
+			this.OnDataReceiveStart(this, e);
+		}
+
+		/// <summary>
+		/// Raise event to finish data receiving.
+		/// </summary>
+		/// <param name="e">Event argument.</param>
+		public void RaiseDataReceiveFinishedEvent(EventArgs e)
+		{
+			this.OnDataFinished(this, e);
 		}
 	}
 }

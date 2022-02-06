@@ -11,7 +11,7 @@
         Width="460" 
         Title="{Binding Title}"
         DataContextChanged="Window_DataContextChanged" 
-        ContentRendered="Window_ContentRendered">
+        >
     <Window.DataContext>
         <vm:ContentWindowViewModel/>
     </Window.DataContext>

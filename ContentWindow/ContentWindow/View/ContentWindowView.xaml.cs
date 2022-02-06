@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CountrySideEngineer.ContentWindow.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -53,8 +54,27 @@ namespace CountrySideEngineer.ContentWindow.View
 		/// <param name="e">Event argument.</param>
 		private void Window_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
 		{
-			//var viewModel = (ProgressWindowsViewModel)e.NewValue;
-			//viewModel.CloseWindowEvent += this.OnWindowClose;
+			var viewModel = (ContentWindowViewModel)e.NewValue;
+			viewModel.StartContentReceiveEvent += this.OnWindowShow;
+			viewModel.FinishContentReceiveEvent += this.OnWindowClose;
+		}
+
+		private void OnWindowShow(object sender, EventArgs e)
+		{
+			this.Dispatcher.Invoke(new System.EventHandler(OnShowDispatch), this, null);
+		}
+
+		public void OnShowDispatch(object sender, EventArgs e)
+		{
+			try
+			{
+				var view = sender as ContentWindowView;
+				view.Show();
+			}
+			catch (NullReferenceException)
+			{
+				this.Show();
+			}
 		}
 
 		/// <summary>
@@ -66,7 +86,7 @@ namespace CountrySideEngineer.ContentWindow.View
 		private void OnWindowClose(object sender, EventArgs e)
 		{
 			//Add delegate to thread queue manager, called "dispatch".
-			//this.Dispatcher.Invoke(new System.EventHandler(this.OnCloseDispatch), this, null);
+			this.Dispatcher.Invoke(new System.EventHandler(this.OnCloseDispatch), this, null);
 		}
 
 		/// <summary>
@@ -74,29 +94,17 @@ namespace CountrySideEngineer.ContentWindow.View
 		/// </summary>
 		/// <param name="sender">Event sender.</param>
 		/// <param name="e">Event argument.</param>
-		private void OnCloseDispatch(object sender, EventArgs e)
+		public void OnCloseDispatch(object sender, EventArgs e)
 		{
-			//try
-			//{
-			//	var progressWindow = sender as ProgressWindow;
-			//	progressWindow.Close();
-			//}
-			//catch (NullReferenceException)
-			//{
-			//	this.Close();
-			//}
-		}
-
-		/// <summary>
-		/// Window ContentRendered event handler.
-		/// When the event raised, 
-		/// </summary>
-		/// <param name="sender">Event sender</param>
-		/// <param name="e">Event argument.</param>
-		private void Window_ContentRendered(object sender, EventArgs e)
-		{
-			//var viewModel = (ProgressWindowsViewModel)this.DataContext;
-			//viewModel.OnProgressStart(this, null);
+			try
+			{
+				var view = sender as ContentWindowView;
+				view.Close();
+			}
+			catch (NullReferenceException)
+			{
+				this.Close();
+			}
 		}
 	}
 }

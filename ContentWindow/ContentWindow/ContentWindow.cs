@@ -41,8 +41,14 @@ namespace CountrySideEngineer.ContentWindow
 			ViewTitle = title;
 		}
 
-		protected delegate void DataReceivedEventHandler(object sender, ContentReceivedEventArgs e);
-		protected DataReceivedEventHandler OnDataReceivedEvent;
+		protected delegate void ContentReceivedEventHandler(object sender, ContentReceivedEventArgs e);
+		protected ContentReceivedEventHandler ContentReceivedEvent;
+
+		protected delegate void ContentRefreshEventHandler(object sender, EventArgs e);
+		protected ContentRefreshEventHandler ContentRefreshEvent;
+
+		protected delegate void DataReceivedEventHandler(object sender, DataReceivedEventArgs e);
+		protected DataReceivedEventHandler DataReceivedEvent;
 
 		/// <summary>
 		/// View of title.
@@ -54,35 +60,59 @@ namespace CountrySideEngineer.ContentWindow
 		/// </summary>
 		/// <param name="sender">Event sender.</param>
 		/// <param name="e">Event argument.</param>
-		public void OnDataReceived(object sender, ContentReceivedEventArgs e)
+		public void OnContentReceived(object sender, ContentReceivedEventArgs e)
 		{
-			OnDataReceivedEvent?.Invoke(this, e);
+			ContentReceivedEvent?.Invoke(sender, e);
+		}
+
+		/// <summary>
+		/// Data received event handler.
+		/// </summary>
+		/// <param name="sender">Event sender.</param>
+		/// <param name="e">Event argument.</param>
+		public void OnDataReceived(object sender, DataReceivedEventArgs e)
+		{
+			DataReceivedEvent?.Invoke(sender, e);
+		}
+
+		/// <summary>
+		/// Data refresh request event handler.
+		/// </summary>
+		/// <param name="sender">Event sender.</param>
+		/// <param name="e">Event argument.</param>
+		public void OnDataRefresh(object sender, EventArgs e)
+		{
+			ContentRefreshEvent?.Invoke(sender, e);
 		}
 
 		/// <summary>
 		/// Open content window.
 		/// </summary>
-		public void Open()
+		public void Start()
 		{
 			_viewModel = new ContentWindowViewModel()
 			{
 				Title = ViewTitle
 			};
-			OnDataReceivedEvent += _viewModel.OnDataReceived;
+			DataReceivedEvent += _viewModel.OnDataReceived;
+			ContentReceivedEvent += _viewModel.OnContentReceived;
+			ContentRefreshEvent += _viewModel.OnDataRefresh;
 			_view = new CountrySideEngineer.ContentWindow.View.ContentWindowView()
 			{
 				DataContext = _viewModel
 			};
-			_view.Show();
+			_viewModel.RaiseDataReceiveStartEvent(null);
 		}
 
 		/// <summary>
 		/// Close content window.
 		/// </summary>
-		public void Close()
+		public void Finish()
 		{
-			OnDataReceivedEvent -= _viewModel.OnDataReceived;
-			_view.Close();
+			DataReceivedEvent -= _viewModel.OnDataReceived;
+			ContentReceivedEvent -= _viewModel.OnContentReceived;
+			ContentRefreshEvent -= _viewModel.OnDataRefresh;
+			_viewModel.RaiseDataReceiveFinishedEvent(null);
 		}
 	}
 }
