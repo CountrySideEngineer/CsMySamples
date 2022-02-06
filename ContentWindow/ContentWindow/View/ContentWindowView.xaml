@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Height="400" 
-        Width="460" 
+        Height="480" 
+        Width="920" 
         Title="{Binding Title}"
         DataContextChanged="Window_DataContextChanged" 
         >
@@ -18,25 +18,17 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!--
-                <ResourceDictionary Source="/Resources/Styles.xaml"/>
-                -->
+                <ResourceDictionary Source="./../Resources/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <Border Margin="8"
-                BorderBrush="DarkGray"
-                BorderThickness="1"
+        <Border Style="{DynamicResource ResourceKey=ContentAreaBorder}"
                 >
             <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <TextBlock HorizontalAlignment="Stretch"
-                           VerticalAlignment="Stretch"
-                           TextAlignment="Left"
-                           TextWrapping="Wrap"
+                <TextBlock Style="{DynamicResource ResourceKey=TextBlockContentArea}"
                            Text="{Binding Content}"
-                           >
-                </TextBlock>
+                           />
             </ScrollViewer>
         </Border>
     </Grid>

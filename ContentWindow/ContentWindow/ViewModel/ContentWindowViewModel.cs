@@ -69,7 +69,7 @@ namespace CountrySideEngineer.ContentWindow.ViewModel
 		public void Append(string item)
 		{
 			Content += item;
-			Content += "\r\n";
+			Content += Environment.NewLine;
 		}
 
 		/// <summary>

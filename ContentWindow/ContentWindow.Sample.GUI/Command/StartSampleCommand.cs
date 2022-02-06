@@ -34,7 +34,11 @@ namespace ContentWindow.Sample.GUI.Command
 		{
 			if (_dispatchCount < 200)
 			{
-				string content = $"Dispatch counte = {_dispatchCount}\r\n";
+				string content = $"Dispatch counter = {_dispatchCount}";
+				if (0 == _dispatchCount % 2)
+				{
+					content = " " + content;
+				}
 				var eventArgs = new ContentReceivedEventArgs(content);
 				ContentReceivedEventHandler?.Invoke(this, eventArgs);
 				_dispatchCount++;

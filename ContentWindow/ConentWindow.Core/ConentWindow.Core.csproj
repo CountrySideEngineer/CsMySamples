@@ -5,7 +5,7 @@
     <UseWPF>true</UseWPF>
     <AssemblyName>ContentWindow</AssemblyName>
     <RootNamespace>CountrySideEngineer.ContentWindow</RootNamespace>
-    <Version>0.1.1</Version>
+    <Version>0.1.2</Version>
     <Copyright>Copyright ©  2022</Copyright>
   </PropertyGroup>
 
@@ -24,6 +24,7 @@
     <Folder Include="Model\" />
     <Folder Include="View\" />
     <Folder Include="ViewModel\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
 
   <ItemGroup>
