@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>ContentWindow</AssemblyName>
+    <RootNamespace>CountrySideEngineer.ContentWindow</RootNamespace>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\bin\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\ContentWindow\ContentWindow.cs" Link="ContentWindow.cs" />
+    <Compile Include="..\ContentWindow\Model\ContentReceivedEventArgs.cs" Link="Model\ContentReceivedEventArgs.cs" />
+    <Compile Include="..\ContentWindow\ViewModel\ContentWindowViewModel.cs" Link="ViewModel\ContentWindowViewModel.cs" />
+    <Compile Include="..\ContentWindow\View\ContentWindowView.xaml.cs" Link="View\ContentWindowView.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Model\" />
+    <Folder Include="View\" />
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="..\ContentWindow\View\ContentWindowView.xaml" Link="View\ContentWindowView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CountrySideEngineer.ViewModel.Base">
+      <HintPath>..\lib\netcoreapp3.1\CountrySideEngineer.ViewModel.Base.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
