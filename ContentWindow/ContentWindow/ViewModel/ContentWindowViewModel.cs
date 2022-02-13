@@ -69,8 +69,12 @@ namespace CountrySideEngineer.ContentWindow.ViewModel
 		public void Append(string item)
 		{
 			Content += item;
+			Content += Environment.NewLine;
 		}
 
+		/// <summary>
+		/// Refresh (all clear) content.
+		/// </summary>
 		public void Refresh()
 		{
 			Content = string.Empty;
