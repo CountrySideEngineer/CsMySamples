@@ -25,7 +25,9 @@
     <Grid>
         <Border Style="{DynamicResource ResourceKey=ContentAreaBorder}"
                 >
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <ScrollViewer x:Name="ContentAreaScrollBar"
+                          VerticalScrollBarVisibility="Auto" 
+                          ScrollChanged="ScrollViewer_ScrollChanged">
                 <TextBlock Style="{DynamicResource ResourceKey=TextBlockContentArea}"
                            Text="{Binding Content}"
                            />

@@ -106,5 +106,15 @@ namespace CountrySideEngineer.ContentWindow.View
 				this.Close();
 			}
 		}
+
+		private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+		{
+			var scrollViewer = FindName("ContentAreaScrollBar") as ScrollViewer;
+
+			if (0 != e.ExtentHeightChange)
+			{
+				scrollViewer.ScrollToVerticalOffset(scrollViewer.ExtentHeight);
+			}
+		}
 	}
 }
