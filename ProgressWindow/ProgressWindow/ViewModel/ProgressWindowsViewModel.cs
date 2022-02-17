@@ -179,11 +179,16 @@ namespace CountrySideEngineer.ProgressWindow.ViewModel
 			ProgressRate = progressInfo.Progress;
 			Numerator = progressInfo.Numerator;
 			Denominator = progressInfo.Denominator;
+		}
 
-			if (100 <= ProgressRate)
-			{
-				CloseWindowEvent?.Invoke(this, null);
-			}
+		/// <summary>
+		/// Event handler to handle request to close window.
+		/// </summary>
+		/// <param name="sender">Event sender</param>
+		/// <param name="e">Event argument.</param>
+		public void OnCloseWindowsCloseRequest(object sender, EventArgs e)
+		{
+			CloseWindowEvent?.Invoke(this, null);
 		}
 	}
 }
