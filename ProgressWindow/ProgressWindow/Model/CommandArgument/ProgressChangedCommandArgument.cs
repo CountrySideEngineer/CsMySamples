@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CountrySideEngineer.ProgressWindow.Model.CommandArgument
 {
-	public class ProgressChangedCommandArgument
+	public class ProgressChangedCommandArgument : EventArgs
 	{
 		/// <summary>
 		/// Progress information to update.
