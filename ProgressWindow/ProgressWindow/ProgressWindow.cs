@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CountrySideEngineer.ProgressWindow
 {
@@ -25,6 +26,11 @@ namespace CountrySideEngineer.ProgressWindow
                     ProgressInfo = _
                 };
                 viewModel.OnProgressChanged(this, cmdArg);
+
+                if (100 <= _.Progress)
+				{
+                    viewModel.OnCloseWindowsCloseRequest(this, cmdArg);
+				}
             });
             viewModel.Progress = progress;
             var view = new CountrySideEngineer.ProgressWindow.View.ProgressWindow
