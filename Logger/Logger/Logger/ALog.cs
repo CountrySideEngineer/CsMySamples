@@ -48,6 +48,10 @@ namespace CSEngineer.Logger
 			Output(ALog._DEBUG, e);
 		}
 
+		/// <summary>
+		/// DEBUG level log.
+		/// </summary>
+		/// <param name="message">Log message.</param>
 		public void DEBUG(string message)
 		{
 			Output(ALog._DEBUG, message);
@@ -63,6 +67,10 @@ namespace CSEngineer.Logger
 			Output(ALog._ERROR, e);
 		}
 
+		/// <summary>
+		/// ERROR level log.
+		/// </summary>
+		/// <param name="message">Log message.</param>
 		public void ERROR(string message)
 		{
 			Output(ALog._ERROR, message);
@@ -78,6 +86,10 @@ namespace CSEngineer.Logger
 			Output(ALog._FATAL, e);
 		}
 
+		/// <summary>
+		/// FATAL level log.
+		/// </summary>
+		/// <param name="message">Log message.</param>
 		public void FATAL(string message)
 		{
 			Output(ALog._FATAL, message);
@@ -93,6 +105,10 @@ namespace CSEngineer.Logger
 			Output(ALog._FATAL, e);
 		}
 
+		/// <summary>
+		/// INFO (information) level log.
+		/// </summary>
+		/// <param name="message">Log message.</param>
 		public void INFO(string message)
 		{
 			Output(ALog._INFO, message);
@@ -108,6 +124,10 @@ namespace CSEngineer.Logger
 			Output(ALog._TRACE, e);
 		}
 
+		/// <summary>
+		/// TRACE level log.
+		/// </summary>
+		/// <param name="message">Log message.</param>
 		public void TRACE(string message)
 		{
 			Output(ALog._TRACE, message);
@@ -123,6 +143,10 @@ namespace CSEngineer.Logger
 			Output(ALog._WARN, e);
 		}
 
+		/// <summary>
+		/// WARN (warning) level log.
+		/// </summary>
+		/// <param name="message">Log message.</param>
 		public void WARN(string message)
 		{
 			Output(ALog._WARN, message);
