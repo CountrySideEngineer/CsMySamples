@@ -196,5 +196,31 @@ namespace CSEngineer.Logger
 		/// <param name="level">Log level.</param>
 		/// <param name="message">Log message.</param>
 		public abstract void Output(string level, string message);
+
+		/// <summary>
+		/// Default time stamp format.
+		/// </summary>
+		private static string TIME_STAMP_FORMAT = "yyyy/MM/dd HH:mm:ss.fff";
+
+		/// <summary>
+		/// Return time stamp.
+		/// </summary>
+		/// <returns>Time stamp in string.</returns>
+		public virtual string GetTimeStamp()
+		{
+			string timeStamp = GetTimeStamp(TIME_STAMP_FORMAT);
+			return timeStamp;
+		}
+
+		/// <summary>
+		/// Return time stamp with in a format.
+		/// </summary>
+		/// <param name="format">Time stamp format.</param>
+		/// <returns>Time stamp in string.</returns>
+		public virtual string GetTimeStamp(string format)
+		{
+			string timeStamp = DateTime.Now.ToString(format);
+			return timeStamp;
+		}
 	}
 }
