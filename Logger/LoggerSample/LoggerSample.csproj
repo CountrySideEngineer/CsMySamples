@@ -3,11 +3,12 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <StartupObject>LoggerSample.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
     <Reference Include="Logger">
-      <HintPath>..\Logger\bin\Debug\netcoreapp3.1\Logger.dll</HintPath>
+      <HintPath>..\Logger\bin\Release\netcoreapp3.1\Logger.dll</HintPath>
     </Reference>
   </ItemGroup>
 
