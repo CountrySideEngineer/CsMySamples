@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Logger</RootNamespace>
     <AssemblyName>Logger</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,8 +42,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Logger\Logger.cs">
-      <Link>Logger.cs</Link>
+    <Compile Include="..\Logger\Logger\ALog.cs">
+      <Link>ALog.cs</Link>
+    </Compile>
+    <Compile Include="..\Logger\Logger\Console\Log.cs">
+      <Link>Logger\Console\Log.cs</Link>
+    </Compile>
+    <Compile Include="..\Logger\Logger\EventArg\LogEventArgs.cs">
+      <Link>Logger\EventArg\LogEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\Logger\Logger\File\Log.cs">
+      <Link>Logger\File\Log.cs</Link>
+    </Compile>
+    <Compile Include="..\Logger\Logger\Interface\ILog.cs">
+      <Link>Logger\Interface\ILog.cs</Link>
+    </Compile>
+    <Compile Include="..\Logger\Logger\Interface\ILogEvent.cs">
+      <Link>Logger\Interface\ILogEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\Logger\Logger\Log.cs">
+      <Link>Log.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
