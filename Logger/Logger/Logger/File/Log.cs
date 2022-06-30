@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace CSEngineer.Logger.Logger.File
+namespace CSEngineer.Logger.File
 {
 	public class Log : ALog
 	{
@@ -38,10 +38,12 @@ namespace CSEngineer.Logger.Logger.File
 		{
 			try
 			{
-				using var stream = new StreamWriter(FilePath, true);
-				string timeStamp = GetTimeStamp();
-				string log = $"[{level}][{timeStamp}]:{message}";
-				stream.WriteLine(log);
+				using (var stream = new StreamWriter(FilePath, true))
+				{
+					string timeStamp = GetTimeStamp();
+					string log = $"[{level}][{timeStamp}]:{message}";
+					stream.WriteLine(log);
+				}
 			}
 			catch (Exception)
 			{

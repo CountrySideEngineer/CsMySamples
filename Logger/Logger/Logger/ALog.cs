@@ -26,7 +26,7 @@ namespace CSEngineer.Logger
 		/// <summary>
 		/// WARN level log tag.
 		/// </summary>
-		protected static string _WARN = "WARN";
+		protected static string _WARN = "WARN ";
 
 		/// <summary>
 		/// ERROR level log tag.

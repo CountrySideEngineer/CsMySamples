@@ -14,41 +14,41 @@ namespace CSEngineer.Logger.Interface
 		/// </summary>
 		/// <param name="sende">Event sender.</param>
 		/// <param name="e">Event argument.</param>
-		public void TRACE(object sende, EventArgs e);
+		void TRACE(object sende, EventArgs e);
 
 		/// <summary>
 		/// DEBUG level log event handler
 		/// </summary>
 		/// <param name="sende">Event sender.</param>
 		/// <param name="e">Event argument.</param>
-		public void DEBUG(object sender, EventArgs e);
+		void DEBUG(object sender, EventArgs e);
 
 		/// <summary>
 		/// INFO (information) level log event handler
 		/// </summary>
 		/// <param name="sende">Event sender.</param>
 		/// <param name="e">Event argument.</param>
-		public void INFO(object sender, EventArgs e);
+		void INFO(object sender, EventArgs e);
 
 		/// <summary>
 		/// WARN (warning) level log event handler
 		/// </summary>
 		/// <param name="sende">Event sender.</param>
 		/// <param name="e">Event argument.</param>
-		public void WARN(object sender, EventArgs e);
+		void WARN(object sender, EventArgs e);
 
 		/// <summary>
 		/// ERROR level log event handler
 		/// </summary>
 		/// <param name="sende">Event sender.</param>
 		/// <param name="e">Event argument.</param>
-		public void ERROR(object sender, EventArgs e);
+		void ERROR(object sender, EventArgs e);
 
 		/// <summary>
 		/// FALTAL level log event handler
 		/// </summary>
 		/// <param name="sende">Event sender.</param>
 		/// <param name="e">Event argument.</param>
-		public void FATAL(object sender, EventArgs e);
+		void FATAL(object sender, EventArgs e);
 	}
 }
