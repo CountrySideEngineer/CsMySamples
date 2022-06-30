@@ -11,7 +11,7 @@ namespace CSEngineer
 	/// <summary>
 	/// Logger class to output log class.
 	/// </summary>
-	public class Logger
+	public class _Logger
 	{
 		#region Private fields and constants
 		/// <summary>
