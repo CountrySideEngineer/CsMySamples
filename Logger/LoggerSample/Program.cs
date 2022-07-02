@@ -31,22 +31,11 @@ namespace LoggerSample
 			ILogEvent consoleLog = new CSEngineer.Logger.Console.Log();
 			ILogEvent fileLog = new CSEngineer.Logger.File.Log();
 
-
-			//SetupLogger(ref consoleLog);
+			SetupLogger(ref consoleLog);
 			SetupLogger(ref fileLog);
 
-			var logger = Log.GetInstance();
-			logger.TRACE("Sample TRACE message");
-			logger = Log.GetInstance();
-			logger.DEBUG("Sample DEBUG message");
-			logger = Log.GetInstance();
-			logger.INFO("Sample INFO message");
-			logger = Log.GetInstance();
-			logger.WARN("Sample WARN message");
-			logger = Log.GetInstance();
-			logger.ERROR("Sample ERROR message");
-			logger = Log.GetInstance();
-			logger.FATAL("Sample FATAL message");
+			var sampleClass = new LoggerSampleClass();
+			sampleClass.Sample();
 
 			return;
 		}
