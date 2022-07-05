@@ -21,7 +21,7 @@ namespace CSEngineer.Logger
 		/// <summary>
 		/// INFO level log tag.
 		/// </summary>
-		protected static string _INFO = "INFO";
+		protected static string _INFO = "INFO ";
 
 		/// <summary>
 		/// WARN level log tag.
