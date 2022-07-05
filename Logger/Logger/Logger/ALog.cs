@@ -102,7 +102,7 @@ namespace CSEngineer.Logger
 		/// <param name="e">Log event argument.</param>
 		public void INFO(object sender, EventArgs e)
 		{
-			Output(ALog._FATAL, e);
+			Output(ALog._INFO, e);
 		}
 
 		/// <summary>
