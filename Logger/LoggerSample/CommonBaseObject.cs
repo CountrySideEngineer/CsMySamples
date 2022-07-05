@@ -9,7 +9,6 @@ namespace LoggerSample
 {
 	public class CommonBaseObject : ILogger
 	{
-
 		/// <summary>
 		/// DEBUG level log.
 		/// </summary>
