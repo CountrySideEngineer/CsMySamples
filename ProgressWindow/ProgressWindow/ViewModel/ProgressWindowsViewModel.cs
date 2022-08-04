@@ -183,7 +183,7 @@ namespace CountrySideEngineer.ProgressWindow.ViewModel
 
 		public void OnProgressDone(object sneder, EventArgs e)
 		{
-			CloseWindowEvent?.Invoke(this, null);
+			CloseWindowEvent?.Invoke(this, e);
 		}
 
 		/// <summary>
@@ -193,7 +193,7 @@ namespace CountrySideEngineer.ProgressWindow.ViewModel
 		/// <param name="e">Event argument.</param>
 		public void OnCloseWindowsCloseRequest(object sender, EventArgs e)
 		{
-			CloseWindowEvent?.Invoke(this, null);
+			CloseWindowEvent?.Invoke(this, e);
 		}
 	}
 }
