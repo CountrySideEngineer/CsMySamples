@@ -181,6 +181,11 @@ namespace CountrySideEngineer.ProgressWindow.ViewModel
 			Denominator = progressInfo.Denominator;
 		}
 
+		public void OnProgressDone(object sneder, EventArgs e)
+		{
+			CloseWindowEvent?.Invoke(this, null);
+		}
+
 		/// <summary>
 		/// Event handler to handle request to close window.
 		/// </summary>
