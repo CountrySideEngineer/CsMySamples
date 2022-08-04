@@ -47,23 +47,33 @@ namespace ProgressWindow.Sample
 			{
 				Console.WriteLine($"Start!");
 
+				ProgressInfo info = new ProgressInfo();
+
 				int denominator = 100;
 				var baseProgInfo = new ProgressInfo()
 				{
 					Title = "ProgressSample",
 					Denominator = denominator
 				};
-				for (int index = 0; index <= denominator; index++)
+				for (int index = 0; index < 10; index++)
 				{
-					Console.WriteLine($"Progress = {index}");
-					var progInfo = new ProgressInfo(baseProgInfo);
-					progInfo.ProcessName = $"Process_{index}";
-					progInfo.Progress = index * 100 / denominator;
-					progInfo.Numerator = index;
-					progress.Report(progInfo);
+					for (int index2 = 0; index2 <= denominator; index2++)
+					{
+						ProgressInfo progInfo = new ProgressInfo(baseProgInfo);
+						progInfo.ProcessName = $"Process_{index2} ({index} / 10)";
+						progInfo.Progress = index2 * 100 / denominator;
+						progInfo.Numerator = index2;
+						progInfo.ShouldContinue = true;
+						progress.Report(progInfo);
 
-					Thread.Sleep(50);
+						Thread.Sleep(5);
+					}
 				}
+
+				var endInfo = new ProgressInfo(baseProgInfo);
+				endInfo.ShouldContinue = false;
+				progress.Report(endInfo);
+
 			});
 			return task;
 		}

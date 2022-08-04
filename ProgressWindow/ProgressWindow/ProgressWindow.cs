@@ -27,10 +27,10 @@ namespace CountrySideEngineer.ProgressWindow
                 };
                 viewModel.OnProgressChanged(this, cmdArg);
 
-                if (100 <= _.Progress)
+                if (!_.ShouldContinue)
 				{
                     viewModel.OnCloseWindowsCloseRequest(this, cmdArg);
-				}
+                }
             });
             viewModel.Progress = progress;
             var view = new CountrySideEngineer.ProgressWindow.View.ProgressWindow
