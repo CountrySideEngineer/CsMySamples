@@ -32,6 +32,11 @@ namespace CountrySideEngineer.ProgressWindow.Model
 		public int Denominator { get; set; }
 
 		/// <summary>
+		/// The process should continue or not.
+		/// </summary>
+		public bool ShouldContinue { get; set; }
+
+		/// <summary>
 		/// Default constructor.
 		/// </summary>
 		public ProgressInfo()
@@ -41,6 +46,7 @@ namespace CountrySideEngineer.ProgressWindow.Model
 			Progress = 0;
 			Numerator = 0;
 			Denominator = 0;
+			ShouldContinue = true;
 		}
 
 		/// <summary>
@@ -56,6 +62,7 @@ namespace CountrySideEngineer.ProgressWindow.Model
 				Progress = src.Progress;
 				Numerator = src.Numerator;
 				Denominator = src.Denominator;
+				ShouldContinue = src.ShouldContinue;
 			}
 			catch (NullReferenceException)
 			{
