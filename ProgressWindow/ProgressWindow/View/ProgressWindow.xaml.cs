@@ -97,7 +97,7 @@ namespace CountrySideEngineer.ProgressWindow.View
 		private void Window_ContentRendered(object sender, EventArgs e)
 		{
 			var viewModel = (ProgressWindowsViewModel)this.DataContext;
-			viewModel.OnProgressStart(this, null);
+			viewModel.OnProgressStart(this, e);
 		}
 	}
 }
