@@ -11,22 +11,22 @@ namespace TableReader.TableData
 		/// <summary>
 		/// Table start row number.
 		/// </summary>
-		public uint StartRow { get; set; }
+		public int StartRow { get; set; }
 
 		/// <summary>
 		/// Table start column number.
 		/// </summary>
-		public uint StartColumn { get; set; }
+		public int StartColumn { get; set; }
 
 		/// <summary>
 		/// The number of rows in table.
 		/// </summary>
-		public uint RowCount { get; set; }
+		public int RowCount { get; set; }
 
 		/// <summary>
 		/// The number of columns in table.
 		/// </summary>
-		public uint ColumnCount { get; set; }
+		public int ColumnCount { get; set; }
 
 		/// <summary>
 		/// Default constructor.
