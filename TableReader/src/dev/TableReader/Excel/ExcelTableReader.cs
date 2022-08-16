@@ -288,19 +288,62 @@ namespace TableReader.Excel
 			return ranges;
 		}
 
+		/// <summary>
+		/// Get range about column.
+		/// </summary>
+		/// <param name="range">Reference to Range object to set result.</param>
 		public void GetColumnRange(ref Range range)
 		{
-			throw new NotImplementedException();
+			var workBook = new XLWorkbook(_excelStream);
+			var workSheet = workBook.Worksheet(SheetName);
+
+			var firstUsedCell = workSheet.FirstColumnUsed();
+			range.StartColumn = firstUsedCell.ColumnNumber();
+
+			var lastUsedCell = workSheet.LastColumnUsed();
+			range.ColumnCount = lastUsedCell.ColumnNumber() - firstUsedCell.ColumnNumber() + 1;
 		}
 
+		/// <summary>
+		/// Get merged cell range.
+		/// </summary>
+		/// <param name="range">Range of merged cell.</param>
 		public void GetMergedCellRange(ref Range range)
 		{
-			throw new NotImplementedException();
+			var workBook = new XLWorkbook(_excelStream);
+			var workSheet = workBook.Worksheet(SheetName);
+
+			if (workSheet.Cell(range.StartRow, range.StartColumn).IsMerged())
+			{
+				var mergedRange = workSheet.Cell(range.StartRow, range.StartColumn).MergedRange();
+				var firstCell = mergedRange.FirstCell();
+				var lastCell = mergedRange.LastCell();
+				range.StartRow = firstCell.Address.RowNumber;
+				range.StartColumn = firstCell.Address.ColumnNumber;
+				range.RowCount = lastCell.Address.RowNumber - firstCell.Address.RowNumber + 1;
+				range.ColumnCount = lastCell.Address.ColumnNumber - firstCell.Address.ColumnNumber + 1;
+			}
+			else
+			{
+				range.RowCount = 1;
+				range.ColumnCount = 1;
+			}
 		}
 
+		/// <summary>
+		/// Get row range.
+		/// </summary>
+		/// <param name="range">Range to set.</param>
 		public void GetRowRange(ref Range range)
 		{
-			throw new NotImplementedException();
+			var workBook = new XLWorkbook(_excelStream);
+			var workSheet = workBook.Worksheet(SheetName);
+
+			var firstCell = workSheet.FirstRowUsed();
+			range.StartRow = firstCell.RowNumber();
+
+			var lastCell = workSheet.LastRowUsed();
+			range.RowCount = lastCell.RowNumber() - firstCell.RowNumber() + 1;
 		}
 
 		public void GetTableRange(ref Range range)
