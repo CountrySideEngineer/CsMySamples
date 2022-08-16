@@ -348,7 +348,14 @@ namespace TableReader.Excel
 
 		public void GetTableRange(ref Range range)
 		{
-			throw new NotImplementedException();
+			string item = string.Empty;
+			Range rowRange = FindFirstItemInRow(item, range);
+			Range columnRange = FindFirstItemInColumn(item, range);
+
+			int rowCount = rowRange.StartRow - range.StartRow + 1;
+			int columnCount = columnRange.StartColumn - range.StartColumn + 1;
+			range.RowCount = rowCount;
+			range.ColumnCount = columnCount;
 		}
 
 		public IEnumerable<string> ReadColumn(Range range)
