@@ -253,9 +253,39 @@ namespace TableReader.Excel
 			}
 		}
 
+		/// <summary>
+		/// Get range of cell which contains the string specified by argument "item".
+		/// </summary>
+		/// <param name="item">String a cell should contain.</param>
+		/// <returns>Collection of cells which contain "item".</returns>
 		public IEnumerable<Range> FindItem(string item)
 		{
-			throw new NotImplementedException();
+			if ((string.IsNullOrEmpty(item)) || (string.IsNullOrWhiteSpace(item)))
+			{
+				string message = "Target string must not be empty.";
+				throw new ArgumentException(message);
+			}
+
+			var workBook = new XLWorkbook(_excelStream);
+			var workSheet = workBook.Worksheet(SheetName);
+			var itemCells = workSheet.CellsUsed().Where(_ => 0 == string.Compare(_.GetString(), item));
+			if (0 == itemCells.Count())
+			{
+				throw new ArgumentException($"No cell contains \"{item}\" in {SheetName}.");
+			}
+			var ranges = new List<Range>();
+			foreach (var itemCell in itemCells)
+			{
+				Range range = new Range()
+				{
+					StartRow = itemCell.Address.RowNumber,
+					StartColumn = itemCell.Address.ColumnNumber,
+					RowCount = 1,
+					ColumnCount = 1,
+				};
+				ranges.Add(range);
+			}
+			return ranges;
 		}
 
 		public void GetColumnRange(ref Range range)
