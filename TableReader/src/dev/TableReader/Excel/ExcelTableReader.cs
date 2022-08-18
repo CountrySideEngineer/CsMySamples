@@ -346,6 +346,10 @@ namespace TableReader.Excel
 			range.RowCount = lastCell.RowNumber() - firstCell.RowNumber() + 1;
 		}
 
+		/// <summary>
+		/// Get table range.
+		/// </summary>
+		/// <param name="range">Range object to set result.</param>
 		public void GetTableRange(ref Range range)
 		{
 			string item = string.Empty;
@@ -358,14 +362,50 @@ namespace TableReader.Excel
 			range.ColumnCount = columnCount;
 		}
 
+		/// <summary>
+		/// Read column and get value in cells.
+		/// (Read vertical).
+		/// </summary>
+		/// <param name="range">Range to read.</param>
+		/// <returns>Collection of cell value as string.</returns>
 		public IEnumerable<string> ReadColumn(Range range)
 		{
-			throw new NotImplementedException();
+			var workBook = new XLWorkbook(_excelStream);
+			var workSheet = workBook.Worksheet(SheetName);
+			var cellsInColumn = workSheet.Cells()
+				.Where(_ =>
+					(range.StartRow <= _.Address.RowNumber) &&
+					(_.Address.RowNumber <= workSheet.LastRowUsed().RowNumber()) &&
+					(_.Address.ColumnNumber == range.StartColumn));
+			List<string> items = new List<string>();
+			foreach (var cellInColumn in cellsInColumn)
+			{
+				items.Add(cellInColumn.GetString());
+			}
+			return items;
 		}
 
+		/// <summary>
+		/// Read row and get value in cells.
+		/// (Read horizontal)
+		/// </summary>
+		/// <param name="range">Range to read.</param>
+		/// <returns>Collection of cell value as string.</returns>
 		public IEnumerable<string> ReadRow(Range range)
 		{
-			throw new NotImplementedException();
+			var workBook = new XLWorkbook(_excelStream);
+			var workSheet = workBook.Worksheet(SheetName);
+			var cellsInRow = workSheet.Cells()
+				.Where(_ =>
+					(range.StartRow == _.Address.RowNumber) &&
+					(range.StartColumn <= _.Address.ColumnNumber) &&
+					(_.Address.ColumnNumber <= workSheet.LastColumnUsed().ColumnNumber()));
+			List<string> items = new List<string>();
+			foreach (var cellInRow in cellsInRow)
+			{
+				items.Add(cellInRow.GetString());
+			}
+			return items;
 		}
 	}
 }
