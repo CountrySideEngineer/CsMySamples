@@ -35,9 +35,11 @@ namespace TableReader.Excel
 		/// Constructor with argument about excel file stream.
 		/// </summary>
 		/// <param name="stream">Stream data to excel file to read.</param>
-		public ExcelTableReader(Stream stream)
+		/// <param name="sheetName">Sheet name to read.</param>
+		public ExcelTableReader(Stream stream, string sheetName = "")
 		{
 			_excelStream = stream;
+			SheetName = sheetName;
 		}
 
 		/// <summary>
