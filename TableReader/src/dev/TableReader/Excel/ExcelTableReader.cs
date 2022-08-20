@@ -168,7 +168,7 @@ namespace TableReader.Excel
 			}
 			if (null == range)
 			{
-				throw new ArgumentNullException("Range to read has not been set.");
+				throw new ArgumentNullException($"{nameof(range)}", "Range to read has not been set.");
 			}
 			try
 			{
@@ -179,7 +179,7 @@ namespace TableReader.Excel
 					.Where(_ =>
 						(0 == string.Compare(item, _.GetString())) &&
 						(range.StartRow <= _.Address.RowNumber) &&
-						(_.Address.RowNumber <= (range.StartRow + range.RowCount)) &&
+						(_.Address.RowNumber <= (range.StartRow + range.RowCount - 1)) &&
 						(_.Address.ColumnNumber == range.StartColumn))
 					.FirstOrDefault();
 				Range itemRange = new Range()
@@ -228,7 +228,7 @@ namespace TableReader.Excel
 						(0 == string.Compare(item, _.GetString())) &&
 						(range.StartRow == _.Address.RowNumber) &&
 						(range.StartColumn <= _.Address.ColumnNumber) &&
-						(_.Address.ColumnNumber <= (range.StartColumn + range.ColumnCount)))
+						(_.Address.ColumnNumber <= (range.StartColumn + range.ColumnCount - 1)))
 					.FirstOrDefault();
 				Range itemRange = new Range()
 				{
