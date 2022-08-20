@@ -73,7 +73,7 @@ namespace TableReader.Excel
 
 			if (string.IsNullOrEmpty(item))
 			{
-				throw new ArgumentException("Target item to scane should have any value, not empty.");
+				throw new ArgumentException("The string to be searched must have value set.");
 			}
 			try
 			{
@@ -131,9 +131,9 @@ namespace TableReader.Excel
 					.Where(_ =>
 						(0 == string.Compare(_.GetString(), item)) &&
 						(range.StartRow <= _.Address.RowNumber) &&
-						(_.Address.RowNumber <= (range.StartRow + range.ColumnCount)) &&
+						(_.Address.RowNumber <= (range.StartRow + range.RowCount - 1)) &&
 						(range.StartColumn <= _.Address.ColumnNumber) &&
-						(_.Address.ColumnNumber <= range.StartColumn + range.ColumnCount))
+						(_.Address.ColumnNumber <= range.StartColumn + range.ColumnCount - 1))
 					.FirstOrDefault();
 				Range itemRange = new Range()
 				{
