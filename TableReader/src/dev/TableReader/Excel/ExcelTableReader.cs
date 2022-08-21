@@ -329,11 +329,22 @@ namespace TableReader.Excel
 				}
 				return ranges;
 			}
-			catch (Exception ex)
-			when ((ex is NullReferenceException) || (ex is ArgumentException))
+			catch (NullReferenceException)
 			{
 				string message = $"No cell contains \"{item}\" in {SheetName}.";
 				throw new ArgumentException(message);
+			}
+			catch (ArgumentException ex)
+			{
+				if (string.IsNullOrEmpty(ex.Message))
+				{
+					string message = $"No cell contains \"{item}\" in {SheetName}.";
+					throw new ArgumentException(message);
+				}
+				else
+				{
+					throw;
+				}
 			}
 		}
 

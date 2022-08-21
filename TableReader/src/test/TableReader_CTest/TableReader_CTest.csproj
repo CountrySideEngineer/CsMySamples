@@ -63,6 +63,7 @@
     <Compile Include="TableReader_Test_FindFirstItemInRow.cs" />
     <Compile Include="TableReader_Test_FindFirstItem_001.cs" />
     <Compile Include="TableReader_Test_FindFirstItem_002.cs" />
+    <Compile Include="TableReader_Test_FindItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MSTest.TestAdapter">
