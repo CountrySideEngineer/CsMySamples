@@ -172,7 +172,7 @@ namespace TableReader_CTest
 
 		[TestMethod]
 		[Description("FindFirstItemInColumn(string item, Range range)")]
-		public void FindFirstItemInColumn_Test_009()
+		public void FindFirstItemInColumn_Test_007()
 		{
 			var testDataPath = @"..\..\..\TestData\FindFirstItemInColumn_Test.xlsx";
 			using (var testDataStream = new FileStream(testDataPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
@@ -197,7 +197,7 @@ namespace TableReader_CTest
 
 		[TestMethod]
 		[Description("FindFirstItemInColumn(string item, Range range)")]
-		public void FindFirstItemInColumn_Test_010()
+		public void FindFirstItemInColumn_Test_008()
 		{
 			var testDataPath = @"..\..\..\TestData\FindFirstItemInColumn_Test.xlsx";
 			using (var testDataStream = new FileStream(testDataPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
@@ -223,7 +223,7 @@ namespace TableReader_CTest
 
 		[TestMethod]
 		[Description("FindFirstItemInColumn(string item, Range range)")]
-		public void FindFirstItemInColumn_Test_011()
+		public void FindFirstItemInColumn_Test_009()
 		{
 			var testDataPath = @"..\..\..\TestData\FindFirstItemInColumn_Test.xlsx";
 			using (var testDataStream = new FileStream(testDataPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
@@ -248,7 +248,7 @@ namespace TableReader_CTest
 
 		[TestMethod]
 		[Description("FindFirstItemInColumn(string item, Range range)")]
-		public void FindFirstItemInColumn_Test_012()
+		public void FindFirstItemInColumn_Test_010()
 		{
 			var testDataPath = @"..\..\..\TestData\FindFirstItemInColumn_Test.xlsx";
 			using (var testDataStream = new FileStream(testDataPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
@@ -273,7 +273,7 @@ namespace TableReader_CTest
 
 		[TestMethod]
 		[Description("FindFirstItemInColumn(string item, Range range)")]
-		public void FindFirstItemInColumn_Test_013()
+		public void FindFirstItemInColumn_Test_011()
 		{
 			var testDataPath = @"..\..\..\TestData\FindFirstItemInColumn_Test.xlsx";
 			using (var testDataStream = new FileStream(testDataPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))

@@ -92,11 +92,22 @@ namespace TableReader.Excel
 				};
 				return range;
 			}
-			catch (Exception ex)
-			when ((ex is NullReferenceException) || (ex is ArgumentException))
+			catch (NullReferenceException)
 			{
 				string message = $"No cell contains \"{item}\" in {SheetName}.";
 				throw new ArgumentException(message);
+			}
+			catch (ArgumentException ex)
+			{
+				if (string.IsNullOrEmpty(ex.Message))
+				{
+					string message = $"No cell contains \"{item}\" in {SheetName}.";
+					throw new ArgumentException(message);
+				}
+				else
+				{
+					throw;
+				}
 			}
 		}
 
@@ -144,11 +155,22 @@ namespace TableReader.Excel
 				};
 				return itemRange;
 			}
-			catch (Exception ex)
-			when ((ex is NullReferenceException) || (ex is ArgumentException))
+			catch (NullReferenceException)
 			{
 				string message = $"No cell contains \"{item}\" in {SheetName}.";
 				throw new ArgumentException(message);
+			}
+			catch (ArgumentException ex)
+			{
+				if (string.IsNullOrEmpty(ex.Message))
+				{
+					string message = $"No cell contains \"{item}\" in {SheetName}.";
+					throw new ArgumentException(message);
+				}
+				else
+				{
+					throw;
+				}
 			}
 		}
 
@@ -191,11 +213,22 @@ namespace TableReader.Excel
 				};
 				return itemRange;
 			}
-			catch (Exception ex)
-			when ((ex is NullReferenceException) || (ex is ArgumentException))
+			catch (NullReferenceException)
 			{
 				string message = $"No cell contains \"{item}\" in {SheetName}.";
 				throw new ArgumentException(message);
+			}
+			catch (ArgumentException ex)
+			{
+				if (string.IsNullOrEmpty(ex.Message))
+				{
+					string message = $"No cell contains \"{item}\" in {SheetName}.";
+					throw new ArgumentException(message);
+				}
+				else
+				{
+					throw;
+				}
 			}
 		}
 
@@ -216,7 +249,7 @@ namespace TableReader.Excel
 			}
 			if (null == range)
 			{
-				throw new ArgumentNullException("Range to read has not been set.");
+				throw new ArgumentNullException($"{nameof(range)}", "Range to read has not been set.");
 			}
 			try
 			{
@@ -239,11 +272,22 @@ namespace TableReader.Excel
 				};
 				return itemRange;
 			}
-			catch (Exception ex)
-			when ((ex is NullReferenceException) || (ex is ArgumentException))
+			catch (NullReferenceException)
 			{
 				string message = $"No cell contains \"{item}\" in {SheetName}.";
 				throw new ArgumentException(message);
+			}
+			catch (ArgumentException ex)
+			{
+				if (string.IsNullOrEmpty(ex.Message))
+				{
+					string message = $"No cell contains \"{item}\" in {SheetName}.";
+					throw new ArgumentException(message);
+				}
+				else
+				{
+					throw;
+				}
 			}
 		}
 
