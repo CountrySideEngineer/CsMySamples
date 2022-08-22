@@ -64,6 +64,7 @@
     <Compile Include="TableReader_Test_FindFirstItem_001.cs" />
     <Compile Include="TableReader_Test_FindFirstItem_002.cs" />
     <Compile Include="TableReader_Test_FindItem.cs" />
+    <Compile Include="TableReader_Test_GetColumnRange.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MSTest.TestAdapter">

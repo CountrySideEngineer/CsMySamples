@@ -313,7 +313,8 @@ namespace TableReader.Excel
 				var itemCells = workSheet.CellsUsed().Where(_ => 0 == string.Compare(_.GetString(), item));
 				if (0 == itemCells.Count())
 				{
-					throw new ArgumentException();
+					string message = $"No cell contains \"{item}\" in {SheetName}.";
+					throw new ArgumentException(message);
 				}
 				var ranges = new List<Range>();
 				foreach (var itemCell in itemCells)
@@ -349,14 +350,13 @@ namespace TableReader.Excel
 		}
 
 		/// <summary>
-		/// Get range about column.
+		/// Get column count (Width of table).
 		/// </summary>
 		/// <param name="range">Reference to Range object to set result.</param>
 		/// <exception cref="ArgumentNullException"></exception>
 		public void GetColumnRange(ref Range range)
 		{
 			CheckParameter();
-
 			try
 			{
 				var workBook = new XLWorkbook(_excelStream);
