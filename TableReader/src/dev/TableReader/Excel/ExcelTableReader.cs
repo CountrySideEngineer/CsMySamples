@@ -496,17 +496,19 @@ namespace TableReader.Excel
 			{
 				var workBook = new XLWorkbook(_excelStream);
 				var workSheet = workBook.Worksheet(SheetName);
-				var cellsInColumn = workSheet.Cells()
-					.Where(_ =>
-						(range.StartRow <= _.Address.RowNumber) &&
-						(_.Address.RowNumber <= workSheet.LastRowUsed().RowNumber()) &&
-						(_.Address.ColumnNumber == range.StartColumn));
-				List<string> items = new List<string>();
-				foreach (var cellInColumn in cellsInColumn)
+				var rowRange = new Range(range);
+				GetRowRange(ref rowRange);
+				rowRange.StartRow = range.StartRow;	//The StartRow in rowRange is overwritten in GetRowRange(). reset the change.
+
+				List<string> cellItems = new List<string>();
+				int tailIndex = GetLastRowInColumn(workSheet, rowRange);
+				for (int rowIndex = rowRange.StartRow; rowIndex <= tailIndex; rowIndex++)
 				{
-					items.Add(cellInColumn.GetString());
+					var cell = workSheet.Cell(rowIndex, range.StartColumn);
+					string cellItem = cell.GetString();
+					cellItems.Add(cellItem);
 				}
-				return items;
+				return cellItems;
 			}
 			catch (NullReferenceException)
 			{
@@ -525,17 +527,63 @@ namespace TableReader.Excel
 		{
 			var workBook = new XLWorkbook(_excelStream);
 			var workSheet = workBook.Worksheet(SheetName);
-			var cellsInRow = workSheet.Cells()
-				.Where(_ =>
-					(range.StartRow == _.Address.RowNumber) &&
-					(range.StartColumn <= _.Address.ColumnNumber) &&
-					(_.Address.ColumnNumber <= workSheet.LastColumnUsed().ColumnNumber()));
-			List<string> items = new List<string>();
-			foreach (var cellInRow in cellsInRow)
+			var columnRange = new Range(range);
+			GetColumnRange(ref columnRange);
+			columnRange.StartColumn = range.StartColumn;
+
+			List<string> cellItems = new List<string>();
+			int tailIndex = GetLastColumnInRow(workSheet, columnRange);
+			for (int columnIndex = columnRange.StartColumn; columnIndex <= tailIndex; columnIndex++)
 			{
-				items.Add(cellInRow.GetString());
+				var cell = workSheet.Cell(range.StartRow, columnIndex);
+				string cellItem = cell.GetString();
+				cellItems.Add(cellItem);
 			}
-			return items;
+			return cellItems;
+		}
+
+		/// <summary>
+		/// Get the index of the last row of the specified column by argument.
+		/// </summary>
+		/// <param name="workSheet">Worksheet object.</param>
+		/// <param name="range">Range to scan.</param>
+		/// <returns>The index of the last row.</returns>
+		protected int GetLastRowInColumn(IXLWorksheet workSheet, Range range)
+		{
+			int rowIndex = 0;
+			var rowRange = new Range(range);
+			for (rowIndex = rowRange.StartRow + range.RowCount - 1; rowRange.StartRow <= rowIndex; rowIndex--)
+			{
+				var cell = workSheet.Cell(rowIndex, rowRange.StartColumn);
+				string cellValue = cell.GetString();
+				if ((!string.IsNullOrEmpty(cellValue)) && (!string.IsNullOrWhiteSpace(cellValue)))
+				{
+					break;
+				}
+			}
+			return rowIndex;
+		}
+
+		/// <summary>
+		/// Get the index of the last column of the specified row by argument.
+		/// </summary>
+		/// <param name="workSheet">Worksheet object.</param>
+		/// <param name="range">Range to scan.</param>
+		/// <returns>The index of the last column.</returns>
+		protected int GetLastColumnInRow(IXLWorksheet workSheet, Range range)
+		{
+			int columnIndex = 0;
+			var columnRange = new Range(range);
+			for (columnIndex = columnRange.StartColumn + columnRange.ColumnCount - 1; columnRange.StartColumn <= columnIndex; columnIndex--)
+			{
+				var cell = workSheet.Cell(columnRange.StartRow, columnIndex);
+				string cellValue = cell.GetString();
+				if ((!string.IsNullOrEmpty(cellValue)) && (!string.IsNullOrWhiteSpace(cellValue)))
+				{
+					break;
+				}
+			}
+			return columnIndex;
 		}
 	}
 }
