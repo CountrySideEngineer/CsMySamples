@@ -417,6 +417,7 @@ namespace TableReader.Excel
 		/// </summary>
 		/// <param name="range">Range to set.</param>
 		/// <exception cref="ArgumentNullException"></exception>
+		/// <exception cref="InvalidDataException"></exception>
 		public void GetRowRange(ref Range range)
 		{
 			CheckParameter();
@@ -432,10 +433,10 @@ namespace TableReader.Excel
 				var lastCell = workSheet.LastRowUsed();
 				range.RowCount = lastCell.RowNumber() - firstCell.RowNumber() + 1;
 			}
-			catch (NullReferenceException)
+			catch (NullReferenceException ex)
 			{
-				string message = "Argument Range is must not be null.";
-				throw new ArgumentNullException(message);
+				string message = $"No used cell has been found in {SheetName}.";
+				throw new InvalidDataException(message, ex);
 			}
 		}
 
@@ -449,19 +450,34 @@ namespace TableReader.Excel
 
 			try
 			{
-				string item = string.Empty;
-				Range rowRange = FindFirstItemInRow(item, range);
-				Range columnRange = FindFirstItemInColumn(item, range);
+				Range rowRange = new Range();
+				GetRowRange(ref rowRange);
 
-				int rowCount = rowRange.StartRow - range.StartRow + 1;
-				int columnCount = columnRange.StartColumn - range.StartColumn + 1;
-				range.RowCount = rowCount;
-				range.ColumnCount = columnCount;
+				Range columnRange = new Range();
+				GetColumnRange(ref columnRange);
+
+				range.StartRow = rowRange.StartRow;
+				range.RowCount = rowRange.RowCount;
+				range.StartColumn = columnRange.StartColumn;
+				range.ColumnCount = columnRange.ColumnCount;
 			}
-			catch (NullReferenceException)
+			catch (ArgumentNullException)
 			{
-				string message = "Argument Range is must not be null.";
-				throw new ArgumentNullException(message);
+				throw;
+			}
+			catch (InvalidDataException ex)
+			{
+				if (ex.InnerException is NullReferenceException)
+				{
+					range.StartRow = 0;
+					range.StartColumn = 0;
+					range.RowCount = 0;
+					range.ColumnCount = 0;
+				}
+				else
+				{
+					throw;
+				}
 			}
 		}
 
