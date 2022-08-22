@@ -73,7 +73,7 @@ namespace TableReader.Excel
 
 			if (string.IsNullOrEmpty(item))
 			{
-				throw new ArgumentException("Target item to scane should have any value, not empty.");
+				throw new ArgumentException("The string to be searched must have value set.");
 			}
 			try
 			{
@@ -92,11 +92,22 @@ namespace TableReader.Excel
 				};
 				return range;
 			}
-			catch (Exception ex)
-			when ((ex is NullReferenceException) || (ex is ArgumentException))
+			catch (NullReferenceException)
 			{
 				string message = $"No cell contains \"{item}\" in {SheetName}.";
 				throw new ArgumentException(message);
+			}
+			catch (ArgumentException ex)
+			{
+				if (string.IsNullOrEmpty(ex.Message))
+				{
+					string message = $"No cell contains \"{item}\" in {SheetName}.";
+					throw new ArgumentException(message);
+				}
+				else
+				{
+					throw;
+				}
 			}
 		}
 
@@ -131,9 +142,9 @@ namespace TableReader.Excel
 					.Where(_ =>
 						(0 == string.Compare(_.GetString(), item)) &&
 						(range.StartRow <= _.Address.RowNumber) &&
-						(_.Address.RowNumber <= (range.StartRow + range.ColumnCount)) &&
+						(_.Address.RowNumber <= (range.StartRow + range.RowCount - 1)) &&
 						(range.StartColumn <= _.Address.ColumnNumber) &&
-						(_.Address.ColumnNumber <= range.StartColumn + range.ColumnCount))
+						(_.Address.ColumnNumber <= range.StartColumn + range.ColumnCount - 1))
 					.FirstOrDefault();
 				Range itemRange = new Range()
 				{
@@ -144,11 +155,22 @@ namespace TableReader.Excel
 				};
 				return itemRange;
 			}
-			catch (Exception ex)
-			when ((ex is NullReferenceException) || (ex is ArgumentException))
+			catch (NullReferenceException)
 			{
 				string message = $"No cell contains \"{item}\" in {SheetName}.";
 				throw new ArgumentException(message);
+			}
+			catch (ArgumentException ex)
+			{
+				if (string.IsNullOrEmpty(ex.Message))
+				{
+					string message = $"No cell contains \"{item}\" in {SheetName}.";
+					throw new ArgumentException(message);
+				}
+				else
+				{
+					throw;
+				}
 			}
 		}
 
@@ -168,7 +190,7 @@ namespace TableReader.Excel
 			}
 			if (null == range)
 			{
-				throw new ArgumentNullException("Range to read has not been set.");
+				throw new ArgumentNullException($"{nameof(range)}", "Range to read has not been set.");
 			}
 			try
 			{
@@ -179,7 +201,7 @@ namespace TableReader.Excel
 					.Where(_ =>
 						(0 == string.Compare(item, _.GetString())) &&
 						(range.StartRow <= _.Address.RowNumber) &&
-						(_.Address.RowNumber <= (range.StartRow + range.RowCount)) &&
+						(_.Address.RowNumber <= (range.StartRow + range.RowCount - 1)) &&
 						(_.Address.ColumnNumber == range.StartColumn))
 					.FirstOrDefault();
 				Range itemRange = new Range()
@@ -191,11 +213,22 @@ namespace TableReader.Excel
 				};
 				return itemRange;
 			}
-			catch (Exception ex)
-			when ((ex is NullReferenceException) || (ex is ArgumentException))
+			catch (NullReferenceException)
 			{
 				string message = $"No cell contains \"{item}\" in {SheetName}.";
 				throw new ArgumentException(message);
+			}
+			catch (ArgumentException ex)
+			{
+				if (string.IsNullOrEmpty(ex.Message))
+				{
+					string message = $"No cell contains \"{item}\" in {SheetName}.";
+					throw new ArgumentException(message);
+				}
+				else
+				{
+					throw;
+				}
 			}
 		}
 
@@ -216,7 +249,7 @@ namespace TableReader.Excel
 			}
 			if (null == range)
 			{
-				throw new ArgumentNullException("Range to read has not been set.");
+				throw new ArgumentNullException($"{nameof(range)}", "Range to read has not been set.");
 			}
 			try
 			{
@@ -228,7 +261,7 @@ namespace TableReader.Excel
 						(0 == string.Compare(item, _.GetString())) &&
 						(range.StartRow == _.Address.RowNumber) &&
 						(range.StartColumn <= _.Address.ColumnNumber) &&
-						(_.Address.ColumnNumber <= (range.StartColumn + range.ColumnCount)))
+						(_.Address.ColumnNumber <= (range.StartColumn + range.ColumnCount - 1)))
 					.FirstOrDefault();
 				Range itemRange = new Range()
 				{
@@ -239,11 +272,22 @@ namespace TableReader.Excel
 				};
 				return itemRange;
 			}
-			catch (Exception ex)
-			when ((ex is NullReferenceException) || (ex is ArgumentException))
+			catch (NullReferenceException)
 			{
 				string message = $"No cell contains \"{item}\" in {SheetName}.";
 				throw new ArgumentException(message);
+			}
+			catch (ArgumentException ex)
+			{
+				if (string.IsNullOrEmpty(ex.Message))
+				{
+					string message = $"No cell contains \"{item}\" in {SheetName}.";
+					throw new ArgumentException(message);
+				}
+				else
+				{
+					throw;
+				}
 			}
 		}
 
@@ -269,7 +313,8 @@ namespace TableReader.Excel
 				var itemCells = workSheet.CellsUsed().Where(_ => 0 == string.Compare(_.GetString(), item));
 				if (0 == itemCells.Count())
 				{
-					throw new ArgumentException();
+					string message = $"No cell contains \"{item}\" in {SheetName}.";
+					throw new ArgumentException(message);
 				}
 				var ranges = new List<Range>();
 				foreach (var itemCell in itemCells)
@@ -285,23 +330,33 @@ namespace TableReader.Excel
 				}
 				return ranges;
 			}
-			catch (Exception ex)
-			when ((ex is NullReferenceException) || (ex is ArgumentException))
+			catch (NullReferenceException)
 			{
 				string message = $"No cell contains \"{item}\" in {SheetName}.";
 				throw new ArgumentException(message);
 			}
+			catch (ArgumentException ex)
+			{
+				if (string.IsNullOrEmpty(ex.Message))
+				{
+					string message = $"No cell contains \"{item}\" in {SheetName}.";
+					throw new ArgumentException(message);
+				}
+				else
+				{
+					throw;
+				}
+			}
 		}
 
 		/// <summary>
-		/// Get range about column.
+		/// Get column count (Width of table).
 		/// </summary>
 		/// <param name="range">Reference to Range object to set result.</param>
 		/// <exception cref="ArgumentNullException"></exception>
 		public void GetColumnRange(ref Range range)
 		{
 			CheckParameter();
-
 			try
 			{
 				var workBook = new XLWorkbook(_excelStream);
@@ -362,6 +417,7 @@ namespace TableReader.Excel
 		/// </summary>
 		/// <param name="range">Range to set.</param>
 		/// <exception cref="ArgumentNullException"></exception>
+		/// <exception cref="InvalidDataException"></exception>
 		public void GetRowRange(ref Range range)
 		{
 			CheckParameter();
@@ -377,10 +433,10 @@ namespace TableReader.Excel
 				var lastCell = workSheet.LastRowUsed();
 				range.RowCount = lastCell.RowNumber() - firstCell.RowNumber() + 1;
 			}
-			catch (NullReferenceException)
+			catch (NullReferenceException ex)
 			{
-				string message = "Argument Range is must not be null.";
-				throw new ArgumentNullException(message);
+				string message = $"No used cell has been found in {SheetName}.";
+				throw new InvalidDataException(message, ex);
 			}
 		}
 
@@ -394,19 +450,34 @@ namespace TableReader.Excel
 
 			try
 			{
-				string item = string.Empty;
-				Range rowRange = FindFirstItemInRow(item, range);
-				Range columnRange = FindFirstItemInColumn(item, range);
+				Range rowRange = new Range();
+				GetRowRange(ref rowRange);
 
-				int rowCount = rowRange.StartRow - range.StartRow + 1;
-				int columnCount = columnRange.StartColumn - range.StartColumn + 1;
-				range.RowCount = rowCount;
-				range.ColumnCount = columnCount;
+				Range columnRange = new Range();
+				GetColumnRange(ref columnRange);
+
+				range.StartRow = rowRange.StartRow;
+				range.RowCount = rowRange.RowCount;
+				range.StartColumn = columnRange.StartColumn;
+				range.ColumnCount = columnRange.ColumnCount;
 			}
-			catch (NullReferenceException)
+			catch (ArgumentNullException)
 			{
-				string message = "Argument Range is must not be null.";
-				throw new ArgumentNullException(message);
+				throw;
+			}
+			catch (InvalidDataException ex)
+			{
+				if (ex.InnerException is NullReferenceException)
+				{
+					range.StartRow = 0;
+					range.StartColumn = 0;
+					range.RowCount = 0;
+					range.ColumnCount = 0;
+				}
+				else
+				{
+					throw;
+				}
 			}
 		}
 
@@ -425,17 +496,19 @@ namespace TableReader.Excel
 			{
 				var workBook = new XLWorkbook(_excelStream);
 				var workSheet = workBook.Worksheet(SheetName);
-				var cellsInColumn = workSheet.Cells()
-					.Where(_ =>
-						(range.StartRow <= _.Address.RowNumber) &&
-						(_.Address.RowNumber <= workSheet.LastRowUsed().RowNumber()) &&
-						(_.Address.ColumnNumber == range.StartColumn));
-				List<string> items = new List<string>();
-				foreach (var cellInColumn in cellsInColumn)
+				var rowRange = new Range(range);
+				GetRowRange(ref rowRange);
+				rowRange.StartRow = range.StartRow;	//The StartRow in rowRange is overwritten in GetRowRange(). reset the change.
+
+				List<string> cellItems = new List<string>();
+				int tailIndex = GetLastRowInColumn(workSheet, rowRange);
+				for (int rowIndex = rowRange.StartRow; rowIndex <= tailIndex; rowIndex++)
 				{
-					items.Add(cellInColumn.GetString());
+					var cell = workSheet.Cell(rowIndex, range.StartColumn);
+					string cellItem = cell.GetString();
+					cellItems.Add(cellItem);
 				}
-				return items;
+				return cellItems;
 			}
 			catch (NullReferenceException)
 			{
@@ -454,17 +527,63 @@ namespace TableReader.Excel
 		{
 			var workBook = new XLWorkbook(_excelStream);
 			var workSheet = workBook.Worksheet(SheetName);
-			var cellsInRow = workSheet.Cells()
-				.Where(_ =>
-					(range.StartRow == _.Address.RowNumber) &&
-					(range.StartColumn <= _.Address.ColumnNumber) &&
-					(_.Address.ColumnNumber <= workSheet.LastColumnUsed().ColumnNumber()));
-			List<string> items = new List<string>();
-			foreach (var cellInRow in cellsInRow)
+			var columnRange = new Range(range);
+			GetColumnRange(ref columnRange);
+			columnRange.StartColumn = range.StartColumn;
+
+			List<string> cellItems = new List<string>();
+			int tailIndex = GetLastColumnInRow(workSheet, columnRange);
+			for (int columnIndex = columnRange.StartColumn; columnIndex <= tailIndex; columnIndex++)
 			{
-				items.Add(cellInRow.GetString());
+				var cell = workSheet.Cell(range.StartRow, columnIndex);
+				string cellItem = cell.GetString();
+				cellItems.Add(cellItem);
 			}
-			return items;
+			return cellItems;
+		}
+
+		/// <summary>
+		/// Get the index of the last row of the specified column by argument.
+		/// </summary>
+		/// <param name="workSheet">Worksheet object.</param>
+		/// <param name="range">Range to scan.</param>
+		/// <returns>The index of the last row.</returns>
+		protected int GetLastRowInColumn(IXLWorksheet workSheet, Range range)
+		{
+			int rowIndex = 0;
+			var rowRange = new Range(range);
+			for (rowIndex = rowRange.StartRow + range.RowCount - 1; rowRange.StartRow <= rowIndex; rowIndex--)
+			{
+				var cell = workSheet.Cell(rowIndex, rowRange.StartColumn);
+				string cellValue = cell.GetString();
+				if ((!string.IsNullOrEmpty(cellValue)) && (!string.IsNullOrWhiteSpace(cellValue)))
+				{
+					break;
+				}
+			}
+			return rowIndex;
+		}
+
+		/// <summary>
+		/// Get the index of the last column of the specified row by argument.
+		/// </summary>
+		/// <param name="workSheet">Worksheet object.</param>
+		/// <param name="range">Range to scan.</param>
+		/// <returns>The index of the last column.</returns>
+		protected int GetLastColumnInRow(IXLWorksheet workSheet, Range range)
+		{
+			int columnIndex = 0;
+			var columnRange = new Range(range);
+			for (columnIndex = columnRange.StartColumn + columnRange.ColumnCount - 1; columnRange.StartColumn <= columnIndex; columnIndex--)
+			{
+				var cell = workSheet.Cell(columnRange.StartRow, columnIndex);
+				string cellValue = cell.GetString();
+				if ((!string.IsNullOrEmpty(cellValue)) && (!string.IsNullOrWhiteSpace(cellValue)))
+				{
+					break;
+				}
+			}
+			return columnIndex;
 		}
 	}
 }
