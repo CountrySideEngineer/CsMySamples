@@ -1,9 +1,6 @@
 ﻿using CountrySideEngineer.ProgressWindow.Model;
-using CountrySideEngineer.ProgressWindow.Model.Interface;
+using CountrySideEngineer.ProgressWindow.Task.Interface;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

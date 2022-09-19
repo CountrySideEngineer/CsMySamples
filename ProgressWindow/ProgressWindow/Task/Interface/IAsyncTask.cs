@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CountrySideEngineer.ProgressWindow.Model.Interface
+namespace CountrySideEngineer.ProgressWindow.Task.Interface
 {
 	public interface IAsyncTask<T>
 	{
