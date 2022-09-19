@@ -1,13 +1,8 @@
 ﻿using CountrySideEngineer.ProgressWindow.Model;
 using CountrySideEngineer.ProgressWindow.Model.CommandArgument;
-using CountrySideEngineer.ProgressWindow.Model.Interface;
+using CountrySideEngineer.ProgressWindow.Task.Interface;
 using CountrySideEngineer.ProgressWindow.ViewModel;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace CountrySideEngineer.ProgressWindow
 {
@@ -21,14 +16,28 @@ namespace CountrySideEngineer.ProgressWindow
             };
             var progress = new Progress<ProgressInfo>((_) =>
             {
-                var cmdArg = new ProgressChangedCommandArgument()
+                try
                 {
-                    ProgressInfo = _
-                };
-                viewModel.OnProgressChanged(this, cmdArg);
+                    var cmdArg = new ProgressChangedCommandArgument()
+                    {
+                        ProgressInfo = _
+                    };
+                    viewModel.OnProgressChanged(this, cmdArg);
 
-                if (!_.ShouldContinue)
-				{
+                    if (!_.ShouldContinue)
+                    {
+                        viewModel.OnCloseWindowsCloseRequest(this, cmdArg);
+                    }
+                }
+                catch (Exception)
+                {
+                    var cmdArg = new ProgressChangedCommandArgument()
+                    {
+                        ProgressInfo = new ProgressInfo
+                        {
+                            ShouldContinue = false,
+                        }
+                    };
                     viewModel.OnCloseWindowsCloseRequest(this, cmdArg);
                 }
             });
@@ -38,6 +47,6 @@ namespace CountrySideEngineer.ProgressWindow
                 DataContext = viewModel
             };
             view.ShowDialog();
-		}
+        }
     }
 }

@@ -21,6 +21,10 @@
     <OutputPath>..\bin\</OutputPath>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\bin\</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="ProgressWindow.xaml.cs" />
   </ItemGroup>
@@ -31,9 +35,10 @@
 
   <ItemGroup>
     <Compile Include="..\ProgressWindow\Model\CommandArgument\ProgressChangedCommandArgument.cs" Link="Model\CommandArgument\ProgressChangedCommandArgument.cs" />
-    <Compile Include="..\ProgressWindow\Model\Interface\IAsyncTask.cs" Link="Model\Interface\IAsyncTask.cs" />
     <Compile Include="..\ProgressWindow\Model\ProgressInfo.cs" Link="Model\ProgressInfo.cs" />
     <Compile Include="..\ProgressWindow\ProgressWindow.cs" Link="ProgressWindow.cs" />
+    <Compile Include="..\ProgressWindow\Task\AsyncTask.cs" Link="Task\AsyncTask.cs" />
+    <Compile Include="..\ProgressWindow\Task\Interface\IAsyncTask.cs" Link="Task\Interface\IAsyncTask.cs" />
     <Compile Include="..\ProgressWindow\ViewModel\ProgressWindowsViewModel.cs" Link="ViewModel\ProgressWindowsViewModel.cs" />
     <Compile Include="..\ProgressWindow\View\ProgressWindow.xaml.cs" Link="View\ProgressWindow.xaml.cs" />
   </ItemGroup>
@@ -46,9 +51,10 @@
 
   <ItemGroup>
     <Folder Include="Model\CommandArgument\" />
-    <Folder Include="Model\Interface\" />
+    <Folder Include="Task\Interface\" />
     <Folder Include="View\" />
     <Folder Include="ViewModel\" />
+    <Folder Include="Task\" />
   </ItemGroup>
 
   <ItemGroup>

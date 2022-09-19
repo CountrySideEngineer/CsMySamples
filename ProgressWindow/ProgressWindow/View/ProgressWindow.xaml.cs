@@ -96,8 +96,15 @@ namespace CountrySideEngineer.ProgressWindow.View
 		/// <param name="e">Event argument.</param>
 		private void Window_ContentRendered(object sender, EventArgs e)
 		{
-			var viewModel = (ProgressWindowsViewModel)this.DataContext;
-			viewModel.OnProgressStart(this, e);
+			try
+			{
+				var viewModel = (ProgressWindowsViewModel)this.DataContext;
+				viewModel.OnProgressStart(this, e);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex);
+			}
 		}
 	}
 }

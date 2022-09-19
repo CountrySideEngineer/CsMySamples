@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CountrySideEngineer.ProgressWindow.Task.Interface;
 
 namespace ProgressWindow.Sample.GUI.Command
 {
