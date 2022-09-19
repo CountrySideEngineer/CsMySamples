@@ -1,6 +1,6 @@
 ﻿using CountrySideEngineer.ProgressWindow.Model;
 using CountrySideEngineer.ProgressWindow.Model.CommandArgument;
-using CountrySideEngineer.ProgressWindow.Model.Interface;
+using CountrySideEngineer.ProgressWindow.Task.Interface;
 using CountrySideEngineer.ViewModel.Base;
 using System;
 using System.Collections.Generic;
@@ -162,7 +162,14 @@ namespace CountrySideEngineer.ProgressWindow.ViewModel
 		/// <param name="e">Event argument.</param>
 		public void OnProgressStart(object sender, EventArgs e)
 		{
-			AsyncTask.RunTask(Progress);
+			try
+			{
+				AsyncTask.RunTask(Progress);
+			}
+			catch (Exception)
+			{
+				OnCloseWindowsCloseRequest(this, null);
+			}
 		}
 
 		/// <summary>
