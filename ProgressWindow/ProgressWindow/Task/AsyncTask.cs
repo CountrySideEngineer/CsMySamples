@@ -9,16 +9,24 @@ namespace CountrySideEngineer.ProgressWindow.Task
 {
 	public class AsyncTask<T> : IAsyncTask<T>
 	{
+		/// <summary>
+		/// Progress grass which implements IProgress interaface.
+		/// </summary>
 		protected IProgress<T> _progress;
 
-		public delegate void AsyncTaskDelegate(IProgress<T> progress);
-
+		/// <summary>
+		/// Default constructor.
+		/// </summary>
 		public AsyncTask()
 		{
 			TaskAction = null;
 			_progress = null;
 		}
 
+		/// <summary>
+		/// Run task.
+		/// </summary>
+		/// <param name="progress">Progress class.</param>
 		public void RunTask(IProgress<T> progress)
 		{
 			try
@@ -39,12 +47,22 @@ namespace CountrySideEngineer.ProgressWindow.Task
 			}
 		}
 
+		/// <summary>
+		/// Run task asynchronously.
+		/// </summary>
+		/// <param name="progress">Progress class.</param>
+		/// <returns>Task to run.</returns>
 		protected virtual async System.Threading.Tasks.Task RunAsync(IProgress<T> progress)
 		{
 			System.Threading.Tasks.Task task = Run(progress);
 			await task;
 		}
 
+		/// <summary>
+		/// Start running task.
+		/// </summary>
+		/// <param name="progress">Progress class.</param>
+		/// <returns>Task class running.</returns>
 		protected virtual System.Threading.Tasks.Task Run(IProgress<T> progress)
 		{
 			_progress = progress;
@@ -55,6 +73,9 @@ namespace CountrySideEngineer.ProgressWindow.Task
 			return task;
 		}
 
+		/// <summary>
+		/// Action object to run asynchronously.
+		/// </summary>
 		public Action<IProgress<T>> TaskAction;
 	}
 }
