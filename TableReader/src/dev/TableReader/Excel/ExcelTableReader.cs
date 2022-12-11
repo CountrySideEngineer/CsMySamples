@@ -82,6 +82,11 @@ namespace TableReader.Excel
 			return content;
 		}
 
+		/// <summary>
+		/// Convert Range object to collection Range object in vertical direction.
+		/// </summary>
+		/// <param name="range">Range object to be converted.</param>
+		/// <returns>Collection of Range object covnerted.</returns>
 		protected IEnumerable<Range> RangeToRowCollection(Range range)
 		{
 			var rangeCollection = new List<Range>();
@@ -95,6 +100,11 @@ namespace TableReader.Excel
 			return rangeCollection;
 		}
 
+		/// <summary>
+		/// Convert Range object to collection of Range object in horizontal collection.
+		/// </summary>
+		/// <param name="range">Range object to be converted.</param>
+		/// <returns>Collection of Range object converted.</returns>
 		protected IEnumerable<Range> RangeToColCollection(Range range)
 		{
 			var rangeCollection = new List<Range>();
@@ -107,7 +117,6 @@ namespace TableReader.Excel
 			}
 			return rangeCollection;
 		}
-
 
 		/// <summary>
 		/// Check parameter.
@@ -248,6 +257,8 @@ namespace TableReader.Excel
 		/// <param name="item">Item to find.</param>
 		/// <param name="range">Range to scan.</param>
 		/// <returns>Cell range as Range object</returns>
+		/// <exception cref="ArgumentException"></exception>
+		/// <exception cref="ArgumentNullException"></exception>
 		public Range FindFirstItemInColumn(string item, Range range)
 		{
 			CheckParameter();
@@ -511,6 +522,8 @@ namespace TableReader.Excel
 		/// Get table range.
 		/// </summary>
 		/// <param name="range">Range object to set result.</param>
+		/// <exception cref="InvalidDataException"></exception>
+		/// <exception cref="NullReferenceException"></exception>
 		public void GetTableRange(ref Range range)
 		{
 			CheckParameter();
@@ -653,6 +666,15 @@ namespace TableReader.Excel
 			return columnIndex;
 		}
 
+		/// <summary>
+		/// Get range of table.
+		/// </summary>
+		/// <param name="name">Table name.</param>
+		/// <param name="offset">Table offset from </param>
+		/// <returns>Table range, row and column number at the top of table and the number of the row and column.</returns>
+		/// <exception cref="ArgumentException"></exception>
+		/// <exception cref="InvalidDataException"></exception>
+		/// <exception cref="NullReferenceException"></exception>
 		protected Range GetTableRange(string name, Range offset)
 		{
 			CheckParameter();
