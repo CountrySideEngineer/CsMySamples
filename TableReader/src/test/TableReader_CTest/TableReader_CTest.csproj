@@ -28,6 +28,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -52,7 +53,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="TableReader">
+    <Reference Include="TableReader, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\dev\bin\TableReader.dll</HintPath>
     </Reference>
   </ItemGroup>
@@ -66,6 +68,7 @@
     <Compile Include="TableReader_Test_FindItem.cs" />
     <Compile Include="TableReader_Test_GetColumnRange.cs" />
     <Compile Include="TableReader_Test_GetRowRange.cs" />
+    <Compile Include="TableReader_Test_GetTable.cs" />
     <Compile Include="TableReader_Test_GetTableRange.cs" />
     <Compile Include="TableReader_Test_ReadColumn.cs" />
     <Compile Include="TableReader_Test_ReadRow.cs" />

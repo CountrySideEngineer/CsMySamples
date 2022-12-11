@@ -43,6 +43,73 @@ namespace TableReader.Excel
 		}
 
 		/// <summary>
+		/// Get table content.
+		/// </summary>
+		/// <param name="name">Table name</param>
+		/// <returns>Table content as collection of row</returns>
+		public Content GetTable(string name)
+		{
+			var offset = new Range()
+			{
+				RowCount = 1,
+				ColumnCount = 1
+			};
+			return GetTable(name, offset);
+		}
+
+		/// <summary>
+		/// Get table content.
+		/// </summary>
+		/// <param name="name">Table name.</param>
+		/// <param name="offset">Offset to start reading table.</param>
+		/// <returns>Table content as collection of row.</returns>
+		public Content GetTable(string name, Range offset)
+		{
+			CheckParameter();
+
+			Range tableRange = GetTableRange(name, offset);
+			IEnumerable<Range> rowRangeCollection = RangeToRowCollection(tableRange);
+			var tableContent = new List<IEnumerable<string>>();
+			foreach (var rowRangeItem in rowRangeCollection)
+			{
+				var rowContent = ReadRow(rowRangeItem);
+				tableContent.Add(rowContent);
+			}
+			var content = new ExcelTableContent()
+			{
+				TableContent = tableContent
+			};
+			return content;
+		}
+
+		protected IEnumerable<Range> RangeToRowCollection(Range range)
+		{
+			var rangeCollection = new List<Range>();
+			for (int index = 0; index < range.RowCount; index++)
+			{
+				var rowRange = new Range(range);
+				rowRange.StartRow += index;
+				rowRange.RowCount = 1;
+				rangeCollection.Add(rowRange);
+			}
+			return rangeCollection;
+		}
+
+		protected IEnumerable<Range> RangeToColCollection(Range range)
+		{
+			var rangeCollection = new List<Range>();
+			for (int index = 0; index < range.ColumnCount; index++)
+			{
+				var rowRange = new Range(range);
+				rowRange.StartColumn += index;
+				rowRange.ColumnCount = 1;
+				rangeCollection.Add(rowRange);
+			}
+			return rangeCollection;
+		}
+
+
+		/// <summary>
 		/// Check parameter.
 		/// </summary>
 		/// <exception cref="NullReferenceException"></exception>
@@ -584,6 +651,39 @@ namespace TableReader.Excel
 				}
 			}
 			return columnIndex;
+		}
+
+		protected Range GetTableRange(string name, Range offset)
+		{
+			CheckParameter();
+
+			Range nameCellRange = FindFirstItem(name);
+			var sheetRange = new Range();
+			GetTableRange(ref sheetRange);
+
+			int startRow = nameCellRange.StartRow + offset.RowCount;
+			int startCol = nameCellRange.StartColumn + offset.ColumnCount;
+			int lastRow = sheetRange.StartRow + sheetRange.RowCount - 1;
+			int lastColumn = sheetRange.StartColumn + sheetRange.ColumnCount - 1;
+			int rowCount = lastRow - startRow + 1;
+			int colCount = lastColumn - startCol + 1;
+
+			if ((startRow < 1) || (startCol < 1) ||
+				(lastRow < 1) || (lastColumn < 1) ||
+				(lastRow < startRow) || (lastColumn < startCol) ||
+				(rowCount < 1) || (colCount < 1))
+			{
+				throw new ArgumentOutOfRangeException();
+			}
+
+			var tableRange = new Range()
+			{
+				StartRow = startRow,
+				StartColumn = startCol,
+				RowCount = rowCount,
+				ColumnCount = colCount
+			};
+			return tableRange;
 		}
 	}
 }

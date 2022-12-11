@@ -9,6 +9,10 @@ namespace TableReader.Interface
 {
 	public interface ITableReader
 	{
+		Content GetTable(string name);
+
+		Content GetTable(string name, Range offset);
+
 		Range FindFirstItem(string item);
 
 		Range FindFirstItem(string item, Range range);
