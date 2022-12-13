@@ -680,32 +680,64 @@ namespace TableReader.Excel
 			CheckParameter();
 
 			Range nameCellRange = FindFirstItem(name);
-			var sheetRange = new Range();
-			GetTableRange(ref sheetRange);
+			Range tableTop = new Range(nameCellRange);
+			tableTop.StartRow += offset.RowCount;
+			tableTop.StartColumn += offset.ColumnCount;
 
-			int startRow = nameCellRange.StartRow + offset.RowCount;
-			int startCol = nameCellRange.StartColumn + offset.ColumnCount;
-			int lastRow = sheetRange.StartRow + sheetRange.RowCount - 1;
-			int lastColumn = sheetRange.StartColumn + sheetRange.ColumnCount - 1;
-			int rowCount = lastRow - startRow + 1;
-			int colCount = lastColumn - startCol + 1;
-
-			if ((startRow < 1) || (startCol < 1) ||
-				(lastRow < 1) || (lastColumn < 1) ||
-				(lastRow < startRow) || (lastColumn < startCol) ||
-				(rowCount < 1) || (colCount < 1))
+			Range rowRange = GetTableRowRange(tableTop);
+			Range colRange = GetTableColumnRange(tableTop);
+			Range tableRange = new Range()
 			{
-				throw new ArgumentOutOfRangeException();
-			}
-
-			var tableRange = new Range()
-			{
-				StartRow = startRow,
-				StartColumn = startCol,
-				RowCount = rowCount,
-				ColumnCount = colCount
+				StartRow = rowRange.StartRow,
+				RowCount = rowRange.RowCount,
+				StartColumn = colRange.StartColumn,
+				ColumnCount = colRange.ColumnCount
 			};
 			return tableRange;
+		}
+
+		protected Range GetTableRowRange(Range tableTop)
+		{
+			var workBook = new XLWorkbook(_excelStream);
+			var workSheet = workBook.Worksheet(SheetName);
+			var rowNumber = workSheet
+				.CellsUsed()
+				.Where(_ =>
+					((string.IsNullOrEmpty(_.GetString())) || (string.IsNullOrWhiteSpace(_.GetString()))) &&
+					(tableTop.StartRow <= _.Address.RowNumber) &&
+					(tableTop.StartColumn == _.Address.ColumnNumber))
+				.Min(_ => _.Address.RowNumber);
+			int talbeLastRow = rowNumber - 1;
+			int rowCount = talbeLastRow - tableTop.StartRow + 1;
+
+			var range = new Range()
+			{
+				StartRow = tableTop.StartRow,
+				RowCount = rowCount
+			};
+			return range;
+		}
+
+		protected Range GetTableColumnRange(Range tableTop)
+		{
+			var workBook = new XLWorkbook(_excelStream);
+			int columnNumber = workBook
+				.Worksheet(SheetName)
+				.CellsUsed()
+				.Where(_ =>
+				((string.IsNullOrEmpty(_.GetString())) || (string.IsNullOrWhiteSpace(_.GetString()))) &&
+				(tableTop.StartRow == _.Address.RowNumber) &&
+				(tableTop.StartColumn <= _.Address.ColumnNumber))
+				.Min(_ => _.Address.ColumnNumber);
+			int tableLastColumn = columnNumber - 1;
+			int columnCount = tableLastColumn - tableTop.StartColumn + 1;
+
+			var range = new Range()
+			{
+				StartColumn = tableTop.StartColumn,
+				ColumnCount = columnCount
+			};
+			return range;
 		}
 	}
 }
