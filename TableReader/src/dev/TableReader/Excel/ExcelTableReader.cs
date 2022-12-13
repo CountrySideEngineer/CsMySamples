@@ -700,15 +700,18 @@ namespace TableReader.Excel
 		{
 			var workBook = new XLWorkbook(_excelStream);
 			var workSheet = workBook.Worksheet(SheetName);
-			var rowNumber = workSheet
-				.CellsUsed()
-				.Where(_ =>
-					((string.IsNullOrEmpty(_.GetString())) || (string.IsNullOrWhiteSpace(_.GetString()))) &&
-					(tableTop.StartRow <= _.Address.RowNumber) &&
-					(tableTop.StartColumn == _.Address.ColumnNumber))
-				.Min(_ => _.Address.RowNumber);
-			int talbeLastRow = rowNumber - 1;
-			int rowCount = talbeLastRow - tableTop.StartRow + 1;
+			int rowCount = 0;
+			do
+			{
+				int row = tableTop.StartRow + rowCount;
+				string cellContent = workSheet.Cell(row, tableTop.StartColumn).GetString();
+				if ((string.IsNullOrEmpty(cellContent)) || (string.IsNullOrWhiteSpace(cellContent)))
+				{
+					break;
+				}
+				rowCount++;
+
+			} while (true);
 
 			var range = new Range()
 			{
@@ -721,21 +724,23 @@ namespace TableReader.Excel
 		protected Range GetTableColumnRange(Range tableTop)
 		{
 			var workBook = new XLWorkbook(_excelStream);
-			int columnNumber = workBook
-				.Worksheet(SheetName)
-				.CellsUsed()
-				.Where(_ =>
-				((string.IsNullOrEmpty(_.GetString())) || (string.IsNullOrWhiteSpace(_.GetString()))) &&
-				(tableTop.StartRow == _.Address.RowNumber) &&
-				(tableTop.StartColumn <= _.Address.ColumnNumber))
-				.Min(_ => _.Address.ColumnNumber);
-			int tableLastColumn = columnNumber - 1;
-			int columnCount = tableLastColumn - tableTop.StartColumn + 1;
+			var workSheet = workBook.Worksheet(SheetName);
+			int colCount = 0;
+			do
+			{
+				int col = tableTop.StartColumn + colCount;
+				string content = workSheet.Cell(tableTop.StartRow, col).GetString();
+				if ((string.IsNullOrEmpty(content)) || (string.IsNullOrWhiteSpace(content)))
+				{
+					break;
+				}
+				colCount++;
+			} while (true);
 
 			var range = new Range()
 			{
 				StartColumn = tableTop.StartColumn,
-				ColumnCount = columnCount
+				ColumnCount = colCount
 			};
 			return range;
 		}
