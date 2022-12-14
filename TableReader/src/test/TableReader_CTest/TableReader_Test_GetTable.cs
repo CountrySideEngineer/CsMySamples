@@ -68,7 +68,7 @@ namespace TableReader_CTest
 					ColumnCount = 0
 				};
 				Content ret = reader.GetTable(tableName, offset);
-				Assert.AreEqual(4, ret.GetContentsInCol(0).Count());
+				Assert.AreEqual(3, ret.GetContentsInCol(0).Count());
 				Assert.AreEqual("Item_r_001_c_001", ret.GetContent(0, 0));
 				Assert.AreEqual("Item_r_001_c_002", ret.GetContent(0, 1));
 				Assert.AreEqual("Item_r_001_c_003", ret.GetContent(0, 2));
@@ -84,11 +84,6 @@ namespace TableReader_CTest
 				Assert.AreEqual("Item_r_003_c_003", ret.GetContent(2, 2));
 				Assert.AreEqual("Item_r_003_c_004", ret.GetContent(2, 3));
 				Assert.AreEqual("Item_r_003_c_005", ret.GetContent(2, 4));
-				Assert.AreEqual(string.Empty, ret.GetContent(3, 0));
-				Assert.AreEqual("Item_r_004_c_002", ret.GetContent(3, 1));
-				Assert.AreEqual("Item_r_004_c_003", ret.GetContent(3, 2));
-				Assert.AreEqual("Item_r_004_c_004", ret.GetContent(3, 3));
-				Assert.AreEqual("Item_r_004_c_005", ret.GetContent(3, 4));
 			}
 		}
 
@@ -108,27 +103,7 @@ namespace TableReader_CTest
 					ColumnCount = 0
 				};
 				Content ret = reader.GetTable(tableName, offset);
-				Assert.AreEqual(4, ret.GetContentsInCol(0).Count());
-				Assert.AreEqual(string.Empty, ret.GetContent(0, 0));
-				Assert.AreEqual("Item_r_001_c_002", ret.GetContent(0, 1));
-				Assert.AreEqual("Item_r_001_c_003", ret.GetContent(0, 2));
-				Assert.AreEqual("Item_r_001_c_004", ret.GetContent(0, 3));
-				Assert.AreEqual("Item_r_001_c_005", ret.GetContent(0, 4));
-				Assert.AreEqual("Item_r_002_c_001", ret.GetContent(1, 0));
-				Assert.AreEqual("Item_r_002_c_002", ret.GetContent(1, 1));
-				Assert.AreEqual("Item_r_002_c_003", ret.GetContent(1, 2));
-				Assert.AreEqual("Item_r_002_c_004", ret.GetContent(1, 3));
-				Assert.AreEqual("Item_r_002_c_005", ret.GetContent(1, 4));
-				Assert.AreEqual("Item_r_003_c_001", ret.GetContent(2, 0));
-				Assert.AreEqual("Item_r_003_c_002", ret.GetContent(2, 1));
-				Assert.AreEqual("Item_r_003_c_003", ret.GetContent(2, 2));
-				Assert.AreEqual("Item_r_003_c_004", ret.GetContent(2, 3));
-				Assert.AreEqual("Item_r_003_c_005", ret.GetContent(2, 4));
-				Assert.AreEqual("Item_r_004_c_001", ret.GetContent(3, 0));
-				Assert.AreEqual("Item_r_004_c_002", ret.GetContent(3, 1));
-				Assert.AreEqual("Item_r_004_c_003", ret.GetContent(3, 2));
-				Assert.AreEqual("Item_r_004_c_004", ret.GetContent(3, 3));
-				Assert.AreEqual("Item_r_004_c_005", ret.GetContent(3, 4));
+				Assert.AreEqual(0, ret.GetContentsInCol(0).Count());
 			}
 		}
 
