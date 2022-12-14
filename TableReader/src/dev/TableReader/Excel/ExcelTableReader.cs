@@ -696,7 +696,13 @@ namespace TableReader.Excel
 			return tableRange;
 		}
 
-		protected Range GetTableRowRange(Range tableTop)
+		/// <summary>
+		/// Get table vertical size as row range, returns the start row number and the number of row in the table.
+		/// </summary>
+		/// <param name="tableTop">Table top position as Range object.</param>
+		/// <returns>A Range object containing the starting position of the table and the number of rows.</returns>
+		/// <remarks>Counting the number of rows stops when the first "empty" cell found.</remarks>
+		public Range GetTableRowRange(Range tableTop)
 		{
 			var workBook = new XLWorkbook(_excelStream);
 			var workSheet = workBook.Worksheet(SheetName);
@@ -721,7 +727,13 @@ namespace TableReader.Excel
 			return range;
 		}
 
-		protected Range GetTableColumnRange(Range tableTop)
+		/// <summary>
+		/// Get horizontal size as column range, returns the start column number and the number of column in the table.
+		/// </summary>
+		/// <param name="tableTop">Table top position as Range object.</param>
+		/// <returns>A Range object containing the starting position of the table and the number of columns.</returns>
+		/// <remarks>Counting the number of columns stops when the first "empty" cell found.</remarks>
+		public Range GetTableColumnRange(Range tableTop)
 		{
 			var workBook = new XLWorkbook(_excelStream);
 			var workSheet = workBook.Worksheet(SheetName);
