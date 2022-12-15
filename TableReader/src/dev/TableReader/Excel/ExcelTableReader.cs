@@ -43,6 +43,82 @@ namespace TableReader.Excel
 		}
 
 		/// <summary>
+		/// Get table content.
+		/// </summary>
+		/// <param name="name">Table name</param>
+		/// <returns>Table content as collection of row</returns>
+		public Content GetTable(string name)
+		{
+			var offset = new Range()
+			{
+				RowCount = 1,
+				ColumnCount = 1
+			};
+			return GetTable(name, offset);
+		}
+
+		/// <summary>
+		/// Get table content.
+		/// </summary>
+		/// <param name="name">Table name.</param>
+		/// <param name="offset">Offset to start reading table.</param>
+		/// <returns>Table content as collection of row.</returns>
+		public Content GetTable(string name, Range offset)
+		{
+			CheckParameter();
+
+			Range tableRange = GetTableRange(name, offset);
+			IEnumerable<Range> rowRangeCollection = RangeToRowCollection(tableRange);
+			var tableContent = new List<IEnumerable<string>>();
+			foreach (var rowRangeItem in rowRangeCollection)
+			{
+				var rowContent = ReadRow(rowRangeItem);
+				tableContent.Add(rowContent);
+			}
+			var content = new ExcelTableContent()
+			{
+				TableContent = tableContent
+			};
+			return content;
+		}
+
+		/// <summary>
+		/// Convert Range object to collection Range object in vertical direction.
+		/// </summary>
+		/// <param name="range">Range object to be converted.</param>
+		/// <returns>Collection of Range object covnerted.</returns>
+		protected IEnumerable<Range> RangeToRowCollection(Range range)
+		{
+			var rangeCollection = new List<Range>();
+			for (int index = 0; index < range.RowCount; index++)
+			{
+				var rowRange = new Range(range);
+				rowRange.StartRow += index;
+				rowRange.RowCount = 1;
+				rangeCollection.Add(rowRange);
+			}
+			return rangeCollection;
+		}
+
+		/// <summary>
+		/// Convert Range object to collection of Range object in horizontal collection.
+		/// </summary>
+		/// <param name="range">Range object to be converted.</param>
+		/// <returns>Collection of Range object converted.</returns>
+		protected IEnumerable<Range> RangeToColCollection(Range range)
+		{
+			var rangeCollection = new List<Range>();
+			for (int index = 0; index < range.ColumnCount; index++)
+			{
+				var rowRange = new Range(range);
+				rowRange.StartColumn += index;
+				rowRange.ColumnCount = 1;
+				rangeCollection.Add(rowRange);
+			}
+			return rangeCollection;
+		}
+
+		/// <summary>
 		/// Check parameter.
 		/// </summary>
 		/// <exception cref="NullReferenceException"></exception>
@@ -181,6 +257,8 @@ namespace TableReader.Excel
 		/// <param name="item">Item to find.</param>
 		/// <param name="range">Range to scan.</param>
 		/// <returns>Cell range as Range object</returns>
+		/// <exception cref="ArgumentException"></exception>
+		/// <exception cref="ArgumentNullException"></exception>
 		public Range FindFirstItemInColumn(string item, Range range)
 		{
 			CheckParameter();
@@ -444,6 +522,8 @@ namespace TableReader.Excel
 		/// Get table range.
 		/// </summary>
 		/// <param name="range">Range object to set result.</param>
+		/// <exception cref="InvalidDataException"></exception>
+		/// <exception cref="NullReferenceException"></exception>
 		public void GetTableRange(ref Range range)
 		{
 			CheckParameter();
@@ -584,6 +664,97 @@ namespace TableReader.Excel
 				}
 			}
 			return columnIndex;
+		}
+
+		/// <summary>
+		/// Get range of table.
+		/// </summary>
+		/// <param name="name">Table name.</param>
+		/// <param name="offset">Table offset from </param>
+		/// <returns>Table range, row and column number at the top of table and the number of the row and column.</returns>
+		/// <exception cref="ArgumentException"></exception>
+		/// <exception cref="InvalidDataException"></exception>
+		/// <exception cref="NullReferenceException"></exception>
+		protected Range GetTableRange(string name, Range offset)
+		{
+			CheckParameter();
+
+			Range nameCellRange = FindFirstItem(name);
+			Range tableTop = new Range(nameCellRange);
+			tableTop.StartRow += offset.RowCount;
+			tableTop.StartColumn += offset.ColumnCount;
+
+			Range rowRange = GetTableRowRange(tableTop);
+			Range colRange = GetTableColumnRange(tableTop);
+			Range tableRange = new Range()
+			{
+				StartRow = rowRange.StartRow,
+				RowCount = rowRange.RowCount,
+				StartColumn = colRange.StartColumn,
+				ColumnCount = colRange.ColumnCount
+			};
+			return tableRange;
+		}
+
+		/// <summary>
+		/// Get table vertical size as row range, returns the start row number and the number of row in the table.
+		/// </summary>
+		/// <param name="tableTop">Table top position as Range object.</param>
+		/// <returns>A Range object containing the starting position of the table and the number of rows.</returns>
+		/// <remarks>Counting the number of rows stops when the first "empty" cell found.</remarks>
+		public Range GetTableRowRange(Range tableTop)
+		{
+			var workBook = new XLWorkbook(_excelStream);
+			var workSheet = workBook.Worksheet(SheetName);
+			int rowCount = 0;
+			do
+			{
+				int row = tableTop.StartRow + rowCount;
+				string cellContent = workSheet.Cell(row, tableTop.StartColumn).GetString();
+				if ((string.IsNullOrEmpty(cellContent)) || (string.IsNullOrWhiteSpace(cellContent)))
+				{
+					break;
+				}
+				rowCount++;
+
+			} while (true);
+
+			var range = new Range()
+			{
+				StartRow = tableTop.StartRow,
+				RowCount = rowCount
+			};
+			return range;
+		}
+
+		/// <summary>
+		/// Get horizontal size as column range, returns the start column number and the number of column in the table.
+		/// </summary>
+		/// <param name="tableTop">Table top position as Range object.</param>
+		/// <returns>A Range object containing the starting position of the table and the number of columns.</returns>
+		/// <remarks>Counting the number of columns stops when the first "empty" cell found.</remarks>
+		public Range GetTableColumnRange(Range tableTop)
+		{
+			var workBook = new XLWorkbook(_excelStream);
+			var workSheet = workBook.Worksheet(SheetName);
+			int colCount = 0;
+			do
+			{
+				int col = tableTop.StartColumn + colCount;
+				string content = workSheet.Cell(tableTop.StartRow, col).GetString();
+				if ((string.IsNullOrEmpty(content)) || (string.IsNullOrWhiteSpace(content)))
+				{
+					break;
+				}
+				colCount++;
+			} while (true);
+
+			var range = new Range()
+			{
+				StartColumn = tableTop.StartColumn,
+				ColumnCount = colCount
+			};
+			return range;
 		}
 	}
 }
