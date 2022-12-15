@@ -69,7 +69,9 @@
     <Compile Include="TableReader_Test_GetColumnRange.cs" />
     <Compile Include="TableReader_Test_GetRowRange.cs" />
     <Compile Include="TableReader_Test_GetTable.cs" />
+    <Compile Include="TableReader_Test_GetTableColumnRange.cs" />
     <Compile Include="TableReader_Test_GetTableRange.cs" />
+    <Compile Include="TableReader_Test_GetTableRowRange.cs" />
     <Compile Include="TableReader_Test_ReadColumn.cs" />
     <Compile Include="TableReader_Test_ReadRow.cs" />
   </ItemGroup>
