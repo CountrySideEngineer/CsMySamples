@@ -72,7 +72,7 @@ namespace TableReader.Excel
 			var tableContent = new List<IEnumerable<string>>();
 			foreach (var rowRangeItem in rowRangeCollection)
 			{
-				var rowContent = ReadRow(rowRangeItem);
+				IEnumerable<string> rowContent = ReadRowInRange(rowRangeItem);
 				tableContent.Add(rowContent);
 			}
 			var content = new ExcelTableContent()
@@ -565,7 +565,7 @@ namespace TableReader.Excel
 		/// Read column and get value in cells.
 		/// (Read vertical).
 		/// </summary>
-		/// <param name="range">Range to read.</param>
+		/// <param name="range">Range about column to read.</param>
 		/// <returns>Collection of cell value as string.</returns>
 		/// <exception cref="ArgumentNullException"></exception>
 		public IEnumerable<string> ReadColumn(Range range)
@@ -601,7 +601,7 @@ namespace TableReader.Excel
 		/// Read row and get value in cells.
 		/// (Read horizontal)
 		/// </summary>
-		/// <param name="range">Range to read.</param>
+		/// <param name="range">Range about row number to read.</param>
 		/// <returns>Collection of cell value as string.</returns>
 		public IEnumerable<string> ReadRow(Range range)
 		{
@@ -616,6 +616,21 @@ namespace TableReader.Excel
 			for (int columnIndex = columnRange.StartColumn; columnIndex <= tailIndex; columnIndex++)
 			{
 				var cell = workSheet.Cell(range.StartRow, columnIndex);
+				string cellItem = cell.GetString();
+				cellItems.Add(cellItem);
+			}
+			return cellItems;
+		}
+
+		public IEnumerable<string> ReadRowInRange(Range range)
+		{
+			var workBook = new XLWorkbook(_excelStream);
+			var workSheet = workBook.Worksheet(SheetName);
+			List<string> cellItems = new List<string>();
+			IEnumerable<Range> colInRow = RangeToColCollection(range);
+			foreach (var colItem in colInRow)
+			{
+				var cell = workSheet.Cell(colItem.StartRow, colItem.StartColumn);
 				string cellItem = cell.GetString();
 				cellItems.Add(cellItem);
 			}
