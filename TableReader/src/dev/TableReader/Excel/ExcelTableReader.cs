@@ -87,17 +87,30 @@ namespace TableReader.Excel
 		/// </summary>
 		/// <param name="range">Range object to be converted.</param>
 		/// <returns>Collection of Range object covnerted.</returns>
+		/// <exception cref="ArgumentNullException">Range object is null.</exception>
+		/// <exception cref="ArgumentOutOfRangeException">Values in range is invalid.</exception>
 		protected IEnumerable<Range> RangeToRowCollection(Range range)
 		{
-			var rangeCollection = new List<Range>();
-			for (int index = 0; index < range.RowCount; index++)
+			try
 			{
-				var rowRange = new Range(range);
-				rowRange.StartRow += index;
-				rowRange.RowCount = 1;
-				rangeCollection.Add(rowRange);
+				if ((range.StartRow < 1) || (range.RowCount < 0))
+				{
+					throw new ArgumentOutOfRangeException();
+				}
+				var rangeCollection = new List<Range>();
+				for (int index = 0; index < range.RowCount; index++)
+				{
+					var rowRange = new Range(range);
+					rowRange.StartRow += index;
+					rowRange.RowCount = 1;
+					rangeCollection.Add(rowRange);
+				}
+				return rangeCollection;
 			}
-			return rangeCollection;
+			catch (NullReferenceException)
+			{
+				throw new ArgumentNullException();
+			}
 		}
 
 		/// <summary>
@@ -105,17 +118,30 @@ namespace TableReader.Excel
 		/// </summary>
 		/// <param name="range">Range object to be converted.</param>
 		/// <returns>Collection of Range object converted.</returns>
+		/// <exception cref="ArgumentNullException">Range object is null.</exception>
+		/// <exception cref="ArgumentOutOfRangeException">Values in range is invalid.</exception>
 		protected IEnumerable<Range> RangeToColCollection(Range range)
 		{
-			var rangeCollection = new List<Range>();
-			for (int index = 0; index < range.ColumnCount; index++)
+			try
 			{
-				var rowRange = new Range(range);
-				rowRange.StartColumn += index;
-				rowRange.ColumnCount = 1;
-				rangeCollection.Add(rowRange);
+				if ((range.StartColumn < 1) || (range.ColumnCount < 0))
+				{
+					throw new ArgumentOutOfRangeException();
+				}
+				var rangeCollection = new List<Range>();
+				for (int index = 0; index < range.ColumnCount; index++)
+				{
+					var rowRange = new Range(range);
+					rowRange.StartColumn += index;
+					rowRange.ColumnCount = 1;
+					rangeCollection.Add(rowRange);
+				}
+				return rangeCollection;
 			}
-			return rangeCollection;
+			catch (NullReferenceException)
+			{
+				throw new ArgumentNullException();
+			}
 		}
 
 		/// <summary>
@@ -622,6 +648,11 @@ namespace TableReader.Excel
 			return cellItems;
 		}
 
+		/// <summary>
+		/// Read the values in the row specified by the argument.
+		/// </summary>
+		/// <param name="range">Range about row to read.</param>
+		/// <returns>Collection of values read from the row.</returns>
 		public IEnumerable<string> ReadRowInRange(Range range)
 		{
 			var workBook = new XLWorkbook(_excelStream);
