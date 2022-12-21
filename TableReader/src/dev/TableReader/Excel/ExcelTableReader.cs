@@ -72,7 +72,7 @@ namespace TableReader.Excel
 			var tableContent = new List<IEnumerable<string>>();
 			foreach (var rowRangeItem in rowRangeCollection)
 			{
-				var rowContent = ReadRow(rowRangeItem);
+				IEnumerable<string> rowContent = ReadRowInRange(rowRangeItem);
 				tableContent.Add(rowContent);
 			}
 			var content = new ExcelTableContent()
@@ -87,17 +87,30 @@ namespace TableReader.Excel
 		/// </summary>
 		/// <param name="range">Range object to be converted.</param>
 		/// <returns>Collection of Range object covnerted.</returns>
+		/// <exception cref="ArgumentNullException">Range object is null.</exception>
+		/// <exception cref="ArgumentOutOfRangeException">Values in range is invalid.</exception>
 		protected IEnumerable<Range> RangeToRowCollection(Range range)
 		{
-			var rangeCollection = new List<Range>();
-			for (int index = 0; index < range.RowCount; index++)
+			try
 			{
-				var rowRange = new Range(range);
-				rowRange.StartRow += index;
-				rowRange.RowCount = 1;
-				rangeCollection.Add(rowRange);
+				if ((range.StartRow < 1) || (range.RowCount < 0))
+				{
+					throw new ArgumentOutOfRangeException();
+				}
+				var rangeCollection = new List<Range>();
+				for (int index = 0; index < range.RowCount; index++)
+				{
+					var rowRange = new Range(range);
+					rowRange.StartRow += index;
+					rowRange.RowCount = 1;
+					rangeCollection.Add(rowRange);
+				}
+				return rangeCollection;
 			}
-			return rangeCollection;
+			catch (NullReferenceException)
+			{
+				throw new ArgumentNullException();
+			}
 		}
 
 		/// <summary>
@@ -105,17 +118,30 @@ namespace TableReader.Excel
 		/// </summary>
 		/// <param name="range">Range object to be converted.</param>
 		/// <returns>Collection of Range object converted.</returns>
+		/// <exception cref="ArgumentNullException">Range object is null.</exception>
+		/// <exception cref="ArgumentOutOfRangeException">Values in range is invalid.</exception>
 		protected IEnumerable<Range> RangeToColCollection(Range range)
 		{
-			var rangeCollection = new List<Range>();
-			for (int index = 0; index < range.ColumnCount; index++)
+			try
 			{
-				var rowRange = new Range(range);
-				rowRange.StartColumn += index;
-				rowRange.ColumnCount = 1;
-				rangeCollection.Add(rowRange);
+				if ((range.StartColumn < 1) || (range.ColumnCount < 0))
+				{
+					throw new ArgumentOutOfRangeException();
+				}
+				var rangeCollection = new List<Range>();
+				for (int index = 0; index < range.ColumnCount; index++)
+				{
+					var rowRange = new Range(range);
+					rowRange.StartColumn += index;
+					rowRange.ColumnCount = 1;
+					rangeCollection.Add(rowRange);
+				}
+				return rangeCollection;
 			}
-			return rangeCollection;
+			catch (NullReferenceException)
+			{
+				throw new ArgumentNullException();
+			}
 		}
 
 		/// <summary>
@@ -565,7 +591,7 @@ namespace TableReader.Excel
 		/// Read column and get value in cells.
 		/// (Read vertical).
 		/// </summary>
-		/// <param name="range">Range to read.</param>
+		/// <param name="range">Range about column to read.</param>
 		/// <returns>Collection of cell value as string.</returns>
 		/// <exception cref="ArgumentNullException"></exception>
 		public IEnumerable<string> ReadColumn(Range range)
@@ -601,7 +627,7 @@ namespace TableReader.Excel
 		/// Read row and get value in cells.
 		/// (Read horizontal)
 		/// </summary>
-		/// <param name="range">Range to read.</param>
+		/// <param name="range">Range about row number to read.</param>
 		/// <returns>Collection of cell value as string.</returns>
 		public IEnumerable<string> ReadRow(Range range)
 		{
@@ -616,6 +642,26 @@ namespace TableReader.Excel
 			for (int columnIndex = columnRange.StartColumn; columnIndex <= tailIndex; columnIndex++)
 			{
 				var cell = workSheet.Cell(range.StartRow, columnIndex);
+				string cellItem = cell.GetString();
+				cellItems.Add(cellItem);
+			}
+			return cellItems;
+		}
+
+		/// <summary>
+		/// Read the values in the row specified by the argument.
+		/// </summary>
+		/// <param name="range">Range about row to read.</param>
+		/// <returns>Collection of values read from the row.</returns>
+		public IEnumerable<string> ReadRowInRange(Range range)
+		{
+			var workBook = new XLWorkbook(_excelStream);
+			var workSheet = workBook.Worksheet(SheetName);
+			List<string> cellItems = new List<string>();
+			IEnumerable<Range> colInRow = RangeToColCollection(range);
+			foreach (var colItem in colInRow)
+			{
+				var cell = workSheet.Cell(colItem.StartRow, colItem.StartColumn);
 				string cellItem = cell.GetString();
 				cellItems.Add(cellItem);
 			}
