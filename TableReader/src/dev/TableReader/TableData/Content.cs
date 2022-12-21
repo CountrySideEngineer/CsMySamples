@@ -15,6 +15,31 @@ namespace TableReader.TableData
 		protected IEnumerable<IEnumerable<string>> _tableContent;
 
 		/// <summary>
+		/// Returns the number of row in the content.
+		/// </summary>
+		/// <returns>The number of row.</returns>
+		/// <exception cref="ArgumentNullException"></exception>
+		/// <exception cref="OverflowException"></exception>
+		public int RowCount()
+		{
+			try
+			{
+				int rowCount = _tableContent.Count();
+
+				return rowCount;
+			}
+			catch (Exception ex)
+			when ((ex is NullReferenceException) || (ex is ArgumentNullException))
+			{
+				throw new NullReferenceException();
+			}
+			catch (Exception)
+			{
+				throw;
+			}
+		}
+
+		/// <summary>
 		/// Get content of cell specified by row and col
 		/// </summary>
 		/// <param name="row">Table row index, 0 base.</param>
