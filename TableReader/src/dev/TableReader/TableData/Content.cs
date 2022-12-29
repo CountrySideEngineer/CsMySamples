@@ -26,7 +26,7 @@ namespace TableReader.TableData
 		/// Returns the number of row in the content.
 		/// </summary>
 		/// <returns>The number of row.</returns>
-		/// <exception cref="ArgumentNullException"></exception>
+		/// <exception cref="NullReferenceException"></exception>
 		/// <exception cref="OverflowException"></exception>
 		public int RowCount()
 		{
@@ -40,6 +40,35 @@ namespace TableReader.TableData
 			when ((ex is NullReferenceException) || (ex is ArgumentNullException))
 			{
 				throw new NullReferenceException();
+			}
+			catch (Exception)
+			{
+				throw;
+			}
+		}
+
+		/// <summary>
+		/// Returns the number of column in the content.
+		/// </summary>
+		/// <returns>The number of column.</returns>
+		/// <exception cref="NullReferenceException"></exception>
+		/// <exception cref="OverflowException"></exception>
+		public int ColCount()
+		{
+			try
+			{
+				int colCount = _tableContent.ElementAt(0).Count();
+
+				return colCount;
+			}
+			catch (Exception ex)
+			when ((ex is NullReferenceException) || (ex is ArgumentNullException))
+			{
+				throw new NullReferenceException();
+			}
+			catch (ArgumentOutOfRangeException)
+			{
+				return 0;
 			}
 			catch (Exception)
 			{
