@@ -9,8 +9,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <RootNamespace>CountrySideEngineer.ProgressWindow</RootNamespace>
-    <AssemblyVersion>0.2.0.0</AssemblyVersion>
-    <FileVersion>0.2.0.0</FileVersion>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
+    <FileVersion>0.3.0.0</FileVersion>
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />
@@ -18,6 +18,10 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\bin\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>..\bin\</OutputPath>
   </PropertyGroup>
 
@@ -31,9 +35,10 @@
 
   <ItemGroup>
     <Compile Include="..\ProgressWindow\Model\CommandArgument\ProgressChangedCommandArgument.cs" Link="Model\CommandArgument\ProgressChangedCommandArgument.cs" />
-    <Compile Include="..\ProgressWindow\Model\Interface\IAsyncTask.cs" Link="Model\Interface\IAsyncTask.cs" />
     <Compile Include="..\ProgressWindow\Model\ProgressInfo.cs" Link="Model\ProgressInfo.cs" />
     <Compile Include="..\ProgressWindow\ProgressWindow.cs" Link="ProgressWindow.cs" />
+    <Compile Include="..\ProgressWindow\Task\AsyncTask.cs" Link="Task\AsyncTask.cs" />
+    <Compile Include="..\ProgressWindow\Task\Interface\IAsyncTask.cs" Link="Task\Interface\IAsyncTask.cs" />
     <Compile Include="..\ProgressWindow\ViewModel\ProgressWindowsViewModel.cs" Link="ViewModel\ProgressWindowsViewModel.cs" />
     <Compile Include="..\ProgressWindow\View\ProgressWindow.xaml.cs" Link="View\ProgressWindow.xaml.cs" />
   </ItemGroup>
@@ -46,9 +51,10 @@
 
   <ItemGroup>
     <Folder Include="Model\CommandArgument\" />
-    <Folder Include="Model\Interface\" />
+    <Folder Include="Task\Interface\" />
     <Folder Include="View\" />
     <Folder Include="ViewModel\" />
+    <Folder Include="Task\" />
   </ItemGroup>
 
   <ItemGroup>
