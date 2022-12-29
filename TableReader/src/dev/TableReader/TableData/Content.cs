@@ -15,6 +15,14 @@ namespace TableReader.TableData
 		protected IEnumerable<IEnumerable<string>> _tableContent;
 
 		/// <summary>
+		/// Default constructor.
+		/// </summary>
+		public Content()
+		{
+			_tableContent = new List<List<string>>();
+		}
+
+		/// <summary>
 		/// Returns the number of row in the content.
 		/// </summary>
 		/// <returns>The number of row.</returns>
@@ -92,5 +100,55 @@ namespace TableReader.TableData
 			}
 			catch (ArgumentOutOfRangeException) { throw; }
 		}
+
+		/// <summary>
+		/// Returns a specified number of contiguous contetn from the start of table content.
+		/// </summary>
+		/// <param name="size">The number of columns to return.</param>
+		/// <returns>A Content that contains the specified number of elements from the start of the table content.</returns>
+		public Content Take(int size)
+		{
+			try
+			{
+				var content = new Content();
+
+				foreach (var item in _tableContent)
+				{
+					IEnumerable<string> contentTaken = item.Take(size);
+					content._tableContent = content._tableContent.Append(contentTaken);
+				}
+				return content;
+			}
+			catch (Exception ex)
+			when ((ex is ArgumentNullException) || (ex is NullReferenceException))
+			{
+				var content = new Content();
+
+				return content;
+			}
+			catch (OutOfMemoryException)
+			{
+				throw;
+			}
+		}
+
+		/// <summary>
+		/// Bypasses a specified number of elements in a table and then returns the remaining contents.
+		/// </summary>
+		/// <param name="count">The number of columns to skip before returning the remaining elements.</param>
+		/// <returns>A Content that contains the content that occur after the specified index in the input.</returns>
+		public Content Skip(int count)
+		{
+			var content = new Content();
+
+			foreach (var item in _tableContent)
+			{
+				IEnumerable<string> skipped = item.Skip(count);
+				content._tableContent = content._tableContent.Append(skipped);
+			}
+			return content;
+
+		}
 	}
 }
+ 
