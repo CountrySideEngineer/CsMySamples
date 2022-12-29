@@ -91,6 +91,7 @@ namespace TableReader_CTest
 
 		[TestMethod]
 		[Description("ReadColumn(Range range)")]
+		[ExpectedException(typeof(ArgumentOutOfRangeException))]
 		public void GetTable_test_003()
 		{
 			var testDataPath = @"..\..\..\TestData\GetTable_Test.xlsx";
@@ -105,7 +106,9 @@ namespace TableReader_CTest
 					ColumnCount = 0
 				};
 				Content ret = reader.GetTable(tableName, offset);
-				Assert.AreEqual(0, ret.GetContentsInCol(0).Count());
+
+				Assert.AreEqual(0, ret.GetContentsInCol(0));
+				Assert.Fail();
 			}
 		}
 

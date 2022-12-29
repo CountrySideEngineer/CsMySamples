@@ -48,6 +48,9 @@
   <ItemGroup>
     <Compile Include="ContentAdapter.cs" />
     <Compile Include="Content_CTest.cs" />
+    <Compile Include="Content_CTest_ColCount.cs" />
+    <Compile Include="Content_CTest_GetContentInCol.cs" />
+    <Compile Include="Content_CTest_GetContentInRow.cs" />
     <Compile Include="Content_CTest_Skip.cs" />
     <Compile Include="Content_CTest_Take.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
