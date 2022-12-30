@@ -26,7 +26,7 @@ namespace TableReader.TableData
 		/// Returns the number of row in the content.
 		/// </summary>
 		/// <returns>The number of row.</returns>
-		/// <exception cref="ArgumentNullException"></exception>
+		/// <exception cref="NullReferenceException"></exception>
 		/// <exception cref="OverflowException"></exception>
 		public int RowCount()
 		{
@@ -40,6 +40,35 @@ namespace TableReader.TableData
 			when ((ex is NullReferenceException) || (ex is ArgumentNullException))
 			{
 				throw new NullReferenceException();
+			}
+			catch (Exception)
+			{
+				throw;
+			}
+		}
+
+		/// <summary>
+		/// Returns the number of column in the content.
+		/// </summary>
+		/// <returns>The number of column.</returns>
+		/// <exception cref="NullReferenceException"></exception>
+		/// <exception cref="OverflowException"></exception>
+		public int ColCount()
+		{
+			try
+			{
+				int colCount = _tableContent.ElementAt(0).Count();
+
+				return colCount;
+			}
+			catch (Exception ex)
+			when ((ex is NullReferenceException) || (ex is ArgumentNullException))
+			{
+				throw new NullReferenceException();
+			}
+			catch (ArgumentOutOfRangeException)
+			{
+				return 0;
 			}
 			catch (Exception)
 			{
@@ -71,14 +100,22 @@ namespace TableReader.TableData
 		/// </summary>
 		/// <param name="row">Table row index to get, 0 base.</param>
 		/// <returns>Collection of item in row.</returns>
+		/// <exception cref="ArgumentOutOfRangeException"></exception>
 		public IEnumerable<string> GetContentsInRow(int row)
 		{
+			if (0 == _tableContent.Count())
+			{
+				throw new ArgumentOutOfRangeException();
+			}
 			try
 			{
 				IEnumerable<string> contentsInRow = _tableContent.ElementAt(row);
 				return contentsInRow;
 			}
-			catch (ArgumentOutOfRangeException) { throw; }
+			catch (ArgumentOutOfRangeException)
+			{
+				throw;
+			}
 		}
 
 		/// <summary>
@@ -86,8 +123,14 @@ namespace TableReader.TableData
 		/// </summary>
 		/// <param name="col">Table column index to get, 0 base.</param>
 		/// <returns>Collection of item in column.</returns>
+		/// <exception cref="ArgumentOutOfRangeException"></exception>
 		public IEnumerable<string> GetContentsInCol(int col)
 		{
+			if (0 == _tableContent.Count())
+			{
+				throw new ArgumentOutOfRangeException();
+			}
+
 			try
 			{
 				var colItems = new List<string>();
@@ -98,7 +141,10 @@ namespace TableReader.TableData
 				}
 				return colItems;
 			}
-			catch (ArgumentOutOfRangeException) { throw; }
+			catch (ArgumentOutOfRangeException)
+			{
+				throw;
+			}
 		}
 
 		/// <summary>
