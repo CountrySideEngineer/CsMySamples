@@ -49,7 +49,7 @@ namespace TableReader.ClosedXML
 		}
 
 		/// <summary>
-		/// Get table content.
+		/// Read table.
 		/// </summary>
 		/// <param name="name">Table name</param>
 		/// <returns>Table content as collection of row</returns>
@@ -65,14 +65,14 @@ namespace TableReader.ClosedXML
 		}
 
 		/// <summary>
-		/// Get table content.
+		/// Read table.
 		/// </summary>
 		/// <param name="name">Table name.</param>
 		/// <param name="offset">Offset to start reading table.</param>
 		/// <returns>Table content as collection of row.</returns>
 		public DataTable Read(string name, Range offset)
 		{
-			LoadWorkbook();
+			LoadWorsheet();
 
 			try
 			{
@@ -82,7 +82,7 @@ namespace TableReader.ClosedXML
 			}
 			finally
 			{
-				UnloadWorkbook();
+				UnloadWorksheet();
 			}
 		}
 
@@ -149,11 +149,11 @@ namespace TableReader.ClosedXML
 		}
 
 		/// <summary>
-		/// Load workbook.
+		/// Load a sheet from a stream as workbook.
 		/// </summary>
 		/// <exception cref="NullReferenceException"></exception>
 		/// <exception cref="InvalidDataException"></exception>
-		protected void LoadWorkbook()
+		protected void LoadWorsheet()
 		{
 			if (null == _excelStream)
 			{
@@ -177,7 +177,10 @@ namespace TableReader.ClosedXML
 			}
 		}
 
-		protected void UnloadWorkbook()
+		/// <summary>
+		/// Unload work sheet read from workbook.
+		/// </summary>
+		protected void UnloadWorksheet()
 		{
 			if (null != _workSheet)
 			{
