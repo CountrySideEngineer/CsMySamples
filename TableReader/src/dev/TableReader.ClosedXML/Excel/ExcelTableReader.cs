@@ -265,6 +265,11 @@ namespace TableReader.ClosedXML
 			return tableRange;
 		}
 
+		/// <summary>
+		/// Returns the number of row in the table.
+		/// </summary>
+		/// <param name="tableTop">Table range, position.</param>
+		/// <returns>The number of row.</returns>
 		protected int GetTableRowCount(Range tableTop)
 		{
 			string content = string.Empty;
@@ -282,6 +287,11 @@ namespace TableReader.ClosedXML
 			return rowCount;
 		}
 
+		/// <summary>
+		/// Returns the nubmer of column in the table.
+		/// </summary>
+		/// <param name="tableTop">Table range, position.</param>
+		/// <returns>The number of column.</returns>
 		protected int GetTableColumnCount(Range tableTop)
 		{
 			string content = string.Empty;
@@ -299,6 +309,12 @@ namespace TableReader.ClosedXML
 			return colCount;
 		}
 
+		/// <summary>
+		/// Read table in the sheet.
+		/// </summary>
+		/// <param name="name">Table name.</param>
+		/// <param name="range">Table range in the sheet.</param>
+		/// <returns>Read data from the sheet.</returns>
 		protected virtual DataTable ReadTable(string name, Range range)
 		{
 			var table = new DataTable(name);
@@ -308,6 +324,11 @@ namespace TableReader.ClosedXML
 			return table;
 		}
 
+		/// <summary>
+		/// Set table header.
+		/// </summary>
+		/// <param name="dst">DataTable object to set the scheme.</param>
+		/// <param name="range">Table range in the sheet.</param>
 		protected virtual void SetScheme(ref DataTable dst, Range range)
 		{
 			for (int colIndex = 0; colIndex < range.ColumnCount; colIndex++)
@@ -321,6 +342,11 @@ namespace TableReader.ClosedXML
 
 		}
 
+		/// <summary>
+		/// Load content from the table in the sheet.
+		/// </summary>
+		/// <param name="dst">DataTable object to set the table data.</param>
+		/// <param name="range">Table range in the sheet.</param>
 		protected virtual void LoadContent(ref DataTable dst, Range range)
 		{
 			var rowRange = new Range(range);
@@ -333,6 +359,11 @@ namespace TableReader.ClosedXML
 			}
 		}
 
+		/// <summary>
+		/// Read content in a row.
+		/// </summary>
+		/// <param name="dst">DataTable object to set the read data.</param>
+		/// <param name="range">One row range to read in the sheet.</param>
 		protected virtual void ReadRow(ref DataTable dst, Range rowRange)
 		{
 			DataRow row = dst.NewRow();

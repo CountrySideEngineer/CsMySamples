@@ -125,8 +125,20 @@ namespace TableReader.ExcelDataReader
 			object item = null;
 			do
 			{
-				item = _sheetData.Rows[tableTop.StartRow + rowCount][tableTop.StartColumn];
-				rowCount++;
+				try
+				{
+					item = _sheetData.Rows[tableTop.StartRow + rowCount][tableTop.StartColumn];
+				}
+				catch (Exception ex)
+				when (ex is IndexOutOfRangeException)
+				{
+					//Reach the last row in the sheet.
+					break;
+				}
+				finally
+				{
+					rowCount++;
+				}
 			} while (!item.GetType().Equals(typeof(DBNull)));
 
 			rowCount--;
@@ -145,8 +157,20 @@ namespace TableReader.ExcelDataReader
 			object item = null;
 			do
 			{
-				item = _sheetData.Rows[tableTop.StartRow][tableTop.StartColumn + colCount];
-				colCount++;
+				try
+				{
+					item = _sheetData.Rows[tableTop.StartRow][tableTop.StartColumn + colCount];
+				}
+				catch (Exception ex)
+				when (ex is IndexOutOfRangeException)
+				{
+					//Reach the last column in the sheet.
+					break;
+				}
+				finally
+				{
+					colCount++;
+				}
 			} while (!item.GetType().Equals(typeof(DBNull)));
 
 			colCount--;
@@ -285,7 +309,7 @@ namespace TableReader.ExcelDataReader
 					content = (string)_sheetData.Rows[range.StartRow][range.StartColumn + colIndex];
 				}
 				catch (Exception ex)
-				when (ex is InvalidCastException)
+				when ((ex is InvalidCastException) || (ex is IndexOutOfRangeException))
 				{
 					content = string.Empty;
 				}
