@@ -45,10 +45,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Excel\ExcelTableContent.cs" />
-    <Compile Include="Excel\ExcelTableReader.cs" />
+    <Compile Include="ExcelTableReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TableData\Content.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ClosedXML">
