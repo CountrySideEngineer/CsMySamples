@@ -270,7 +270,8 @@ namespace TableReader.ExcelDataReader
 		{
 			for (int colIndex = 0; colIndex < range.ColumnCount; colIndex++)
 			{
-				string content = (string)_sheetData.Rows[range.StartRow][range.StartColumn + colIndex];
+				object contentObj = _sheetData.Rows[range.StartRow][range.StartColumn + colIndex];
+				string content = contentObj.ToString();
 				var column = new DataColumn(content, typeof(string));
 				dst.Columns.Add(column);
 			}
@@ -306,10 +307,12 @@ namespace TableReader.ExcelDataReader
 				string content = string.Empty;
 				try
 				{
-					content = (string)_sheetData.Rows[range.StartRow][range.StartColumn + colIndex];
+					object contentObj = _sheetData.Rows[range.StartRow][range.StartColumn + colIndex];
+					content = contentObj.ToString();
 				}
 				catch (Exception ex)
-				when ((ex is InvalidCastException) || (ex is IndexOutOfRangeException))
+				when ((ex is InvalidCastException) ||
+					(ex is IndexOutOfRangeException))
 				{
 					content = string.Empty;
 				}
