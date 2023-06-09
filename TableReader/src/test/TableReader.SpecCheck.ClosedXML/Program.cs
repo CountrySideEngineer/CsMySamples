@@ -16,22 +16,39 @@ namespace TableReader.SpecCheck.ClosedXML
 	{
 		static void Main(string[] args)
 		{
-			string testFilePath = @".\..\..\..\TestData\TableReader_SpecCheck.xlsx";
-			long totalTime = 0;
-			for (int index = 0; index < 40; index++)
+			try
 			{
+				string sheetName = args[0];
+				string tableName = args[1];
+
+				string testFilePath = @".\..\..\..\TestData\TableReader_SpecCheck.xlsx";
+				long totalTime = 0;
+				long testCount = 100;
 				using (var stream = new FileStream(testFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
 				{
+					Console.WriteLine($"Test sheet name : {sheetName}");
+					Console.WriteLine($"Test table name : {tableName}");
+
+					ITableReader reader = new ExcelTableReader(stream, sheetName);
 					var stopWatch = new Stopwatch();
-					ITableReader reader = new ExcelTableReader(stream, "Read_test_002");
-					stopWatch.Start();
-					DataTable table = reader.Read("TestTable_001");
-					stopWatch.Stop();
-					Console.WriteLine($"time({index + 1}) = {stopWatch.ElapsedMilliseconds} ms");
-					totalTime += stopWatch.ElapsedMilliseconds;
+					int index = 1;
+					do
+					{
+						stopWatch.Restart();
+						DataTable table = reader.Read(tableName);
+						stopWatch.Stop();
+						totalTime += stopWatch.ElapsedMilliseconds;
+						Console.Write($"time({(index + 1):D4}) = {stopWatch.ElapsedMilliseconds} ms, average = {totalTime / (index)} ms, table size : ({table.Rows.Count}, {table.Columns.Count})\r");
+						index++;
+					} while (index < testCount);
+					Console.WriteLine();
 				}
+				Console.WriteLine($"Average = {totalTime / testCount} ms");
 			}
-			Console.Write($"Average = {totalTime / 100} ms");
+			catch (IndexOutOfRangeException)
+			{
+				Console.WriteLine("Input sheet name and table name.");
+			}
 			return;
 		}
 	}
