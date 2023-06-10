@@ -24,6 +24,7 @@ namespace TableReader.SpecCheck.ClosedXML
 				string testFilePath = @".\..\..\..\TestData\TableReader_SpecCheck.xlsx";
 				long totalTime = 0;
 				long testCount = 100;
+				DataTable table = null;
 				using (var stream = new FileStream(testFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
 				{
 					Console.WriteLine($"Test sheet name : {sheetName}");
@@ -35,7 +36,7 @@ namespace TableReader.SpecCheck.ClosedXML
 					do
 					{
 						stopWatch.Restart();
-						DataTable table = reader.Read(tableName);
+						table = reader.Read(tableName);
 						stopWatch.Stop();
 						totalTime += stopWatch.ElapsedMilliseconds;
 						Console.Write($"time({(index + 1):D4}) = {stopWatch.ElapsedMilliseconds} ms, average = {totalTime / (index)} ms, table size : ({table.Rows.Count}, {table.Columns.Count})\r");
@@ -44,6 +45,14 @@ namespace TableReader.SpecCheck.ClosedXML
 					Console.WriteLine();
 				}
 				Console.WriteLine($"Average = {totalTime / testCount} ms");
+				for (int rowIndex = 0; rowIndex < table.Rows.Count; rowIndex++)
+				{
+					for (int columnIndex = 0; columnIndex < table.Columns.Count; columnIndex++)
+					{
+						Console.Write($"{table.Rows[rowIndex][columnIndex]},");
+					}
+					Console.WriteLine();
+				}
 			}
 			catch (IndexOutOfRangeException)
 			{
