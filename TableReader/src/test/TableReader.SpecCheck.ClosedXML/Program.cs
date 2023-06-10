@@ -45,14 +45,6 @@ namespace TableReader.SpecCheck.ClosedXML
 					Console.WriteLine();
 				}
 				Console.WriteLine($"Average = {totalTime / testCount} ms");
-				for (int rowIndex = 0; rowIndex < table.Rows.Count; rowIndex++)
-				{
-					for (int columnIndex = 0; columnIndex < table.Columns.Count; columnIndex++)
-					{
-						Console.Write($"{table.Rows[rowIndex][columnIndex]},");
-					}
-					Console.WriteLine();
-				}
 			}
 			catch (IndexOutOfRangeException)
 			{
