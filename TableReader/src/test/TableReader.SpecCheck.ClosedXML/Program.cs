@@ -23,7 +23,7 @@ namespace TableReader.SpecCheck.ClosedXML
 
 				string testFilePath = @".\..\..\..\TestData\TableReader_SpecCheck.xlsx";
 				long totalTime = 0;
-				long testCount = 100;
+				long testCount = 1;
 				DataTable table = null;
 				using (var stream = new FileStream(testFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
 				{
@@ -39,7 +39,7 @@ namespace TableReader.SpecCheck.ClosedXML
 						table = reader.Read(tableName);
 						stopWatch.Stop();
 						totalTime += stopWatch.ElapsedMilliseconds;
-						Console.Write($"time({(index + 1):D4}) = {stopWatch.ElapsedMilliseconds} ms, average = {totalTime / (index)} ms, table size : ({table.Rows.Count}, {table.Columns.Count})\r");
+						Console.Write($"time({(index):D4}) = {stopWatch.ElapsedMilliseconds} ms, average = {totalTime / (index)} ms, table size : ({table.Rows.Count}, {table.Columns.Count})\r");
 						index++;
 					} while (index < testCount);
 					Console.WriteLine();
