@@ -80,14 +80,13 @@ namespace RichTextSample
 
 		private void HighLightText(string textData, SolidColorBrush color)
 		{
-			int leftLen = 0;
-			TextPointer stop = null;
 			try
 			{
+				int leftLen = 0;
 				TextPointer start = richTextBox.Document.ContentStart;
 				do
 				{
-					stop = start.GetPositionAtOffset(textData.Length);
+					TextPointer stop = start.GetPositionAtOffset(textData.Length);
 					var wrapRange = new TextRange(start, stop);
 					var wrapText = wrapRange.Text;
 					if (wrapText.Equals(textData))
@@ -102,10 +101,7 @@ namespace RichTextSample
 					leftLen = start.GetOffsetToPosition(richTextBox.Document.ContentEnd);
 				} while ((0 < leftLen) && (textData.Length < leftLen));
 			}
-			catch (ArgumentException)
-			{
-				Console.WriteLine("Exception!");
-			}
+			catch (ArgumentException) { }
 		}
 	}
 }
