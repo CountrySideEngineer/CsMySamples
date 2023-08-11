@@ -100,7 +100,6 @@ namespace RichTextSample
 						start = start.GetPositionAtOffset(1);
 					}
 					leftLen = start.GetOffsetToPosition(richTextBox.Document.ContentEnd);
-					Console.WriteLine($"leftLen = {leftLen}, textLen = {textData.Length}");
 				} while ((0 < leftLen) && (textData.Length < leftLen));
 			}
 			catch (ArgumentException)
