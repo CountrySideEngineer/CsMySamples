@@ -15,12 +15,14 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <RichTextBox Grid.Row="0"
-            x:Name="richTextBox" TextChanged="richTextBox_TextChanged" SelectionChanged="richTextBox_SelectionChanged">
+                     x:Name="richTextBox"
+                     Background="Black"
+                     >
             <FlowDocument>
                 <Paragraph>
                     <Run FontFamily="MS Gothic"
                          FontSize="14.0"
-                         
+                         Foreground="LightGray"
                          Text="{Binding Content}"
                          />
                 </Paragraph>

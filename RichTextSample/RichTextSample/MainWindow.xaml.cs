@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -44,6 +46,67 @@ namespace RichTextSample
 		{
 			RichTextSampleViewModel vm = (RichTextSampleViewModel)DataContext;
 			vm.LoadContent();
+			HighLightTextOK();
+			HighLightTextNG();
+		}
+
+		private void HighLightTextOK()
+		{
+			var hilightTextData = new List<string>
+			{
+				"[==========]",
+				"[----------]",
+				"[ RUN      ]",
+				"[       OK ]",
+				"[  PASSED  ]",
+			};
+			foreach (var textData in hilightTextData)
+			{
+				HighLightText(textData, Brushes.LightGreen);
+			}
+		}
+
+		private void HighLightTextNG()
+		{
+			var hilightTextData = new List<string>
+			{
+				"[  FAILED  ]",
+			};
+			foreach (var textData in hilightTextData)
+			{
+				HighLightText(textData, Brushes.Red);
+			}
+		}
+
+		private void HighLightText(string textData, SolidColorBrush color)
+		{
+			int leftLen = 0;
+			TextPointer stop = null;
+			try
+			{
+				TextPointer start = richTextBox.Document.ContentStart;
+				do
+				{
+					stop = start.GetPositionAtOffset(textData.Length);
+					var wrapRange = new TextRange(start, stop);
+					var wrapText = wrapRange.Text;
+					if (wrapText.Equals(textData))
+					{
+						wrapRange.ApplyPropertyValue(TextElement.ForegroundProperty, color);
+						start = stop;
+					}
+					else
+					{
+						start = start.GetPositionAtOffset(1);
+					}
+					leftLen = start.GetOffsetToPosition(richTextBox.Document.ContentEnd);
+					Console.WriteLine($"leftLen = {leftLen}, textLen = {textData.Length}");
+				} while ((0 < leftLen) && (textData.Length < leftLen));
+			}
+			catch (ArgumentException)
+			{
+				Console.WriteLine("Exception!");
+			}
 		}
 	}
 }
