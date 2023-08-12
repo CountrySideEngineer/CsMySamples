@@ -27,21 +27,6 @@ namespace RichTextSample
 			InitializeComponent();
 		}
 
-		private void richTextBox_SelectionChanged(object sender, RoutedEventArgs e)
-		{
-			try
-			{
-				if (!richTextBox.Selection.IsEmpty)
-				{
-					var endPos = richTextBox.Selection.End;
-					var startPos = richTextBox.Selection.Start;
-					var range = new TextRange(startPos, endPos);
-					range.ApplyPropertyValue(TextElement.BackgroundProperty, Brushes.DarkBlue);
-				}
-			}
-			catch (Exception) { }
-		}
-
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			RichTextSampleViewModel vm = (RichTextSampleViewModel)DataContext;
