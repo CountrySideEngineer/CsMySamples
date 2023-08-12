@@ -21,7 +21,7 @@
             <FlowDocument>
                 <Paragraph>
                     <Run FontFamily="MS Gothic"
-                         FontSize="14.0"
+                         FontSize="12.0"
                          Foreground="LightGray"
                          Text="{Binding Content}"
                          />
