@@ -1,0 +1,126 @@
+Running main() from E:\development\googletest\googletest-release-1.12.1\googletest\src\gtest_main.cc
+Note: Google Test filter = CMultiple_test.calc_002
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from CMultiple_test
+[ RUN      ] CMultiple_test.calc_002
+E:\development\googletest_gui\sample\SampleTest_NG\SampleTest_NG.cpp(50): error: Expected equality of these values:
+  0x3FFF0000
+    Which is: 1073676288
+  calcResult
+    Which is: 1073676289
+[  FAILED  ] CMultiple_test.calc_002 (0 ms)
+[----------] 1 test from CMultiple_test (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] CMultiple_test.calc_002
+
+ 1 FAILED TEST
+Running main() from E:\development\googletest\googletest-release-1.12.1\googletest\src\gtest_main.cc
+Note: Google Test filter = CMultiple_test.calc_002
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from CMultiple_test
+[ RUN      ] CMultiple_test.calc_002
+E:\development\googletest_gui\sample\SampleTest_NG\SampleTest_NG.cpp(50): error: Expected equality of these values:
+  0x3FFF0000
+    Which is: 1073676288
+  calcResult
+    Which is: 1073676289
+[  FAILED  ] CMultiple_test.calc_002 (0 ms)
+[----------] 1 test from CMultiple_test (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] CMultiple_test.calc_002
+
+ 1 FAILED TEST
+Running main() from E:\development\googletest\googletest-release-1.12.1\googletest\src\gtest_main.cc
+Note: Google Test filter = CMultiple_test.calc_002
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from CMultiple_test
+[ RUN      ] CMultiple_test.calc_002
+E:\development\googletest_gui\sample\SampleTest_NG\SampleTest_NG.cpp(50): error: Expected equality of these values:
+  0x3FFF0000
+    Which is: 1073676288
+  calcResult
+    Which is: 1073676289
+[  FAILED  ] CMultiple_test.calc_002 (0 ms)
+[----------] 1 test from CMultiple_test (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] CMultiple_test.calc_002
+
+ 1 FAILED TEST
+Running main() from E:\development\googletest\googletest-release-1.12.1\googletest\src\gtest_main.cc
+Note: Google Test filter = CMultiple_test.calc_002
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from CMultiple_test
+[ RUN      ] CMultiple_test.calc_002
+E:\development\googletest_gui\sample\SampleTest_NG\SampleTest_NG.cpp(50): error: Expected equality of these values:
+  0x3FFF0000
+    Which is: 1073676288
+  calcResult
+    Which is: 1073676289
+[  FAILED  ] CMultiple_test.calc_002 (0 ms)
+[----------] 1 test from CMultiple_test (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] CMultiple_test.calc_002
+
+ 1 FAILED TEST
+Running main() from E:\development\googletest\googletest-release-1.12.1\googletest\src\gtest_main.cc
+Note: Google Test filter = CMultiple_test.calc_002
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from CMultiple_test
+[ RUN      ] CMultiple_test.calc_002
+E:\development\googletest_gui\sample\SampleTest_NG\SampleTest_NG.cpp(50): error: Expected equality of these values:
+  0x3FFF0000
+    Which is: 1073676288
+  calcResult
+    Which is: 1073676289
+[  FAILED  ] CMultiple_test.calc_002 (0 ms)
+[----------] 1 test from CMultiple_test (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] CMultiple_test.calc_002
+
+ 1 FAILED TEST
+Running main() from E:\development\googletest\googletest-release-1.12.1\googletest\src\gtest_main.cc
+Note: Google Test filter = CMultiple_test.calc_002
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from CMultiple_test
+[ RUN      ] CMultiple_test.calc_002
+E:\development\googletest_gui\sample\SampleTest_NG\SampleTest_NG.cpp(50): error: Expected equality of these values:
+  0x3FFF0000
+    Which is: 1073676288
+  calcResult
+    Which is: 1073676289
+[  FAILED  ] CMultiple_test.calc_002 (0 ms)
+[----------] 1 test from CMultiple_test (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] CMultiple_test.calc_002
+
+ 1 FAILED TEST
