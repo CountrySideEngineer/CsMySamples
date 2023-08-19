@@ -10,6 +10,14 @@ namespace CellDrawingSample
 	{
 		static void Main(string[] args)
 		{
+			var drawer = new DrawRuledLine()
+			{
+				Path = @"./ClosedXml_sample.xlsx",
+				Sheet = "DrawSample"
+			};
+			drawer.Draw4();
+
+			return;
 		}
 	}
 }
