@@ -255,5 +255,20 @@ namespace CellDrawingSample
 				workbook.SaveAs(Path);
 			}
 		}
+
+		public void Draw6()
+		{
+			using (var workbook = new XLWorkbook())
+			{
+				var workSheet = workbook.Worksheets.Add(Sheet);
+
+				//セルに罫線を引く
+				workSheet.Cell(2, 2).Style
+					.Border.SetOutsideBorder(XLBorderStyleValues.Thin)
+					.Border.SetOutsideBorderColor(XLColor.Red);
+
+				workbook.SaveAs(Path);
+			}
+		}
 	}
 }
