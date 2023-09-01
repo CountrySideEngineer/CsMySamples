@@ -12,10 +12,13 @@ namespace ColumnWidth
 		{
 			var colWidth = new ColWidth()
 			{
-				Path = @"./ClosedXml_ColWidth.xlsx",
+				Path = @"./ClosedXml_ColWidth1.xlsx",
 				Sheet = "ColWidthSample"
 			};
 			colWidth.ColumnWidth1();
+
+			colWidth.Path  = @"./ClosedXml_ColWidth2.xlsx";
+			colWidth.ColumnWidth2();
 		}
 	}
 }

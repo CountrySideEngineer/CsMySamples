@@ -32,5 +32,19 @@ namespace ColumnWidth
 				workbook.SaveAs(Path);
 			}
 		}
+
+		public void ColumnWidth2()
+		{
+			using (var workbook = new XLWorkbook())
+			{
+				var workSheet = workbook.Worksheets.Add(Sheet);
+				workSheet.Cell(2, 2).Value = "AdjustToContents 001";
+				workSheet.Cell(2, 3).Value = "Short content";
+				workSheet.Cell(2, 4).Value = "content";
+				workSheet.Columns(2, 4).AdjustToContents();
+
+				workbook.SaveAs(Path);
+			}
+		}
 	}
 }
