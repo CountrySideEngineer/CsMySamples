@@ -12,10 +12,13 @@ namespace SheetGridLines
 		{
 			var gridLines = new SheetGridLines()
 			{
-				Path = @"./ClosedXml_GridLines.xlsx",
+				Path = @"./ClosedXml_GridLines1.xlsx",
 				Sheet = "GridLinesSample"
 			};
 			gridLines.GridLines1();
+
+			gridLines.Path = @"./ClosedXml_GridLines2.xlsx";
+			gridLines.GridLines2();
 		}
 	}
 }

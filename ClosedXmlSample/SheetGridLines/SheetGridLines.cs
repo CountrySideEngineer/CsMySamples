@@ -32,5 +32,17 @@ namespace SheetGridLines
 				workbook.SaveAs(Path);
 			}
 		}
+
+		public void GridLines2()
+		{
+			using (var workbook = new XLWorkbook())
+			{
+				var workSheet = workbook.Worksheets.Add(Sheet);
+				workSheet.ShowGridLines = true;
+				workSheet.Cell(2, 2).Value = "ShowGridLines = true";
+
+				workbook.SaveAs(Path);
+			}
+		}
 	}
 }
