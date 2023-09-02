@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellPaintingSample", "CellP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellAlignment", "CellAlignment\CellAlignment.csproj", "{8714D8F2-5297-4253-8F59-441644D78C96}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SheetGridLines", "SheetGridLines\SheetGridLines.csproj", "{2C220C11-8AE9-40A7-8165-7F97F2EB97A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColumnWidth", "ColumnWidth\ColumnWidth.csproj", "{52DDF71F-BB87-489A-B10B-B0D292F00B90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{8714D8F2-5297-4253-8F59-441644D78C96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8714D8F2-5297-4253-8F59-441644D78C96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8714D8F2-5297-4253-8F59-441644D78C96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C220C11-8AE9-40A7-8165-7F97F2EB97A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C220C11-8AE9-40A7-8165-7F97F2EB97A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C220C11-8AE9-40A7-8165-7F97F2EB97A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C220C11-8AE9-40A7-8165-7F97F2EB97A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52DDF71F-BB87-489A-B10B-B0D292F00B90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52DDF71F-BB87-489A-B10B-B0D292F00B90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52DDF71F-BB87-489A-B10B-B0D292F00B90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52DDF71F-BB87-489A-B10B-B0D292F00B90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
