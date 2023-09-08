@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace SQLiteTrial.DB.Connection.SQLite
 		protected SQLiteTransaction _transaction;
 		protected string _connectionString;
 
-		private readonly string _dbPath;
+		private readonly string _dbPath = @".\..\SQLiteSampleDataBase.db";
 
 		/// <summary>
 		/// Default constructor
@@ -89,29 +90,60 @@ namespace SQLiteTrial.DB.Connection.SQLite
 			Disconnect();
 
 			_connection.Dispose();
-			_transaction.Dispose();
+			_transaction?.Dispose();
 
 			_transaction = null;
 		}
 
 		public void ExecuteNonQuery(string query)
 		{
-			throw new NotImplementedException();
+			ExecuteNonQuery(query, new Dictionary<string, object>());
 		}
 
 		public void ExecuteNonQuery(string query, Dictionary<string, object> parameters)
 		{
-			throw new NotImplementedException();
+			using (var cmd = new SQLiteCommand())
+			{
+				cmd.Connection = _connection;
+				cmd.Transaction = _transaction;
+				foreach (var parameter in parameters)
+				{
+					if (0 < query.IndexOf(parameter.Key))
+					{
+						var sqliteParamemeter = new SQLiteParameter(parameter.Key, parameter.Value);
+						cmd.Parameters.Add(sqliteParamemeter);
+					}
+				}
+				cmd.CommandText = query;
+				cmd.ExecuteNonQuery();
+			}
 		}
 
 		public SQLiteDataReader ExecuteQuery(string query)
 		{
-			throw new NotImplementedException();
+			SQLiteDataReader reader = ExecuteQuery(query, new Dictionary<string, object>());
+			return reader;
 		}
 
 		public SQLiteDataReader ExecuteQuery(string query, Dictionary<string, object> parameters)
 		{
-			throw new NotImplementedException();
+			using (var cmd = new SQLiteCommand())
+			{
+				cmd.Connection = _connection;
+				cmd.Transaction = _transaction;
+				foreach (var parameter in parameters)
+				{
+					if (0 < query.IndexOf(parameter.Key))
+					{
+						var sqliteParamemeter = new SQLiteParameter(parameter.Key, parameter.Value);
+						cmd.Parameters.Add(sqliteParamemeter);
+					}
+				}
+				cmd.CommandText = query;
+				SQLiteDataReader reader = cmd.ExecuteReader();
+
+				return reader;
+			}
 		}
 	}
 }
