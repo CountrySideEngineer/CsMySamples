@@ -46,7 +46,14 @@
     <Compile Include="DB\Connection\IDbAccess.cs" />
     <Compile Include="DB\Connection\IDBConnector.cs" />
     <Compile Include="DB\Connection\SQLite\Connector.cs" />
+    <Compile Include="DB\Connection\SQLite\TestCaseDAO.cs" />
+    <Compile Include="DB\Connection\SQLite\TestersDAO.cs" />
     <Compile Include="DB\DBAccess.cs" />
+    <Compile Include="DB\DTO\TestCasesDTO.cs" />
+    <Compile Include="DB\DTO\TestedTestCasesDTO.cs" />
+    <Compile Include="DB\DTO\TestedVersionDTO.cs" />
+    <Compile Include="DB\DTO\TestersDTO.cs" />
+    <Compile Include="DB\DTO\TestResultCodesDTO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

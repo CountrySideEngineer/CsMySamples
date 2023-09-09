@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SQLiteTrial.DB.Connection.SQLite;
+using SQLiteTrial.DB.DTO;
 
 namespace SQLiteTrial
 {
@@ -12,9 +13,21 @@ namespace SQLiteTrial
 	{
 		static void Main(string[] args)
 		{
-			using (var dbConnector = new Connector())
+			var dao = new TestersDAO();
+			IEnumerable<TestersDTO> testers = (IEnumerable<TestersDTO>)dao.SelectAll();
+			foreach (var item in testers)
 			{
-				Console.WriteLine("Sample output.");
+				Console.WriteLine($"ID = {item.ID.ToString().PadLeft(6)}, Tester code = {item.TesterCode}, Name = {item.Name}");
+
+				item.TesterCode = $"{item.TesterCode}_SUB_{DateTime.Now.ToString()}";
+			}
+
+
+
+
+			foreach (var item in testers)
+			{
+				dao.Insert(item);
 			}
 
 			return;

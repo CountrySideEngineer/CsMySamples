@@ -79,7 +79,14 @@ namespace SQLiteTrial.DB.Connection.SQLite
 		/// </summary>
 		public void Disconnect()
 		{
-			_connection.Close();
+			try
+			{
+				_connection.Close();
+			}
+			catch (ObjectDisposedException)
+			{
+				//If the connection has alredy been disposed, ignore the exception.
+			}
 		}
 
 		/// <summary>
@@ -95,12 +102,13 @@ namespace SQLiteTrial.DB.Connection.SQLite
 			_transaction = null;
 		}
 
-		public void ExecuteNonQuery(string query)
+		public int ExecuteNonQuery(string query)
 		{
-			ExecuteNonQuery(query, new Dictionary<string, object>());
+			int count = ExecuteNonQuery(query, new Dictionary<string, object>());
+			return count;
 		}
 
-		public void ExecuteNonQuery(string query, Dictionary<string, object> parameters)
+		public int ExecuteNonQuery(string query, Dictionary<string, object> parameters)
 		{
 			using (var cmd = new SQLiteCommand())
 			{
@@ -115,7 +123,8 @@ namespace SQLiteTrial.DB.Connection.SQLite
 					}
 				}
 				cmd.CommandText = query;
-				cmd.ExecuteNonQuery();
+				int count = cmd.ExecuteNonQuery();
+				return count;
 			}
 		}
 

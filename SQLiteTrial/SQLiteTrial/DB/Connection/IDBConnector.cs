@@ -11,8 +11,8 @@ namespace SQLiteTrial.DB.Connection
 		Reader ExecuteQuery(string query);
 		Reader ExecuteQuery(string query, Dictionary<string, object> parameters);
 
-		void ExecuteNonQuery(string query);
-		void ExecuteNonQuery(string query, Dictionary<string, object> parameters);
+		int ExecuteNonQuery(string query);
+		int ExecuteNonQuery(string query, Dictionary<string, object> parameters);
 
 		void Initialize();
 
