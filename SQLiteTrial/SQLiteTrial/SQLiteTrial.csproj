@@ -47,6 +47,7 @@
     <Compile Include="DB\Connection\IDBConnector.cs" />
     <Compile Include="DB\Connection\SQLite\Connector.cs" />
     <Compile Include="DB\Connection\SQLite\TestCaseDAO.cs" />
+    <Compile Include="DB\Connection\SQLite\TestedVersionDAO.cs" />
     <Compile Include="DB\Connection\SQLite\TestersDAO.cs" />
     <Compile Include="DB\Connection\SQLite\TestResultCodesDAO.cs" />
     <Compile Include="DB\DBAccess.cs" />
