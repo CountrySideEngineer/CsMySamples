@@ -49,7 +49,26 @@ namespace SQLiteTrial.DB.Connection.SQLite
 
 		public object Insert(object dto)
 		{
-			throw new NotImplementedException();
+			TestCasesDTO testCase = (TestCasesDTO)dto;
+			string query =
+				"INSERT OR IGNORE INTO test_cases " +
+				"(test_code, summary, detail) " +
+				"VALUES " +
+				"(@test_code, @summary, @detail);";
+			var parameters = new Dictionary<string, object>();
+			parameters.Add("@test_code", testCase.TestCode);
+			parameters.Add("@summary", testCase.Summary);
+			parameters.Add("@detail", testCase.Detail);
+			using (var connection = new Connector())
+			{
+				connection.BeginTransaction();
+
+				int count = connection.ExecuteNonQuery(query, parameters);
+
+				connection.Commit();
+
+				return count;
+			}
 		}
 
 		public object Select(object dto)
