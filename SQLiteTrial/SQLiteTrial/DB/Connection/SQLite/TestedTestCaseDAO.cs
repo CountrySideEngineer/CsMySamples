@@ -1,10 +1,12 @@
 ﻿using SQLiteTrial.DB.DTO;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Common.CommandTrees;
 using System.Data.Entity.Infrastructure;
 using System.Data.SQLite;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -105,7 +107,45 @@ namespace SQLiteTrial.DB.Connection.SQLite
 
 		public object Update(object dto)
 		{
-			throw new NotImplementedException();
+			var testedTestCaseDto = (TestedTestCasesDTO)dto;
+			string query =
+				$"UPDATE tested_test_cases " +
+				$"SET " +
+					$"test_result_codes_id = " +
+					$"(" +
+						$"SELECT id FROM test_result_codes WHERE test_result_codes.result_text = @code" +
+					$")," +
+					$"testers_id = " +
+					$"(" +
+						$"SELECT id FROM testers " +
+						$"WHERE " +
+							$"testers.company = @company AND " +
+							$"testers.section = @section AND " +
+							$"testers.name = @name" +
+					$")," +
+					$"updated_at = CURRENT_TIMESTAMP " +
+				$"WHERE " +
+					$"test_cases_id = " +
+					$"(" +
+						$"SELECT id FROM test_cases WHERE test_cases.test_code = @test_code" +
+					$");";
+			var parameters = new Dictionary<string, object>();
+			parameters.Add("@version", testedTestCaseDto.TestedVersion);
+			parameters.Add("@code", testedTestCaseDto.TestResultCode);
+			parameters.Add("@company", testedTestCaseDto.Tester.Company);
+			parameters.Add("@section", testedTestCaseDto.Tester.Section);
+			parameters.Add("@name", testedTestCaseDto.Tester.Name);
+			parameters.Add("@test_code", testedTestCaseDto.TestCode);
+			using (var connection = new Connector())
+			{
+				connection.BeginTransaction();
+
+				int count = connection.ExecuteNonQuery(query, parameters);
+
+				connection.Commit();
+
+				return count;
+			}
 		}
 	}
 }
