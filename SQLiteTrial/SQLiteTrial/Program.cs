@@ -13,22 +13,43 @@ namespace SQLiteTrial
 	{
 		static void Main(string[] args)
 		{
-			var dao = new TestersDAO();
-			IEnumerable<TestersDTO> testers = (IEnumerable<TestersDTO>)dao.SelectAll();
-			foreach (var item in testers)
+			var dao = new TestedTestCaseDAO();
+			var testedTestCaseDto = new TestedTestCasesDTO()
 			{
-				Console.WriteLine($"ID = {item.ID.ToString().PadLeft(6)}, Tester code = {item.TesterCode}, Name = {item.Name}");
+				TestCode = "sample_test_code_001_002",
+				TestedVersion = "1.0.0",
+				TestResultCode = "NG",
+				Tester = new TestersDTO()
+				{
+					Company = "COMPANY_001",
+					Section = "SECTION_001",
+					Name = "TESTER_NAME_001"
+				}
+			};
+			dao.Update(testedTestCaseDto);
 
-				item.TesterCode = $"{item.TesterCode}_SUB_{DateTime.Now.ToString()}";
+
+
+
+
+			IEnumerable<TestedTestCasesDTO> dtos = (IEnumerable<TestedTestCasesDTO>)dao.SelectAll();
+			foreach (var dto in dtos)
+			{
+				Console.WriteLine($"ID = {dto.ID.ToString().PadLeft(6)}, " +
+					$"code = {dto.TestCode.PadLeft(18)}, " +
+					$"reuslt = {dto.TestResultCode.PadLeft(8)}");
 			}
 
-
-
-
-			foreach (var item in testers)
+			var testCaseDto = new TestCasesDTO()
 			{
-				dao.Insert(item);
-			}
+				TestCode = "sample_test_code_002_006",
+				Summary = "Sample test code, code 003-001",
+				Detail = "Sample test code, code 003-001",
+			};
+			var testCaseDao = new TestCaseDAO();
+			testCaseDao.Insert(testCaseDto);
+
+			
 
 			return;
 		}
