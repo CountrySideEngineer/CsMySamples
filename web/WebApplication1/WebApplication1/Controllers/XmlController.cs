@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Api.Common;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Xml;
 using System.Xml.Linq;
@@ -24,12 +25,5 @@ namespace WebApplication1.Controllers
                 return BadRequest($"Error processing XML data: {ex.Message}");
             }
         }
-    }
-
-    public class Person
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int Age { get; set; }
     }
 }
