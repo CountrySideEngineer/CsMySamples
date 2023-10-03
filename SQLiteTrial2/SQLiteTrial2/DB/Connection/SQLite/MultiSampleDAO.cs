@@ -52,7 +52,5 @@ namespace SQLiteTrial2.DB.Connection.SQLite
                 return count;
             }
         }
-
     }
-
 }

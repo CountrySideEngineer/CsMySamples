@@ -47,6 +47,8 @@
     <Compile Include="DB\Connection\IDBConnector.cs" />
     <Compile Include="DB\Connection\SQLite\Connector.cs" />
     <Compile Include="DB\Connection\SQLite\MultiSampleDAO.cs" />
+    <Compile Include="DB\Connection\SQLite\MultiSampleDAO2.cs" />
+    <Compile Include="DB\Connection\SQLite\MultiSampleDAO3.cs" />
     <Compile Include="DB\Connection\SQLite\SampleDAO.cs" />
     <Compile Include="DB\DTO\SampleDTO.cs" />
     <Compile Include="Program.cs" />
