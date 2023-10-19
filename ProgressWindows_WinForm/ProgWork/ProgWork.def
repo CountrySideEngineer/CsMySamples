@@ -1,0 +1,5 @@
+LIBRARY		ProgWork
+
+EXPORTS
+	BackgroundWork			@2
+	BackgroundWorkAsync		@3
