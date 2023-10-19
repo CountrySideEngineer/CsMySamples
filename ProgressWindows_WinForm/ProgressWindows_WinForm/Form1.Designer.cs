@@ -46,9 +46,9 @@
 			// buttonStart
 			// 
 			this.buttonStart.Font = new System.Drawing.Font("ＭＳ ゴシック", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.buttonStart.Location = new System.Drawing.Point(309, 17);
+			this.buttonStart.Location = new System.Drawing.Point(12, 87);
 			this.buttonStart.Name = "buttonStart";
-			this.buttonStart.Size = new System.Drawing.Size(80, 40);
+			this.buttonStart.Size = new System.Drawing.Size(120, 40);
 			this.buttonStart.TabIndex = 0;
 			this.buttonStart.Text = "START";
 			this.buttonStart.UseVisualStyleBackColor = true;
@@ -57,9 +57,9 @@
 			// buttonCancel
 			// 
 			this.buttonCancel.Enabled = false;
-			this.buttonCancel.Location = new System.Drawing.Point(309, 63);
+			this.buttonCancel.Location = new System.Drawing.Point(141, 87);
 			this.buttonCancel.Name = "buttonCancel";
-			this.buttonCancel.Size = new System.Drawing.Size(80, 40);
+			this.buttonCancel.Size = new System.Drawing.Size(120, 40);
 			this.buttonCancel.TabIndex = 1;
 			this.buttonCancel.Text = "CANCEL";
 			this.buttonCancel.UseVisualStyleBackColor = true;
@@ -83,7 +83,7 @@
 			this.progressValue.BackColor = System.Drawing.Color.White;
 			this.progressValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.progressValue.Font = new System.Drawing.Font("ＭＳ ゴシック", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			this.progressValue.Location = new System.Drawing.Point(141, 17);
+			this.progressValue.Location = new System.Drawing.Point(149, 17);
 			this.progressValue.Margin = new System.Windows.Forms.Padding(8);
 			this.progressValue.MaximumSize = new System.Drawing.Size(112, 56);
 			this.progressValue.MinimumSize = new System.Drawing.Size(112, 56);
@@ -98,7 +98,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(396, 117);
+			this.ClientSize = new System.Drawing.Size(281, 147);
 			this.Controls.Add(this.progressValue);
 			this.Controls.Add(this.progressTitle);
 			this.Controls.Add(this.buttonCancel);
