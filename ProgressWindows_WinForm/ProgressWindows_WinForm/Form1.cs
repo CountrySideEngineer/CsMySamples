@@ -22,6 +22,12 @@ namespace ProgressWindows_WinForm
 		[DllImport("ProgWork.dll")]
 		public static extern void BackgroundWork(ProgressNotification notify);
 
+		[DllImport("ProgWork.dll")]
+		public static extern void BackgroundWorkCancle();
+
+		[DllImport("ProgWork.dll")]
+		public static extern bool GetBackgroundWorkState();
+
 		public Form1()
 		{
 			InitializeComponent();
@@ -50,9 +56,21 @@ namespace ProgressWindows_WinForm
 
 			while (_isContinue)
 			{
+				if (backgroundWorker.CancellationPending)
+				{
+					e.Cancel = true;
+					BackgroundWorkCancle();
+					break;
+				}
 				backgroundWorker.ReportProgress(_progress);
 				Thread.Sleep(10);
 			}
+
+			bool isRunning = false;
+			do
+			{
+				isRunning = GetBackgroundWorkState();
+			} while (isRunning);
 		}
 
 		private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -95,7 +113,6 @@ namespace ProgressWindows_WinForm
 			{
 				backgroundWorker.CancelAsync();
 			}
-
 		}
 	}
 }
