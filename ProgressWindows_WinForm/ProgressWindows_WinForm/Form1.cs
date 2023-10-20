@@ -16,21 +16,28 @@ namespace ProgressWindows_WinForm
 	{
 		public delegate void ProgressNotification(int progress);
 
-		[DllImport("ProgWork.dll")]
-		public static extern void BackgroundWorkAsync(ProgressNotification notify);
-
-		[DllImport("ProgWork.dll")]
-		public static extern void BackgroundWork(ProgressNotification notify);
-
-		[DllImport("ProgWork.dll")]
-		public static extern void BackgroundWorkCancle();
-
-		[DllImport("ProgWork.dll")]
-		public static extern bool GetBackgroundWorkState();
+		protected BindingSource _tableItemBindingSource;
+		protected IEnumerable<TableItem> _tableItems;
 
 		public Form1()
 		{
 			InitializeComponent();
+		}
+
+		public Form1(int itemNum)
+		{
+			InitializeComponent();
+
+			SetupTableItem(itemNum);
+		}
+
+		protected void SetupTableItem(int itemNum)
+		{
+			_tableItems = TableItem.Factory(itemNum);
+
+			_tableItemBindingSource = new BindingSource();
+			_tableItemBindingSource.DataSource = _tableItems;
+			ItemTableGridView.DataSource = _tableItemBindingSource;
 		}
 
 		public static int _progress = 0;
@@ -51,7 +58,7 @@ namespace ProgressWindows_WinForm
 		private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
 		{
 			var notification = new ProgressNotification(OnProgressNotification);
-			BackgroundWorkAsync(notification);
+			ProgWork.BackgroundWorkAsync(notification);
 			Form1._isContinue = true;
 
 			while (_isContinue)
@@ -59,7 +66,7 @@ namespace ProgressWindows_WinForm
 				if (backgroundWorker.CancellationPending)
 				{
 					e.Cancel = true;
-					BackgroundWorkCancle();
+					ProgWork.BackgroundWorkCancle();
 					break;
 				}
 				backgroundWorker.ReportProgress(_progress);
@@ -69,7 +76,7 @@ namespace ProgressWindows_WinForm
 			bool isRunning = false;
 			do
 			{
-				isRunning = GetBackgroundWorkState();
+				isRunning = ProgWork.GetBackgroundWorkState();
 			} while (isRunning);
 		}
 
