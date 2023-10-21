@@ -19,6 +19,8 @@ namespace ProgressWindows_WinForm
 		protected BindingSource _tableItemBindingSource;
 		protected List<TableItem> _tableItems;
 
+		private Worker _worker = new Worker();
+
 		public Form1()
 		{
 			InitializeComponent();
@@ -29,6 +31,10 @@ namespace ProgressWindows_WinForm
 			InitializeComponent();
 
 			SetupTableItem(itemNum);
+
+			_worker.OnWorkProgressChanged += OnProgressChanged;
+			var progress = new Progress<int>(OnProgressChanged);
+			_worker.WorkerProgress = progress;
 		}
 
 		protected void SetupTableItem(int itemNum)
@@ -40,25 +46,35 @@ namespace ProgressWindows_WinForm
 			ItemTableGridView.DataSource = _tableItemBindingSource;
 		}
 
-		public static int _progress = 0;
-		public static bool _isContinue = false;
-		public static void OnProgressNotification(int progress)
+		int _progressChanged = 0;
+		public void OnProgressChanged(object sender, EventArgs e)
 		{
-			_progress = progress;
-			if (100 <= _progress)
+			_progressChanged++;
+
+			string content = _progressChanged.ToString() + "%";
+			Console.WriteLine(content);
+			try
 			{
-				_isContinue = false;
+				progressValue.Text = content;
+
 			}
-			else
+			catch (Exception ex)
 			{
-				_isContinue = true;
+				Console.WriteLine(ex.Message);
 			}
 		}
 
-		int _itemIndex = 0;
+		public void OnProgressChanged(int prog)
+		{
+			string content = prog.ToString() + "%";
+			Console.WriteLine(content);
+			progressValue.Text = content;
+		}
 
 		private void button1_Click(object sender, EventArgs e)
 		{
+			_progressChanged = 0;
+			_worker?.DoWork(_tableItems);
 		}
 
 		private void buttonCancel_Click(object sender, EventArgs e)
