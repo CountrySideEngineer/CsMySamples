@@ -20,6 +20,7 @@ namespace ProgressWindows_WinForm
 
 		int _currentStageIndex = 0;
 		string _currentStageName = string.Empty;
+		bool _isContinue = false;
 
 		public static Worker worker = null;
 		public IProgress<WorkState> WorkerProgress { get; set; }
@@ -47,14 +48,22 @@ namespace ProgressWindows_WinForm
 			Task task = DoWorkAsycn(items);
 		}
 
+		public void CancelWork()
+		{
+			_isContinue = false;
+		}
+
 		protected virtual async Task DoWorkAsycn(IEnumerable<TableItem> items)
 		{
-			Task task = DoWorkTask(items);
-			await task;
+			await DoWorkTask(items);
+
+			OnWorkFinished?.Invoke(this, null);
 		}
 
 		protected virtual Task DoWorkTask(IEnumerable<TableItem> items)
 		{
+			_isContinue = true;
+
 			var notification = new ProgressNotification(OnProgressNotify);
 			Task task = Task.Run(() =>
 			{
@@ -67,6 +76,11 @@ namespace ProgressWindows_WinForm
 						ProgWork.BackgroundWork(notification);
 					}
 					_currentStageIndex++;
+
+					if (!_isContinue)
+					{
+						break;
+					}
 				}
 			});
 			return task;
