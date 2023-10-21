@@ -55,34 +55,53 @@ namespace ProgressWindows_WinForm
 			}
 		}
 
+		int _itemIndex = 0;
 		private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
 		{
 			var notification = new ProgressNotification(OnProgressNotification);
-			ProgWork.BackgroundWorkAsync(notification);
-			Form1._isContinue = true;
 
-			while (_isContinue)
+			_itemIndex = 0;
+			foreach (var item in _tableItems)
 			{
-				if (backgroundWorker.CancellationPending)
+				_isContinue = true;
+				_progress = 0;
+				if (item.IsChecked)
 				{
-					e.Cancel = true;
-					ProgWork.BackgroundWorkCancle();
-					break;
-				}
-				backgroundWorker.ReportProgress(_progress);
-				Thread.Sleep(10);
-			}
+					ProgWork.BackgroundWorkAsync(notification);
+					while (_isContinue)
+					{
+						if (backgroundWorker.CancellationPending)
+						{
+							e.Cancel = true;
+							ProgWork.BackgroundWorkCancle();
+							break;
+						}
+						backgroundWorker.ReportProgress(_progress);
+						Thread.Sleep(10);
+					}
+					backgroundWorker.ReportProgress(_progress);
 
-			bool isRunning = false;
-			do
-			{
-				isRunning = ProgWork.GetBackgroundWorkState();
-			} while (isRunning);
+					bool isRunning = false;
+					do
+					{
+						isRunning = ProgWork.GetBackgroundWorkState();
+					} while (isRunning);
+				}
+				_itemIndex++;
+			}
 		}
 
 		private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
 		{
-			progressValue.Text = e.ProgressPercentage.ToString() + "%";
+			try
+			{
+				progressValue.Text = e.ProgressPercentage.ToString() + "%";
+				ItemTableGridView.Rows[_itemIndex].Cells[3].Value = e.ProgressPercentage;
+			}
+			catch (Exception)
+			{
+				Console.WriteLine("Exception detected.!");
+			}
 		}
 
 		private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
