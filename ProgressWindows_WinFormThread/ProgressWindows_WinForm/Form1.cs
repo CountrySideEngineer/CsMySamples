@@ -34,6 +34,7 @@ namespace ProgressWindows_WinForm
 
 			var progress = new Progress<WorkState>(OnProgressChanged);
 			_worker.WorkerProgress = progress;
+			_worker.OnWorkFinished += OnSubProcessFinished;
 		}
 
 		protected void SetupTableItem(int itemNum)
@@ -53,13 +54,23 @@ namespace ProgressWindows_WinForm
 			ItemTableGridView.Rows[rowIndex].Cells[3].Value = progressState.ProgressPercentage;
 		}
 
+		internal virtual void OnSubProcessFinished(object sender, EventArgs e)
+		{
+			buttonStart.Enabled = true;
+			buttonCancel.Enabled = false;
+		}
+
 		private void button1_Click(object sender, EventArgs e)
 		{
+			buttonStart.Enabled = false;
+			buttonCancel.Enabled = true;
+
 			_worker?.DoWork(_tableItems);
 		}
 
 		private void buttonCancel_Click(object sender, EventArgs e)
 		{
+			_worker?.CancelWork();
 		}
 
 		private void Form1_Load(object sender, EventArgs e)
