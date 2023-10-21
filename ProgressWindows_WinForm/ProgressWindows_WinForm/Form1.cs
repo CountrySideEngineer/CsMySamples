@@ -121,5 +121,14 @@ namespace ProgressWindows_WinForm
 				backgroundWorker.CancelAsync();
 			}
 		}
+
+		private void Form1_Load(object sender, EventArgs e)
+		{
+			//Add progress column.
+			var progColumn = new DataGridViewProgressBarColumn();
+			progColumn.DataPropertyName = "progress";
+			progColumn.HeaderText = "progress";
+			ItemTableGridView.Columns.Add(progColumn);
+		}
 	}
 }
