@@ -32,8 +32,7 @@ namespace ProgressWindows_WinForm
 
 			SetupTableItem(itemNum);
 
-			_worker.OnWorkProgressChanged += OnProgressChanged;
-			var progress = new Progress<int>(OnProgressChanged);
+			var progress = new Progress<WorkState>(OnProgressChanged);
 			_worker.WorkerProgress = progress;
 		}
 
@@ -46,34 +45,16 @@ namespace ProgressWindows_WinForm
 			ItemTableGridView.DataSource = _tableItemBindingSource;
 		}
 
-		int _progressChanged = 0;
-		public void OnProgressChanged(object sender, EventArgs e)
+		internal void OnProgressChanged(WorkState progressState)
 		{
-			_progressChanged++;
+			progressValue.Text = progressState.ProgressPercentage.ToString() + "%";
 
-			string content = _progressChanged.ToString() + "%";
-			Console.WriteLine(content);
-			try
-			{
-				progressValue.Text = content;
-
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.Message);
-			}
-		}
-
-		public void OnProgressChanged(int prog)
-		{
-			string content = prog.ToString() + "%";
-			Console.WriteLine(content);
-			progressValue.Text = content;
+			int rowIndex = progressState.StageIndex;
+			ItemTableGridView.Rows[rowIndex].Cells[3].Value = progressState.ProgressPercentage;
 		}
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			_progressChanged = 0;
 			_worker?.DoWork(_tableItems);
 		}
 

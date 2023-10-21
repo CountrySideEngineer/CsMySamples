@@ -10,7 +10,7 @@ namespace ProgressWindows_WinForm
 {
 	internal class Worker
 	{
-		public delegate void WorkProgressChangedEventHandler(object sender, EventArgs e);
+		public delegate void WorkProgressChangedEventHandler(object sender, ProgressChangedEventArgs e);
 
 		public delegate void WorkFinishedEventHandler(object sender, EventArgs e);
 
@@ -18,22 +18,26 @@ namespace ProgressWindows_WinForm
 
 		public event WorkFinishedEventHandler OnWorkFinished;
 
+		int _currentStageIndex = 0;
+		string _currentStageName = string.Empty;
+
 		public static Worker worker = null;
-		public IProgress<int> WorkerProgress { get; set; }
+		public IProgress<WorkState> WorkerProgress { get; set; }
 
 		public static void OnProgressNotify(int progress)
 		{
-			worker?.SendProgress(100);
+			worker?.OnProgressChanged(progress);
 		}
 
-		public void SendProgress(int progress)
+		public void OnProgressChanged(int progress)
 		{
-			ProgressChanged(WorkerProgress);
-		}
-
-		public void ProgressChanged(IProgress<int> progress)
-		{
-			progress.Report(10);
+			var state = new WorkState()
+			{
+				ProgressPercentage = progress,
+				StageIndex = _currentStageIndex,
+				Name = _currentStageName
+			};
+			WorkerProgress.Report(state);
 		}
 
 		public void DoWork(IEnumerable<TableItem> items)
@@ -54,13 +58,15 @@ namespace ProgressWindows_WinForm
 			var notification = new ProgressNotification(OnProgressNotify);
 			Task task = Task.Run(() =>
 			{
-
+				_currentStageIndex = 0;
 				foreach (var item in items)
 				{
 					if (item.IsChecked)
 					{
+						_currentStageName = item.Name;
 						ProgWork.BackgroundWork(notification);
 					}
+					_currentStageIndex++;
 				}
 			});
 			return task;
