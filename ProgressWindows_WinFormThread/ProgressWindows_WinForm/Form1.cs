@@ -56,89 +56,13 @@ namespace ProgressWindows_WinForm
 		}
 
 		int _itemIndex = 0;
-		private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-		{
-			var notification = new ProgressNotification(OnProgressNotification);
-
-			_itemIndex = 0;
-			foreach (var item in _tableItems)
-			{
-				_isContinue = true;
-				_progress = 0;
-				if (item.IsChecked)
-				{
-					ProgWork.BackgroundWorkAsync(notification);
-					while (_isContinue)
-					{
-						if (backgroundWorker.CancellationPending)
-						{
-							e.Cancel = true;
-							ProgWork.BackgroundWorkCancle();
-							break;
-						}
-						backgroundWorker.ReportProgress(_progress);
-						Thread.Sleep(10);
-					}
-					backgroundWorker.ReportProgress(_progress);
-
-					bool isRunning = false;
-					do
-					{
-						isRunning = ProgWork.GetBackgroundWorkState();
-					} while (isRunning);
-				}
-				_itemIndex++;
-			}
-		}
-
-		private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-		{
-			try
-			{
-				progressValue.Text = e.ProgressPercentage.ToString() + "%";
-				ItemTableGridView.Rows[_itemIndex].Cells[3].Value = e.ProgressPercentage;
-			}
-			catch (Exception)
-			{
-				Console.WriteLine("Exception detected.!");
-			}
-		}
-
-		private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-		{
-			if (true == e.Cancelled)
-			{
-				progressValue.Text = "canceled";
-			}
-			else if (null != e.Error)
-			{
-				progressValue.Text = "failed";
-			}
-			else
-			{
-				progressValue.Text = "DONE!";
-			}
-
-			buttonStart.Enabled = true;
-			buttonCancel.Enabled = false;
-		}
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			if (false == backgroundWorker.IsBusy)
-			{
-				backgroundWorker.RunWorkerAsync();
-				buttonCancel.Enabled = true;
-				buttonStart.Enabled = false;
-			}
 		}
 
 		private void buttonCancel_Click(object sender, EventArgs e)
 		{
-			if (true == backgroundWorker.WorkerSupportsCancellation)
-			{
-				backgroundWorker.CancelAsync();
-			}
 		}
 
 		private void Form1_Load(object sender, EventArgs e)
