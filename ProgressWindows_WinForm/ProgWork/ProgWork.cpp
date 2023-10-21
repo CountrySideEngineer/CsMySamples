@@ -16,9 +16,8 @@ void WINAPI BackgroundWork(ProgressNotification callback)
 		}
 		if (NULL != callback) {
 			callback(index);
-
-			Sleep(100);
 		}
+		Sleep(20);
 	}
 	isRunning = false;
 }
