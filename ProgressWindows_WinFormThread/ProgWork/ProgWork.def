@@ -1,0 +1,9 @@
+LIBRARY		ProgWork
+
+EXPORTS
+	BackgroundWork			@2
+	BackgroundWorkAsync		@3
+	BackgroundWorkCancle	@4
+	GetBackgroundWorkState	@5
+	GetName					@6
+	GetParameter			@7
