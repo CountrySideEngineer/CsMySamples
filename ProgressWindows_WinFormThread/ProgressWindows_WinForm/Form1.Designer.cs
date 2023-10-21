@@ -29,33 +29,24 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-			this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.buttonStart = new System.Windows.Forms.Button();
 			this.buttonCancel = new System.Windows.Forms.Button();
 			this.progressTitle = new System.Windows.Forms.Label();
 			this.progressValue = new System.Windows.Forms.Label();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-			this.tableItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.parameterDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.isCheckedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.ItemTableGridView = new System.Windows.Forms.DataGridView();
+			this.isCheckedDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+			this.parameterDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.tableItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.tableItemBindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.ItemTableGridView)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.tableItemBindingSource)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// backgroundWorker
-			// 
-			this.backgroundWorker.WorkerReportsProgress = true;
-			this.backgroundWorker.WorkerSupportsCancellation = true;
-			this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
-			this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
-			this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
 			// 
 			// buttonStart
 			// 
@@ -141,29 +132,6 @@
 			this.splitContainer1.SplitterDistance = 252;
 			this.splitContainer1.TabIndex = 4;
 			// 
-			// tableItemBindingSource
-			// 
-			this.tableItemBindingSource.DataSource = typeof(ProgressWindows_WinForm.TableItem);
-			// 
-			// nameDataGridViewTextBoxColumn
-			// 
-			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-			this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-			// 
-			// parameterDataGridViewTextBoxColumn
-			// 
-			this.parameterDataGridViewTextBoxColumn.DataPropertyName = "Parameter";
-			this.parameterDataGridViewTextBoxColumn.HeaderText = "Parameter";
-			this.parameterDataGridViewTextBoxColumn.Name = "parameterDataGridViewTextBoxColumn";
-			// 
-			// isCheckedDataGridViewCheckBoxColumn
-			// 
-			this.isCheckedDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.isCheckedDataGridViewCheckBoxColumn.DataPropertyName = "IsChecked";
-			this.isCheckedDataGridViewCheckBoxColumn.HeaderText = "IsChecked";
-			this.isCheckedDataGridViewCheckBoxColumn.Name = "isCheckedDataGridViewCheckBoxColumn";
-			// 
 			// ItemTableGridView
 			// 
 			this.ItemTableGridView.AllowUserToAddRows = false;
@@ -173,14 +141,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.ItemTableGridView.AutoGenerateColumns = false;
 			this.ItemTableGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle2.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-			dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.ItemTableGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.ItemTableGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.ItemTableGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.ItemTableGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.isCheckedDataGridViewCheckBoxColumn,
@@ -192,6 +160,29 @@
 			this.ItemTableGridView.RowTemplate.Height = 21;
 			this.ItemTableGridView.Size = new System.Drawing.Size(858, 246);
 			this.ItemTableGridView.TabIndex = 0;
+			// 
+			// isCheckedDataGridViewCheckBoxColumn
+			// 
+			this.isCheckedDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.isCheckedDataGridViewCheckBoxColumn.DataPropertyName = "IsChecked";
+			this.isCheckedDataGridViewCheckBoxColumn.HeaderText = "IsChecked";
+			this.isCheckedDataGridViewCheckBoxColumn.Name = "isCheckedDataGridViewCheckBoxColumn";
+			// 
+			// parameterDataGridViewTextBoxColumn
+			// 
+			this.parameterDataGridViewTextBoxColumn.DataPropertyName = "Parameter";
+			this.parameterDataGridViewTextBoxColumn.HeaderText = "Parameter";
+			this.parameterDataGridViewTextBoxColumn.Name = "parameterDataGridViewTextBoxColumn";
+			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+			this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			// 
+			// tableItemBindingSource
+			// 
+			this.tableItemBindingSource.DataSource = typeof(ProgressWindows_WinForm.TableItem);
 			// 
 			// Form1
 			// 
@@ -209,15 +200,13 @@
 			this.splitContainer1.Panel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
 			this.splitContainer1.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.tableItemBindingSource)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.ItemTableGridView)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.tableItemBindingSource)).EndInit();
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
-
-		private System.ComponentModel.BackgroundWorker backgroundWorker;
 		private System.Windows.Forms.Button buttonStart;
 		private System.Windows.Forms.Button buttonCancel;
 		private System.Windows.Forms.Label progressTitle;
