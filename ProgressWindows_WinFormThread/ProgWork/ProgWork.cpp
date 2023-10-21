@@ -3,7 +3,7 @@
 #include <tchar.h>
 #include <thread>
 
-static bool isContinueWork = false;
+static bool isContinueWork = true;
 static bool isRunning = false;
 
 typedef void(__stdcall* ProgressNotification)(long data);

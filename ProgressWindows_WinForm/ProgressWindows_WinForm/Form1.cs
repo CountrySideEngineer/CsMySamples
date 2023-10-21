@@ -16,21 +16,28 @@ namespace ProgressWindows_WinForm
 	{
 		public delegate void ProgressNotification(int progress);
 
-		[DllImport("ProgWork.dll")]
-		public static extern void BackgroundWorkAsync(ProgressNotification notify);
-
-		[DllImport("ProgWork.dll")]
-		public static extern void BackgroundWork(ProgressNotification notify);
-
-		[DllImport("ProgWork.dll")]
-		public static extern void BackgroundWorkCancle();
-
-		[DllImport("ProgWork.dll")]
-		public static extern bool GetBackgroundWorkState();
+		protected BindingSource _tableItemBindingSource;
+		protected List<TableItem> _tableItems;
 
 		public Form1()
 		{
 			InitializeComponent();
+		}
+
+		public Form1(int itemNum)
+		{
+			InitializeComponent();
+
+			SetupTableItem(itemNum);
+		}
+
+		protected void SetupTableItem(int itemNum)
+		{
+			_tableItems = TableItem.Factory(itemNum).ToList();
+
+			_tableItemBindingSource = new BindingSource();
+			_tableItemBindingSource.DataSource = _tableItems;
+			ItemTableGridView.DataSource = _tableItemBindingSource;
 		}
 
 		public static int _progress = 0;
@@ -48,34 +55,53 @@ namespace ProgressWindows_WinForm
 			}
 		}
 
+		int _itemIndex = 0;
 		private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
 		{
 			var notification = new ProgressNotification(OnProgressNotification);
-			BackgroundWorkAsync(notification);
-			Form1._isContinue = true;
 
-			while (_isContinue)
+			_itemIndex = 0;
+			foreach (var item in _tableItems)
 			{
-				if (backgroundWorker.CancellationPending)
+				_isContinue = true;
+				_progress = 0;
+				if (item.IsChecked)
 				{
-					e.Cancel = true;
-					BackgroundWorkCancle();
-					break;
-				}
-				backgroundWorker.ReportProgress(_progress);
-				Thread.Sleep(10);
-			}
+					ProgWork.BackgroundWorkAsync(notification);
+					while (_isContinue)
+					{
+						if (backgroundWorker.CancellationPending)
+						{
+							e.Cancel = true;
+							ProgWork.BackgroundWorkCancle();
+							break;
+						}
+						backgroundWorker.ReportProgress(_progress);
+						Thread.Sleep(10);
+					}
+					backgroundWorker.ReportProgress(_progress);
 
-			bool isRunning = false;
-			do
-			{
-				isRunning = GetBackgroundWorkState();
-			} while (isRunning);
+					bool isRunning = false;
+					do
+					{
+						isRunning = ProgWork.GetBackgroundWorkState();
+					} while (isRunning);
+				}
+				_itemIndex++;
+			}
 		}
 
 		private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
 		{
-			progressValue.Text = e.ProgressPercentage.ToString() + "%";
+			try
+			{
+				progressValue.Text = e.ProgressPercentage.ToString() + "%";
+				ItemTableGridView.Rows[_itemIndex].Cells[3].Value = e.ProgressPercentage;
+			}
+			catch (Exception)
+			{
+				Console.WriteLine("Exception detected.!");
+			}
 		}
 
 		private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -113,6 +139,16 @@ namespace ProgressWindows_WinForm
 			{
 				backgroundWorker.CancelAsync();
 			}
+		}
+
+		private void Form1_Load(object sender, EventArgs e)
+		{
+			//Add progress column.
+			var progColumn = new DataGridViewProgressBarColumn();
+			progColumn.DataPropertyName = "progress";
+			progColumn.Name = "progress";
+			progColumn.HeaderText = "progress";
+			ItemTableGridView.Columns.Add(progColumn);
 		}
 	}
 }
