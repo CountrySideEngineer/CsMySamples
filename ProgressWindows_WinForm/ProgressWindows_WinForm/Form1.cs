@@ -17,7 +17,7 @@ namespace ProgressWindows_WinForm
 		public delegate void ProgressNotification(int progress);
 
 		protected BindingSource _tableItemBindingSource;
-		protected IEnumerable<TableItem> _tableItems;
+		protected List<TableItem> _tableItems;
 
 		public Form1()
 		{
@@ -33,7 +33,7 @@ namespace ProgressWindows_WinForm
 
 		protected void SetupTableItem(int itemNum)
 		{
-			_tableItems = TableItem.Factory(itemNum);
+			_tableItems = TableItem.Factory(itemNum).ToList();
 
 			_tableItemBindingSource = new BindingSource();
 			_tableItemBindingSource.DataSource = _tableItems;
@@ -127,6 +127,7 @@ namespace ProgressWindows_WinForm
 			//Add progress column.
 			var progColumn = new DataGridViewProgressBarColumn();
 			progColumn.DataPropertyName = "progress";
+			progColumn.Name = "progress";
 			progColumn.HeaderText = "progress";
 			ItemTableGridView.Columns.Add(progColumn);
 		}
