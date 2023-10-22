@@ -10,12 +10,7 @@ namespace ProgressWindows_WinForm
 {
 	internal class Worker
 	{
-		public delegate void WorkProgressChangedEventHandler(object sender, ProgressChangedEventArgs e);
-
 		public delegate void WorkFinishedEventHandler(object sender, EventArgs e);
-
-		public event WorkProgressChangedEventHandler OnWorkProgressChanged;
-
 		public event WorkFinishedEventHandler OnWorkFinished;
 
 		int _currentStageIndex = 0;
@@ -45,7 +40,7 @@ namespace ProgressWindows_WinForm
 		{
 			worker = this;
 
-			Task task = DoWorkAsycn(items);
+			_ = DoWorkAsycn(items);
 		}
 
 		public void CancelWork()
