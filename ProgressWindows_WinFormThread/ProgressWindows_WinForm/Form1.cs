@@ -62,15 +62,16 @@ namespace ProgressWindows_WinForm
 
 		private void button1_Click(object sender, EventArgs e)
 		{
+			_worker?.DoWork(_tableItems);
+
 			buttonStart.Enabled = false;
 			buttonCancel.Enabled = true;
-
-			_worker?.DoWork(_tableItems);
 		}
 
 		private void buttonCancel_Click(object sender, EventArgs e)
 		{
 			_worker?.CancelWork();
+			buttonCancel.Enabled = false;
 		}
 
 		private void Form1_Load(object sender, EventArgs e)
