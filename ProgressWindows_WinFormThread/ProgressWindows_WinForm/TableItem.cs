@@ -25,6 +25,8 @@ namespace ProgressWindows_WinForm
 		/// </summary>
 		public string Name { get; set; } = string.Empty;
 
+		public bool Enabled { get; set; } = true;
+
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
@@ -44,7 +46,12 @@ namespace ProgressWindows_WinForm
 				int parameter = 0;
 				ProgWork.GetParameter(index, ref parameter);
 
-				yield return new TableItem { Parameter = parameter, Name = name };
+				yield return new TableItem
+				{
+					Parameter = parameter,
+					Name = name,
+					Enabled = (0 == index % 2)
+				};
 			}
 		}
 	}

@@ -82,6 +82,23 @@ namespace ProgressWindows_WinForm
 			progColumn.Name = "progress";
 			progColumn.HeaderText = "progress";
 			ItemTableGridView.Columns.Add(progColumn);
+
+			int index = 0;
+			foreach (var item in _tableItems)
+			{
+				ItemTableGridView.Rows[index].ReadOnly = !item.Enabled;
+				index++;
+            }
 		}
-	}
+
+        private void ItemTableGridView_ReadOnlyChanged(object sender, EventArgs e)
+        {
+			Console.WriteLine("ItemTableGridView_ReadOnlyChanged");
+        }
+
+        private void ItemTableGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+			Console.WriteLine(sender.ToString());
+        }
+    }
 }
