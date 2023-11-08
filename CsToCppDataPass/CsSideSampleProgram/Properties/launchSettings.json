@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CsSideSampleProgram": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
