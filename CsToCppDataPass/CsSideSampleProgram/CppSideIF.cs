@@ -17,9 +17,7 @@ namespace CsSideSampleProgram
 
     public static class CppSideIF
     {
-        [DllImport("CppSideSampleDll.dll", CallingConvention = CallingConvention.StdCall)]
+        [DllImport("CppSideSampleDll.dll")]
         public static extern short CppSideSampleIF(ref SAMPLE_STRUCT input);
-        [DllImport("CppSideSampleDll.dll", CallingConvention = CallingConvention.StdCall)]
-        public static extern short CppSideSampleIF2(short inputA, short inputB);
     }
 }
