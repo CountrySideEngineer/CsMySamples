@@ -17,7 +17,7 @@ CppSideSampleIF(SAMPLE_STRUCT* input)
 
 	input->result = result;
 
-	return 0;
+	return result;
 }
 
 SHORT
