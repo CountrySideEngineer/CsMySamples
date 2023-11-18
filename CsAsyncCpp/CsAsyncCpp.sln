@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsAsyncCpp", "CsAsyncCpp\CsAsyncCpp.csproj", "{F58186E7-948F-4F75-A5FD-6BEE6F0D1D7F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{168F6867-BCE8-414E-9C59-227A04A356D6} = {168F6867-BCE8-414E-9C59-227A04A356D6}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppDll", "CppDll\CppDll.vcxproj", "{168F6867-BCE8-414E-9C59-227A04A356D6}"
 EndProject

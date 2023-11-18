@@ -13,8 +13,6 @@ namespace CsAsyncCpp
 {
     public partial class Form1 : Form
     {
-        Worker worker;
-
         IProgress<ProgressInfo> _progress;
         IProgress<int> _notifyResult;
 
@@ -33,19 +31,18 @@ namespace CsAsyncCpp
             _notifyResult = new Progress<int>(e =>
             {
                 resultLabel.Text = $"ResultCode : {e:d5}";
+                btnExecuteProcess.Enabled = true;
             });
-            worker = new Worker
-            {
-                Progress = _progress,
-                Result = _notifyResult
-            };
+            Worker.GetInstance().Progress = _progress;
+            Worker.GetInstance().Result = _notifyResult;
 
             resultLabel.Text = string.Empty;
         }
 
         private void btnExecuteProcess_Click(object sender, EventArgs e)
         {
-            _ = worker.RunAsync();
+            _ = Worker.GetInstance().RunAsync();
+            btnExecuteProcess.Enabled = false;
         }
     }
 }

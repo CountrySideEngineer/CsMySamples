@@ -55,16 +55,16 @@ NotifyResult(
 	}
 }
 
-#define	PROCESS_MAX			(1234)
+#define	PROCESS_MAX			(10)
 
 VOID
 WINAPI
 Process()
 {
 	for (int index = 0; index < PROCESS_MAX; index++) {
-		Sleep(10);
+		Sleep(60000);
 
-		NotifyProgress((SHORT)index, (SHORT)PROCESS_MAX);
+		NotifyProgress((SHORT)(index + 1), (SHORT)PROCESS_MAX);
 	}
 
 	NotifyResult(0);
