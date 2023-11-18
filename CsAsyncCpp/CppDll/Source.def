@@ -1,0 +1,7 @@
+LIBRARY	CppDll
+
+EXPORTS
+	SetProgressCallback		@2
+	SetResultCallback		@3
+	Process					@4
+	
