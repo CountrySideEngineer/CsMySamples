@@ -2,8 +2,8 @@
 #include <iostream>
 #include <Windows.h>
 
-SHORT	enumrator;
-SHORT	denominator;
+SHORT	enumrator = 0;
+SHORT	denominator = 0;
 
 VOID
 WINAPI
@@ -30,4 +30,16 @@ GetProgressByReturn()
 	GetProgressByPointer(&progress);
 
 	return progress;
+}
+
+VOID
+WINAPI
+Process(BYTE span)
+{
+	denominator = 100;
+	for (int index = 0; index < 100; index++) {
+		enumrator = (index + 1);
+
+		Sleep(span * 10);
+	}
 }
