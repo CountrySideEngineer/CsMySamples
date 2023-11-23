@@ -1,1 +1,6 @@
 LIBRARY	CppDll
+
+EXPORTS
+	GetProgressByReturn		@1
+	GetProgressByPointer	@2
+	Process					@3
