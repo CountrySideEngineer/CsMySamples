@@ -13,14 +13,26 @@ namespace CsAsyncCpp_002
 {
     public partial class Form1 : Form
     {
-        long _timer1Count = 0;
-        long _itmer2Count = 0;
+        Worker _worker = null;
 
         public Form1()
         {
             InitializeComponent();
 
             SetUpTimer();
+
+            _worker = new Worker();
+
+            _worker.TaskFinishedEvent += OnTaskFinished;
+        }
+
+        public void OnTaskFinished(object sender, EventArgs e)
+        {
+            startTimerButton1.Enabled = true;
+            startTimerButton2.Enabled = true;
+
+            progressTimer1.Stop();
+            progressTimer2.Stop();
         }
 
         protected void SetUpTimer()
@@ -30,22 +42,38 @@ namespace CsAsyncCpp_002
 
             progressTimer1.Tick += (sender, e) =>
             {
-                Console.WriteLine("TIMER1 - ticked");
+                short progress = _worker.GetProgress();
+
+                progressBar1.Value = progress;
             };
             progressTimer2.Tick += (sender, e) =>
             {
-                Console.WriteLine("TIMER2 - ticked");
+                short progress = 0;
+
+                _worker.GetProgress(ref progress);
+
+                progressBar1.Value = progress;
             };
         }
 
         private void startTimerButton1_Click(object sender, EventArgs e)
         {
+            startTimerButton1.Enabled = false;
+            startTimerButton2.Enabled = false;
+
             progressTimer1.Start();
+
+            _ = _worker.RunTask();
         }
 
         private void startTimerButton2_Click(object sender, EventArgs e)
         {
+            startTimerButton1.Enabled = false;
+            startTimerButton2.Enabled = false;
+
             progressTimer2.Start();
+
+            _ = _worker.RunTask();
         }
     }
 }
