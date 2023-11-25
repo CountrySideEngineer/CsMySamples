@@ -23,5 +23,19 @@ namespace ProgressWindows_WinFormThread2
                 return _resultCode;
             }
         }
+
+        public static IEnumerable<DataItem> Factory()
+        {
+            for (int index = 0; index < 4; index++)
+            {
+                yield return new DataItem()
+                {
+                    IsChecked = false,
+                    Name = $"sample data 0x{index:X4}",
+                    Progress = 0
+                };
+            }
+        }
     }
+
 }
