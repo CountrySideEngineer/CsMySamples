@@ -24,15 +24,15 @@ GetProgresses(
 )
 {
 	LONG	numToSet = progressNum;
-	if (PROGRESS_SIZE < progressNum) {
-		progressNum = PROGRESS_SIZE;
+	if (PROGRESS_SIZE < numToSet) {
+		numToSet = PROGRESS_SIZE;
 	}
 
-	for (LONG index = 0; index < progressNum; index++) {
+	for (LONG index = 0; index < numToSet; index++) {
 		progresses[index] = progress[index];
 	}
 
-	*actProgressNum = progressNum;
+	*actProgressNum = numToSet;
 }
 
 VOID
