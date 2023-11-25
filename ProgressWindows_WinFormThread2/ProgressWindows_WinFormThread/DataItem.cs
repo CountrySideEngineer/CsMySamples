@@ -8,13 +8,13 @@ namespace ProgressWindows_WinFormThread2
 {
     internal class DataItem
     {
-        public bool IsChecked { get; set; }
+        public bool IsChecked { get; set; } = false;
 
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
-        public short Progress { get; set; }
+        public short Progress { get; protected set; } = 0;
 
-        public ulong Result { get; set; }
+        public ulong Result { get; set; } = 0;
 
         public string ResultCode {
             get
@@ -37,5 +37,4 @@ namespace ProgressWindows_WinFormThread2
             }
         }
     }
-
 }
