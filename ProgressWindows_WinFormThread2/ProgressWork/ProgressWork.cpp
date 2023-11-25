@@ -3,7 +3,7 @@
 #include <random>
 #include <Windows.h>
 
-#define	PROGRESS_SIZE		(10)
+#define	PROGRESS_SIZE		(4)
 
 SHORT	progress[PROGRESS_SIZE];
 SHORT	result[PROGRESS_SIZE];
