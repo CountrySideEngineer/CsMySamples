@@ -161,6 +161,7 @@
             // 
             // Progress
             // 
+            this.Progress.DataPropertyName = "Progress";
             this.Progress.HeaderText = "Progress";
             this.Progress.Maximum = 100;
             this.Progress.Mimimum = 0;

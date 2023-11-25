@@ -40,21 +40,15 @@ namespace ProgressWindows_WinFormThread2
             dataView.DataSource = tableItemBindingSource;
         }
 
-        int _count = 0;
         public void SetupTimer()
         {
             progressCheckTimer.Tick += (sender, e) =>
             {
-                int count = _dataItems.Count();
-                short[] progressData;
-                _worker.GetProgress(count, out progressData);
+                IEnumerable<DataItem> updateItem = _worker.GetInformation(_dataItems);
+                _dataItems = updateItem.ToList();
+                tableItemBindingSource.DataSource = _dataItems;
 
-                for (int index = 0; index < count; index++)
-                {
-                    short prg = progressData[index];
-                    dataView.Rows[index].Cells[2].Value = (int)prg;
-                    _count++;
-                }
+                tableItemBindingSource.ResetBindings(false);
             };
         }
 

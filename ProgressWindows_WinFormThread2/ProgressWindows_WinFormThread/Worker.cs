@@ -21,7 +21,7 @@ namespace ProgressWindows_WinFormThread2
         {
             await Task.Run(() =>
             {
-                ProgressWorkDll.RunProgress(53);
+                ProgressWorkDll.RunProgress(20);
             });
 
             WorkTaskFinished?.Invoke(this, null);
@@ -38,6 +38,32 @@ namespace ProgressWindows_WinFormThread2
             int actCount = -1;
 
             ProgressWorkDll.GetProgresses(progressData, count, ref actCount);
+        }
+
+        public IEnumerable<DataItem> GetInformation(IEnumerable<DataItem> items)
+        {
+            int actCount = -1;
+            int count = items.Count();
+            short[] progress = new short[count];
+            short[] result = new short[count];
+
+            ProgressWorkDll.GetProgresses(progress, count, ref actCount);
+            ProgressWorkDll.GetResult(result, count, ref actCount);
+
+            for (int index = 0; index < actCount; index++)
+            {
+                var progItem = progress[index];
+                var resultItem = result[index];
+
+                var dataItem = new DataItem()
+                {
+                    IsChecked = items.ElementAt(index).IsChecked,
+                    Name = items.ElementAt(index).Name,
+                    Progress = progItem,
+                    Result = Convert.ToUInt64(resultItem)
+                };
+                yield return dataItem;
+            }
         }
     }
 }
