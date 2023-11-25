@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataView = new System.Windows.Forms.DataGridView();
-            this.tableItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.button1 = new System.Windows.Forms.Button();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewProgressBarColumn1 = new ProgressWindows_WinForm.DataGridViewProgressBarColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isCheckedDataGridColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.nameDataGridColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.progressDataGridColumn = new ProgressWindows_WinForm.DataGridViewProgressBarColumn();
             this.resultDataGridColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableItemBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.startButton = new System.Windows.Forms.Button();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewProgressBarColumn1 = new ProgressWindows_WinForm.DataGridViewProgressBarColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tableItemBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -52,14 +52,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataView.AutoGenerateColumns = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("MS UI Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.isCheckedDataGridColumn,
@@ -73,15 +73,54 @@
             this.dataView.Size = new System.Drawing.Size(776, 317);
             this.dataView.TabIndex = 0;
             // 
-            // button1
+            // isCheckedDataGridColumn
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(713, 335);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 37);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.isCheckedDataGridColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.isCheckedDataGridColumn.DataPropertyName = "IsChecked";
+            this.isCheckedDataGridColumn.HeaderText = "IsChecked";
+            this.isCheckedDataGridColumn.Name = "isCheckedDataGridColumn";
+            this.isCheckedDataGridColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.isCheckedDataGridColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.isCheckedDataGridColumn.Width = 83;
+            // 
+            // nameDataGridColumn
+            // 
+            this.nameDataGridColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nameDataGridColumn.DataPropertyName = "Name";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.nameDataGridColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            this.nameDataGridColumn.HeaderText = "Name";
+            this.nameDataGridColumn.Name = "nameDataGridColumn";
+            this.nameDataGridColumn.ReadOnly = true;
+            // 
+            // progressDataGridColumn
+            // 
+            this.progressDataGridColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.progressDataGridColumn.DataPropertyName = "Progress";
+            this.progressDataGridColumn.HeaderText = "Progress";
+            this.progressDataGridColumn.Maximum = 100;
+            this.progressDataGridColumn.Mimimum = 0;
+            this.progressDataGridColumn.Name = "progressDataGridColumn";
+            this.progressDataGridColumn.ReadOnly = true;
+            this.progressDataGridColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // resultDataGridColumn
+            // 
+            this.resultDataGridColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.resultDataGridColumn.DataPropertyName = "ResultCode";
+            this.resultDataGridColumn.HeaderText = "Result";
+            this.resultDataGridColumn.Name = "resultDataGridColumn";
+            this.resultDataGridColumn.ReadOnly = true;
+            // 
+            // startButton
+            // 
+            this.startButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.startButton.Location = new System.Drawing.Point(713, 335);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(75, 37);
+            this.startButton.TabIndex = 1;
+            this.startButton.Text = "START";
+            this.startButton.UseVisualStyleBackColor = true;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -113,51 +152,12 @@
             this.dataGridViewTextBoxColumn3.ReadOnly = true;
             this.dataGridViewTextBoxColumn3.Width = 63;
             // 
-            // isCheckedDataGridColumn
-            // 
-            this.isCheckedDataGridColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.isCheckedDataGridColumn.DataPropertyName = "IsChecked";
-            this.isCheckedDataGridColumn.HeaderText = "IsChecked";
-            this.isCheckedDataGridColumn.Name = "isCheckedDataGridColumn";
-            this.isCheckedDataGridColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.isCheckedDataGridColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.isCheckedDataGridColumn.Width = 83;
-            // 
-            // nameDataGridColumn
-            // 
-            this.nameDataGridColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.nameDataGridColumn.DataPropertyName = "Name";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.nameDataGridColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.nameDataGridColumn.HeaderText = "Name";
-            this.nameDataGridColumn.Name = "nameDataGridColumn";
-            this.nameDataGridColumn.ReadOnly = true;
-            // 
-            // progressDataGridColumn
-            // 
-            this.progressDataGridColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.progressDataGridColumn.DataPropertyName = "Progress";
-            this.progressDataGridColumn.HeaderText = "Progress";
-            this.progressDataGridColumn.Maximum = 100;
-            this.progressDataGridColumn.Mimimum = 0;
-            this.progressDataGridColumn.Name = "progressDataGridColumn";
-            this.progressDataGridColumn.ReadOnly = true;
-            this.progressDataGridColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // resultDataGridColumn
-            // 
-            this.resultDataGridColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.resultDataGridColumn.DataPropertyName = "ResultCode";
-            this.resultDataGridColumn.HeaderText = "Result";
-            this.resultDataGridColumn.Name = "resultDataGridColumn";
-            this.resultDataGridColumn.ReadOnly = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 382);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.startButton);
             this.Controls.Add(this.dataView);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -171,7 +171,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataView;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private ProgressWindows_WinForm.DataGridViewProgressBarColumn dataGridViewProgressBarColumn1;
