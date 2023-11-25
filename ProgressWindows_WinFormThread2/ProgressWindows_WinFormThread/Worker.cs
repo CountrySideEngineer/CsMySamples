@@ -21,6 +21,8 @@ namespace ProgressWindows_WinFormThread2
         {
             await Task.Run(() =>
             {
+                InitProgress();
+
                 ProgressWorkDll.RunProgress(20);
             });
 
