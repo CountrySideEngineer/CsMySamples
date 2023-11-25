@@ -14,7 +14,7 @@ namespace ProgressWindows_WinFormThread2
 
         [DllImport("ProgressWork.dll")]
         public static extern void GetProgresses(
-            ref short progresses, 
+            short[] progresses, 
             int progressNum, 
             ref int actProgressNum);
 
