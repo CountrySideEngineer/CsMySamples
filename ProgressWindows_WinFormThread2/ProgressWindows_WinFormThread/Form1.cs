@@ -21,5 +21,10 @@ namespace ProgressWindows_WinFormThread2
         private void Form1_Load(object sender, EventArgs e)
         {
         }
+
+        public void SetupDataBinding()
+        {
+            tableItemBindingSource = new BindingSource();
+        }
     }
 }
