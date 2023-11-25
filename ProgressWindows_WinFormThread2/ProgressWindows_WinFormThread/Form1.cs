@@ -27,7 +27,15 @@ namespace ProgressWindows_WinFormThread2
         private void Form1_Load(object sender, EventArgs e)
         {
             _worker = new Worker();
+            _worker.WorkTaskFinished += OnTaskFinished;
         }
+
+        public void OnTaskFinished(object sender, EventArgs e)
+        {
+            progressCheckTimer.Stop();
+            startButton.Enabled = true;
+        }
+
 
         List<DataItem> _dataItems;
 
