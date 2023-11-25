@@ -12,7 +12,7 @@ namespace ProgressWindows_WinFormThread2
 
         public string Name { get; set; } = string.Empty;
 
-        public short Progress { get; protected set; } = 0;
+        public int Progress { get; set; } = 0;
 
         public ulong Result { get; set; } = 0;
 
