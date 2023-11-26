@@ -1,0 +1,7 @@
+LIBRARY	ProgressWork
+
+EXPORTS
+	InitProgress	@1
+	GetProgresses	@2
+	RunProgress		@3
+	GetResult		@4
