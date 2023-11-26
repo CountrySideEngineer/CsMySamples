@@ -5,9 +5,9 @@
 
 typedef struct _DataItemTag
 {
-	BOOL	IsChecked;
-	LONG	Progress;
-	ULONG	Result;
+	SHORT		IsChecked;
+	LONG		Progress;
+	ULONGLONG	Result;
 } DataItemTag;
 
 #define	PROGRESS_SIZE		(4)
@@ -71,10 +71,17 @@ RunProgress(SHORT interval, DataItemTag* items, LONG itemCount)
 	srand((unsigned int)time(NULL));
 
 	for (int index1 = 0; index1 < PROGRESS_SIZE; index1++) {
-		for (int index2 = 0; index2 < 100; index2++) {
-			progress[index1] = (index2 + 1);
-			Sleep(interval);
+		DataItemTag itemTag = items[index1];
+		if (itemTag.IsChecked) {
+			for (int index2 = 0; index2 < 100; index2++) {
+				progress[index1] = (index2 + 1);
+				Sleep(interval);
+			}
+			result[index1] = ((SHORT)rand()) % 0x07FF;
 		}
-		result[index1] = ((SHORT)rand()) % 0x07FF;
+		else {
+			progress[index1] = 0;
+			result[index1] = 0;
+		}
 	}
 }

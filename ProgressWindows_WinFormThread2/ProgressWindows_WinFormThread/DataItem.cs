@@ -8,7 +8,7 @@ namespace ProgressWindows_WinFormThread2
 {
     internal struct DataItemTag
     {
-        public bool IsChecked { get; set; }
+        public short IsChecked { get; set; }
 
         public int Progress { get; set; }
 
@@ -37,7 +37,7 @@ namespace ProgressWindows_WinFormThread2
         {
             var tag = new DataItemTag()
             {
-                IsChecked = this.IsChecked,
+                IsChecked = this.IsChecked == true ? (short)1 : (short)0,
                 Progress = this.Progress,
                 Result = this.Result
             };
