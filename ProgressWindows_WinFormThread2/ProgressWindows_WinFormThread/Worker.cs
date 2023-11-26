@@ -17,13 +17,20 @@ namespace ProgressWindows_WinFormThread2
         /// </summary>
         public Worker() { }
 
-        public async Task RunAsync()
+        public async Task RunAsync(IEnumerable<DataItem> items)
         {
             await Task.Run(() =>
             {
+                int count = items.Count();
+                DataItemTag[] itemTags = new DataItemTag[count];
+                for (int index = 0; index < count; index++)
+                {
+                    itemTags[index] = items.ElementAt(index).ToStruct();
+                }
+
                 InitProgress();
 
-                ProgressWorkDll.RunProgress(20);
+                ProgressWorkDll.RunProgress(20, itemTags, count);
             });
 
             WorkTaskFinished?.Invoke(this, null);

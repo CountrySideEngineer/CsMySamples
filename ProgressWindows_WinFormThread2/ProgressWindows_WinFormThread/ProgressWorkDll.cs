@@ -19,7 +19,10 @@ namespace ProgressWindows_WinFormThread2
             ref int actProgressNum);
 
         [DllImport("ProgressWork.dll")]
-        public static extern void RunProgress(short interval);
+        public static extern void RunProgress(
+            short interval,
+            DataItemTag[] items,
+            int itemCount);
 
         [DllImport("ProgressWork.dll")]
         public static extern void GetResult(

@@ -64,8 +64,7 @@ namespace ProgressWindows_WinFormThread2
         {
             startButton.Enabled = false;
             progressCheckTimer.Start();
-            _ = _worker.RunAsync();
+            _ = _worker.RunAsync(_dataItems);
         }
-
     }
 }

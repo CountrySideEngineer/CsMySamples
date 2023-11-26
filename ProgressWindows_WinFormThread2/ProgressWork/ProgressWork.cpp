@@ -3,6 +3,13 @@
 #include <random>
 #include <Windows.h>
 
+typedef struct _DataItemTag
+{
+	BOOL	IsChecked;
+	LONG	Progress;
+	ULONG	Result;
+} DataItemTag;
+
 #define	PROGRESS_SIZE		(4)
 
 SHORT	progress[PROGRESS_SIZE];
@@ -59,7 +66,7 @@ GetResult(
 
 VOID
 WINAPI
-RunProgress(SHORT interval)
+RunProgress(SHORT interval, DataItemTag* items, LONG itemCount)
 {
 	srand((unsigned int)time(NULL));
 
