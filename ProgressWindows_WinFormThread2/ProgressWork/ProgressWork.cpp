@@ -84,4 +84,5 @@ RunProgress(SHORT interval, DataItemTag* items, LONG itemCount)
 			result[index1] = 0;
 		}
 	}
+	Sleep(interval * 2);
 }
