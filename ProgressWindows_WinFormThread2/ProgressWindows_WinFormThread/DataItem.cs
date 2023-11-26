@@ -6,6 +6,15 @@ using System.Threading.Tasks;
 
 namespace ProgressWindows_WinFormThread2
 {
+    internal struct DataItemTag
+    {
+        public bool IsChecked { get; set; }
+
+        public int Progress { get; set; }
+
+        public ulong Result { get; set; }
+    }
+
     internal class DataItem
     {
         public bool IsChecked { get; set; } = false;
@@ -22,6 +31,17 @@ namespace ProgressWindows_WinFormThread2
                 string _resultCode = $"0x{Result:X8}";
                 return _resultCode;
             }
+        }
+
+        public DataItemTag ToStruct()
+        {
+            var tag = new DataItemTag()
+            {
+                IsChecked = this.IsChecked,
+                Progress = this.Progress,
+                Result = this.Result
+            };
+            return tag;
         }
 
         public static IEnumerable<DataItem> Factory()
