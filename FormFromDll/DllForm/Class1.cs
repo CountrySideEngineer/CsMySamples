@@ -27,8 +27,8 @@ namespace DllForm
                 else
                 {
                     MessageBox.Show(
-                        "MULTIPLE START NOT ALLOWED.",
-                        "MULTPLE START ERROR",
+                        "MULTIPLE START IS NOT ALLOWED.",
+                        "MULTIPLE START ERROR",
                         MessageBoxButtons.OK
                         );
                 }
