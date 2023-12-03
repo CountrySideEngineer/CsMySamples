@@ -18,22 +18,28 @@ namespace ProgressWindows_WinFormThread
             InitializeComponent();
 
             SetupDataBinding();
-            dataGridView1.DataSource = bindingSource;
+            SetupTimer();
+
+            _worker.WorkTaskFinished += OnWorkTaskFinished;
+            _worker.ProgressGet += OnProgressGet;
         }
 
         public void OnWorkTaskFinished(object sender, EventArgs e)
         {
             _ = _worker.GetProgressAsync(4);
             startButton.Enabled = true;
+
+            progressCheckTimer.Stop();
         }
 
         public void OnProgressGet(object sender, EventArgs e)
         {
             var eventArg = e as ProgressGetEventArgs;
             var progress = eventArg.Progress;
-            var items = progress.ToList();
 
-            bindingSource.DataSource = progress;
+            List<DataItem> newDatas = ConvertProgress(progress).ToList();
+
+            bindingSource.DataSource = newDatas;
             bindingSource.ResetBindings(false);
         }
 
@@ -41,13 +47,14 @@ namespace ProgressWindows_WinFormThread
         {
             var dataItems = DataItem.Factory().ToList();
 
-            bindingSource = new BindingSource();
             bindingSource.DataSource = dataItems;
-            dataGridView1.DataSource = bindingSource;
+            bindingSource.ResetBindings(false);
         }
 
         private void startButton_Click(object sender, EventArgs e)
         {
+            _ = _worker.RunAsync((List<DataItem>)bindingSource.DataSource);
+
             progressCheckTimer.Start();
             startButton.Enabled = false;
         }
@@ -62,6 +69,35 @@ namespace ProgressWindows_WinFormThread
 
         private void Form1_Load(object sender, EventArgs e)
         {
+        }
+
+        private IEnumerable<DataItem> ConvertProgress(short[] progresses)
+        {
+            var dataSource = (IEnumerable<DataItem>)bindingSource.DataSource;
+            int itemIndex = 0;
+            foreach (var item in dataSource)
+            {
+                int progress = 0;
+
+                try
+                {
+                    progress = progresses[itemIndex];
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    progress = 0;
+                }
+
+                var newItem = new DataItem()
+                {
+                    IsChecked = item.IsChecked,
+                    Name = item.Name,
+                    Progress = progress,
+                    StatusCode = item.StatusCode
+                };
+                itemIndex++;
+                yield return newItem;
+            }
         }
     }
 }
