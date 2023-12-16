@@ -14,8 +14,8 @@ namespace WinFormMultiLanguage
 
         private void pushMeButton_Click(object sender, EventArgs e)
         {
-            string message = Properties.Resources.ResourceManager.GetString("ID_MESSAGE_BOX_MESSAGE");
-            string title = Properties.Resources.ResourceManager.GetString("ID_MESSAGE_BOX_TITLE");
+            string message = Properties.Resources.ID_MESSAGE_BOX_MESSAGE;
+            string title = Properties.Resources.ID_MESSAGE_BOX_TITLE;
 
             MessageBox.Show(message, title, MessageBoxButtons.OK);
         }

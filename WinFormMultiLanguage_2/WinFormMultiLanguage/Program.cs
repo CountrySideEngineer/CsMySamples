@@ -16,7 +16,7 @@ namespace WinFormMultiLanguage
         [STAThread]
         static void Main()
         {
-            CultureInfo culture = CultureInfo.CreateSpecificCulture("ja");
+            CultureInfo culture = CultureInfo.CreateSpecificCulture("en");
             Thread.CurrentThread.CurrentUICulture = culture;
 
             Application.EnableVisualStyles();
