@@ -18,6 +18,9 @@ namespace WinFormMultiLanguage
             string title = Properties.Resources.ResourceManager.GetString("ID_MESSAGE_BOX_TITLE");
 
             MessageBox.Show(message, title, MessageBoxButtons.OK);
+
+            var subFormIF = new SubFormDll.SubFormIF();
+            subFormIF.ShowDialog();
         }
     }
 }
