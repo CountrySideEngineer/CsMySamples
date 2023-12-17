@@ -22,8 +22,8 @@ namespace SubFormDll
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string message = Properties.Resources.ResourceManager.GetString("ID_SUB_FORM_MESSAGE");
-            string title = Properties.Resources.ResourceManager.GetString("ID_SUB_FORM_TITLE");
+            string message = Properties.Resources.ID_SUB_FORM_MESSAGE;
+            string title = Properties.Resources.ID_SUB_FORM_TITLE;
 
             MessageBox.Show(message, title, MessageBoxButtons.OK);
         }

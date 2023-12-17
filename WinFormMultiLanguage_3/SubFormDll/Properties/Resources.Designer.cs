@@ -59,5 +59,23 @@ namespace SubFormDll.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   サブフォームのメッセージです。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ID_SUB_FORM_MESSAGE {
+            get {
+                return ResourceManager.GetString("ID_SUB_FORM_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   サブフォームタイトル に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ID_SUB_FORM_TITLE {
+            get {
+                return ResourceManager.GetString("ID_SUB_FORM_TITLE", resourceCulture);
+            }
+        }
     }
 }
