@@ -120,4 +120,10 @@
   <data name="ID_CONTENT_BUTTON_TITLE" xml:space="preserve">
     <value>ああああ</value>
   </data>
+  <data name="ID_CONTENT_MESSAGE_BOX_CONTENT" xml:space="preserve">
+    <value>aaaa</value>
+  </data>
+  <data name="ID_CONTENT_MESSAGE_BOX_TITLE" xml:space="preserve">
+    <value>aaaa</value>
+  </data>
 </root>

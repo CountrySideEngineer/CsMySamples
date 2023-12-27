@@ -120,4 +120,10 @@
   <data name="ID_CONTENT_BUTTON_TITLE" xml:space="preserve">
     <value>Title in English</value>
   </data>
+  <data name="ID_CONTENT_MESSAGE_BOX_CONTENT" xml:space="preserve">
+    <value>Sample message in message box.</value>
+  </data>
+  <data name="ID_CONTENT_MESSAGE_BOX_TITLE" xml:space="preserve">
+    <value>Sample title</value>
+  </data>
 </root>

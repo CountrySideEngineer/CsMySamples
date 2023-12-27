@@ -68,5 +68,23 @@ namespace WPF_MultiLanguage_002.Properties {
                 return ResourceManager.GetString("ID_CONTENT_BUTTON_TITLE", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   aaaa に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ID_CONTENT_MESSAGE_BOX_CONTENT {
+            get {
+                return ResourceManager.GetString("ID_CONTENT_MESSAGE_BOX_CONTENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   aaaa に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ID_CONTENT_MESSAGE_BOX_TITLE {
+            get {
+                return ResourceManager.GetString("ID_CONTENT_MESSAGE_BOX_TITLE", resourceCulture);
+            }
+        }
     }
 }
