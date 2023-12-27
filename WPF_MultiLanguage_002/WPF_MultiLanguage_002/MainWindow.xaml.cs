@@ -29,5 +29,13 @@ namespace WPF_MultiLanguage_002
 
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string message = Properties.Resources.ID_CONTENT_MESSAGE_BOX_CONTENT;
+            string title = Properties.Resources.ID_CONTENT_MESSAGE_BOX_TITLE;
+
+            MessageBox.Show(message, title, MessageBoxButton.OK);
+        }
     }
 }

@@ -11,7 +11,7 @@
         <Button Content="{x:Static properties:Resources.ID_CONTENT_BUTTON_TITLE}"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
-                Padding="64, 32"
+                Padding="64, 32" Click="Button_Click"
                 />
 
     </Grid>
