@@ -6,6 +6,12 @@
         xmlns:local="clr-namespace:WPF_XMLinTreeView"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <XmlDataProvider x:Key="xmlDataProvider" Source="Data\UTestSample_001.xml"/>
+    </Window.Resources>
     <Grid>
+        <TreeView Margin="8"
+                  ItemsSource="{Binding Source={StaticResource xmlDataProvider}, XPath=*}"
+                  />
     </Grid>
 </Window>
