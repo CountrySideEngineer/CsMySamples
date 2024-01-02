@@ -24,16 +24,16 @@
                                   SnapsToDevicePixels="True">
                                 <Rectangle Width="9" 
                                            Height="9" 
-                                           Stroke="blue" 
+                                           Stroke="DarkGray" 
                                            SnapsToDevicePixels="true">
                                     <Rectangle.Fill>
                                         <LinearGradientBrush EndPoint="0.5,2" 
                                                              StartPoint="0.5,0">
                                             <GradientStop Color="White" 
                                                           Offset="0"/>
-                                            <GradientStop Color="Silver" 
+                                            <GradientStop Color="DarkGray" 
                                                           Offset="0.5"/>
-                                            <GradientStop Color="LightGray" 
+                                            <GradientStop Color="DarkGray" 
                                                           Offset="1"/>
                                         </LinearGradientBrush>
                                     </Rectangle.Fill>
@@ -45,7 +45,7 @@
                                            SnapsToDevicePixels="true"/>
                                 <Rectangle Width="5" 
                                            Height="1" 
-                                           Stroke="red" 
+                                           Stroke="Black" 
                                            SnapsToDevicePixels="true"/>
                             </Grid>
                             <ControlTemplate.Triggers>
@@ -84,15 +84,15 @@
                                 <Rectangle x:Name="HorLn"
                                            Margin="9, 1, 0, 0"
                                            Height="1"
-                                           Stroke="Yellow"
+                                           Stroke="DarkGray"
                                            SnapsToDevicePixels="True"
                                            />
                                 <Rectangle x:Name="VerLn"
-                                           Stroke="Green"
+                                           Stroke="DarkGray"
                                            Width="1"
                                            Margin="0, 0, 1, 0"
                                            Grid.RowSpan="2"
-                                           Fill="Red"
+                                           Fill="DarkGray"
                                            SnapsToDevicePixels="True"
                                            />
                                 <ToggleButton Margin="-1, 0, 0, 0"
@@ -124,45 +124,86 @@
 
                             <ControlTemplate.Triggers>
                                 <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Converter={StaticResource LineConverter}}" Value="true">
-                                    <Setter TargetName="VerLn" Property="Height" Value="9"/>
-                                    <Setter TargetName="VerLn" Property="VerticalAlignment" Value="Top"/>
+                                    <Setter TargetName="VerLn" 
+                                            Property="Height" 
+                                            Value="9"
+                                            />
+                                    <Setter TargetName="VerLn" 
+                                            Property="VerticalAlignment" 
+                                            Value="Top"
+                                            />
                                 </DataTrigger>
                                 
-                                <Trigger Property="IsExpanded" Value="false">
-                                    <Setter TargetName="ItemsHost" Property="Visibility" Value="Collapsed"/>
+                                <Trigger Property="IsExpanded" 
+                                         Value="false">
+                                    <Setter TargetName="ItemsHost" 
+                                            Property="Visibility" 
+                                            Value="Collapsed"
+                                            />
                                 </Trigger>
                                 <Trigger Property="HasItems" Value="false">
-                                    <Setter TargetName="Expander" Property="Visibility" Value="Hidden"/>
+                                    <Setter TargetName="Expander" 
+                                            Property="Visibility" 
+                                            Value="Hidden"
+                                            />
                                 </Trigger>
 
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
-                                        <Condition Property="HasHeader" Value="False"/>
-                                        <Condition Property="Width" Value="Auto"/>
+                                        <Condition Property="HasHeader" 
+                                                   Value="False"
+                                                   />
+                                        <Condition Property="Width" 
+                                                   Value="Auto"
+                                                   />
                                     </MultiTrigger.Conditions>
-                                    <Setter TargetName="PART_Header" Property="MinWidth" Value="75"/>
+                                    <Setter TargetName="PART_Header" 
+                                            Property="MinWidth" 
+                                            Value="75"
+                                            />
                                 </MultiTrigger>
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
-                                        <Condition Property="HasHeader" Value="False"/>
-                                        <Condition Property="Height" Value="Auto"/>
+                                        <Condition Property="HasHeader" 
+                                                   Value="False"
+                                                   />
+                                        <Condition Property="Height" 
+                                                   Value="Auto"
+                                                   />
                                     </MultiTrigger.Conditions>
-                                    <Setter TargetName="PART_Header" Property="MinHeight" Value="19"/>
+                                    <Setter TargetName="PART_Header" 
+                                            Property="MinHeight" 
+                                            Value="19"
+                                            />
                                 </MultiTrigger>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+                                <Trigger Property="IsSelected" 
+                                         Value="True">
+                                    <Setter TargetName="Bd" 
+                                            Property="Background" 
+                                            Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"
+                                            />
+                                    <Setter Property="Foreground" 
+                                            Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"
+                                            />
                                 </Trigger>
                                 <MultiTrigger>
                                     
                                     <MultiTrigger.Conditions>
-                                        <Condition Property="IsSelected" Value="True"/>
-                                        <Condition Property="IsSelectionActive" Value="false"/>
+                                        <Condition Property="IsSelected" 
+                                                   Value="True"/>
+                                        <Condition Property="IsSelectionActive" 
+                                                   Value="false"/>
                                     </MultiTrigger.Conditions>
-                                    <Setter TargetName="Bd" Property="Background" Value="darkgray"/>
-                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter TargetName="Bd" 
+                                            Property="Background" 
+                                            Value="darkgray"
+                                            />
+                                    <Setter Property="Foreground" 
+                                            Value="White"
+                                            />
                                 </MultiTrigger>
-                                <Trigger Property="IsEnabled" Value="False">
+                                <Trigger Property="IsEnabled" 
+                                         Value="False">
                                     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
