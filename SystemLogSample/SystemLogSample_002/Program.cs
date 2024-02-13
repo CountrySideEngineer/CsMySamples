@@ -12,8 +12,8 @@ namespace SystemLogSample_002
         {
             System.Diagnostics.EventLog eventLog = new System.Diagnostics.EventLog();
             //eventLog.MachineName = ".";
-            eventLog.Log = "Sample";
-            eventLog.Source = "SytemLogSample";
+            eventLog.Log = "System";
+            eventLog.Source = "SystemLogSample";
 
             if (!System.Diagnostics.EventLog.SourceExists(eventLog.Source))
             {
@@ -22,8 +22,8 @@ namespace SystemLogSample_002
                 eventData.MachineName = eventLog.MachineName;
                 System.Diagnostics.EventLog.CreateEventSource(eventData);
             }
-            //eventLog.WriteEntry("サンプルイベントメッセージ", System.Diagnostics.EventLogEntryType.Information, 2, 3);
-            eventLog.WriteEntry("サンプルイベントメッセージ");
+            eventLog.WriteEntry("サンプルイベントメッセージ", System.Diagnostics.EventLogEntryType.Information, 2, 3);
+            //eventLog.WriteEntry("サンプルイベントメッセージ");
         }
     }
 }
