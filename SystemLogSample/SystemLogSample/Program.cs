@@ -12,7 +12,7 @@ namespace SystemLogSample
         {
             string sourceName = "SystemLogSample";
 
-            if (!System.Diagnostics.EventLog.Exists(sourceName))
+            if (!System.Diagnostics.EventLog.SourceExists(sourceName))
             {
                 System.Diagnostics.EventLog.CreateEventSource(sourceName, "System");
             }
