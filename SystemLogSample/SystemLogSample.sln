@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemLogSample_001", "Syst
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemLogSample_002", "SystemLogSample_002\SystemLogSample_002.csproj", "{EAB4CCF7-A7E7-4BD8-81B6-E4903AE4EA41}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemLogSample_003", "SystemLogSample_003\SystemLogSample_003.csproj", "{BE0272C0-5799-4D15-B11A-08D3BBAD46EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{EAB4CCF7-A7E7-4BD8-81B6-E4903AE4EA41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAB4CCF7-A7E7-4BD8-81B6-E4903AE4EA41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAB4CCF7-A7E7-4BD8-81B6-E4903AE4EA41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE0272C0-5799-4D15-B11A-08D3BBAD46EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE0272C0-5799-4D15-B11A-08D3BBAD46EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE0272C0-5799-4D15-B11A-08D3BBAD46EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE0272C0-5799-4D15-B11A-08D3BBAD46EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
