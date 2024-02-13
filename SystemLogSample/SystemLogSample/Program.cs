@@ -24,6 +24,10 @@ namespace SystemLogSample
             System.Diagnostics.EventLog.WriteEntry(
                 sourceName, "イベントログに書き込む文字列",
                 System.Diagnostics.EventLogEntryType.Error, 1, 1000, myData);
+
+            System.Diagnostics.EventLog.WriteEntry(
+                sourceName, "sample system event log message",
+                System.Diagnostics.EventLogEntryType.Information, 2);
         }
     }
 }
