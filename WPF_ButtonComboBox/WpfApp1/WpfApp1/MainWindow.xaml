@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="MainWindow"
-        Height="80" 
+        Height="200" 
         Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -15,6 +15,7 @@
             <RowDefinition Height="21" />
             <RowDefinition Height="21" />
             <RowDefinition Height="21" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <local:PropertyPageRow x:Name="CusomtControl1_1"
                                Grid.Row="0"
@@ -25,5 +26,8 @@
         <local:PropertyPageRow x:Name="CusomtControl1_3"
                                Grid.Row="2"
                                />
+        <local:CustomDataGrid x:Name="CusomtDataGrid"
+                              Grid.Row="3"
+                              />
     </Grid>
 </Window>
