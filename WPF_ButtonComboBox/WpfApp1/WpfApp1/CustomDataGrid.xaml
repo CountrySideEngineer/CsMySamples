@@ -11,7 +11,9 @@
         <vm:CustomDataDridViewModel />
     </UserControl.DataContext>
     <Grid>
-        <DataGrid ItemsSource="{Binding SampleDataCollection}">
+        <DataGrid ItemsSource="{Binding SampleDataCollection}"
+                  AutoGenerateColumns="false"
+                  >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Sample1"
                                     Width="3*"
