@@ -38,11 +38,13 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="24"/>
+                                    <ColumnDefinition Width="16"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBox Grid.Row="0"
                                          Grid.Column="0"
                                          Grid.ColumnSpan="2"
+                                         VerticalContentAlignment="Center"
+                                         BorderThickness="0"
                                          Text="{Binding Content}"
                                          />
                                 <Button Grid.Column="1"
