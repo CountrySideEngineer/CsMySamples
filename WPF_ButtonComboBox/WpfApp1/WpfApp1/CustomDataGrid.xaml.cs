@@ -24,5 +24,17 @@ namespace WpfApp1
 		{
 			InitializeComponent();
 		}
-	}
+
+		private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			if (dataGrid.SelectedItem != null)
+			{
+				Console.Write("aaa");
+			}
+			else
+			{
+				Console.Write("bbb");
+			}
+		}
+    }
 }
