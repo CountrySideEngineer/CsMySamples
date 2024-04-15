@@ -6,35 +6,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace WpfApp1.Model 
 {
 	internal class SampleDataModel 
 	{
-		public string Title { get; set; }
+		public string DataTitle { get; set; }
 
 		public string Content { get; set; }
 
-		public ObservableCollection<string> Items { get; set; }
-
-		public ObservableCollection<SampleDataItemModel> Items2 { get; set; }
-
-		public string Item { get; set; }
+		public ObservableCollection<string> Commands { get; set; }
 
 		public SampleDataModel()
 		{
-			Title = string.Empty;
+			DataTitle = string.Empty;
 			Content = string.Empty;
-			Items = new ObservableCollection<string>();
-			Item = string.Empty;
-			Items2 = new ObservableCollection<SampleDataItemModel>()
-			{
-				new SampleDataItemModel()
-				{
-					Summary = "Summary_001",
-					Detail = "Detail_001"
-				}
-			};
+			Commands = new ObservableCollection<string>();
 		}
 	}
 }
