@@ -63,7 +63,7 @@
     <Compile Include="PropertyPageRow.xaml.cs">
       <DependentUpon>PropertyPageRow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\CustomDataDridViewModel.cs" />
+    <Compile Include="ViewModel\CustomDataGridViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Page Include="CustomDataGrid.xaml">
       <SubType>Designer</SubType>
