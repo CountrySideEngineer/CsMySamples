@@ -12,22 +12,10 @@
         <Grid.ColumnDefinitions>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="21" />
-            <RowDefinition Height="21" />
-            <RowDefinition Height="21" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <local:PropertyPageRow x:Name="CusomtControl1_1"
-                               Grid.Row="0"
-                               />
-        <local:PropertyPageRow x:Name="CusomtControl1_2"
-                               Grid.Row="1"
-                               />
-        <local:PropertyPageRow x:Name="CusomtControl1_3"
-                               Grid.Row="2"
-                               />
         <local:CustomDataGrid x:Name="CusomtDataGrid"
-                              Grid.Row="3"
+                              Grid.Row="0"
                               />
     </Grid>
 </Window>
