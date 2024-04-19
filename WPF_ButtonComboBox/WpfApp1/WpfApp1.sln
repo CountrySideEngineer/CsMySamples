@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{B7D25DC5-3DA4-438B-8DC3-5F2ADDCAF4E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComboBoxSample", "ComboBoxSample\ComboBoxSample.csproj", "{B4008503-CB22-4422-93DB-50F35BC2CC5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B7D25DC5-3DA4-438B-8DC3-5F2ADDCAF4E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7D25DC5-3DA4-438B-8DC3-5F2ADDCAF4E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7D25DC5-3DA4-438B-8DC3-5F2ADDCAF4E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4008503-CB22-4422-93DB-50F35BC2CC5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4008503-CB22-4422-93DB-50F35BC2CC5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4008503-CB22-4422-93DB-50F35BC2CC5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4008503-CB22-4422-93DB-50F35BC2CC5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
