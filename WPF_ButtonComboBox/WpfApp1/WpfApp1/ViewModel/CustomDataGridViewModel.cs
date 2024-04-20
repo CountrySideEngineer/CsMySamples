@@ -20,7 +20,7 @@ namespace WpfApp1.ViewModel
 				{
 					DataTitle = "Title_001",
 					Content = "Content_001",
-					Commands = new ObservableCollection<string>()
+					Commands = new List<string>()
 					{
 						"Command_001_001",
 						"Command_001_002",
@@ -31,7 +31,7 @@ namespace WpfApp1.ViewModel
 				{
 					DataTitle = "Title_002",
 					Content = "Content_002",
-					Commands = new ObservableCollection<string>()
+					Commands = new List<string>()
 					{
 						"Command_002_001",
 						"Command_002_002",
@@ -44,7 +44,7 @@ namespace WpfApp1.ViewModel
 				{
 					DataTitle = "Title_003",
 					Content = "Content_003",
-					Commands = new ObservableCollection<string>()
+					Commands = new List<string>()
 					{
 						"Command_003_001",
 					}

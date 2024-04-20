@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ComboBoxSample.ViewModel
 {
-	internal class ComboBoxViewModel : ViewModelBase
+	public class ComboBoxViewModel : ViewModelBase
 	{
 		protected UInt32 _selectedItemIndex1;
 		public UInt32 SelectedItemIndex1

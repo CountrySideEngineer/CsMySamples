@@ -35,6 +35,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ComboBox ItemsSource="{Binding Commands, Mode=TwoWay}"
+                                      SelectedItem="{Binding SelectedCommand, Mode=TwoWay}"
                                       IsEditable="True"
                                       />
                         </DataTemplate>

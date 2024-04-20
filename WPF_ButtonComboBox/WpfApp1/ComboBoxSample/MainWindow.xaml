@@ -22,7 +22,7 @@
         <ComboBox x:Name="ComboBox1"
                   Grid.Row="0"
                   ItemsSource="{Binding ComboBoxItems1}"
-                  SelectedIndex="{Binding SelectedItemIndex}"
+                  SelectedIndex="{Binding SelectedItemIndex1}"
                   />
     </Grid>
 </Window>
