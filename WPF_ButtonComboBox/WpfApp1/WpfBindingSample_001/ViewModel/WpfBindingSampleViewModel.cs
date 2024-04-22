@@ -19,6 +19,8 @@ namespace WpfBindingSample_001.ViewModel
 			}
 		}
 
+
+
 		public WpfBindingSampleViewModel() :base()
 		{
 			CustomViewModel = new CustomDataGridViewModel();

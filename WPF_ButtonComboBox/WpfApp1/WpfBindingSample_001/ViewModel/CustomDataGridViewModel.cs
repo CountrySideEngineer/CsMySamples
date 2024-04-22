@@ -19,6 +19,8 @@ namespace WpfBindingSample_001.ViewModel
 			{
 				_customRowIndex = value;
 				RaisePropertyChanged();
+
+				CurrentIndex = value;
 			}
 		}
 
@@ -29,6 +31,17 @@ namespace WpfBindingSample_001.ViewModel
 			set
 			{
 				_customDataCollection = value;
+				RaisePropertyChanged();
+			}
+		}
+
+		protected int _currentIndex = 0;
+		public int CurrentIndex
+		{
+			get => _currentIndex;
+			set
+			{
+				_currentIndex = value;
 				RaisePropertyChanged();
 			}
 		}

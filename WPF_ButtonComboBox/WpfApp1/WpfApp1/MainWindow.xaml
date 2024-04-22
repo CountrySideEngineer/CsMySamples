@@ -12,10 +12,13 @@
         <Grid.ColumnDefinitions>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="32"/>
         </Grid.RowDefinitions>
         <local:CustomDataGrid x:Name="CusomtDataGrid"
                               Grid.Row="0"
                               />
+        <TextBlock x:Name="SelectedIndex"
+                   Text="{Binding CurrentINdexCurre}"
     </Grid>
 </Window>
