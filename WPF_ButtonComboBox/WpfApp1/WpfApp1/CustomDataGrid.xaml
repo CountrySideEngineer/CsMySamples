@@ -15,7 +15,8 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <DataGrid AutoGenerateColumns="False"
+        <DataGrid x:Name="MyDataGrid"
+                  AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   CanUserDeleteRows="False"
                   CanUserReorderColumns="False"
@@ -31,19 +32,31 @@
                                     Binding="{Binding DataTitle}"
                                     CanUserReorder="False"
                                     />
-                <DataGridTemplateColumn Width="7*"
+                <DataGridTemplateColumn x:Name="MyTemplateColumn"
+                                        Width="7*"
                                         CanUserReorder="False"
                                         Header="Sample comboBox column"
                                         >
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
+                    <DataGridTemplateColumn.CellTemplate x:Uid="MyCellTemplate"
+                        >
+                        <DataTemplate x:Name="MyDataTemplate">
+                            <ComboBox x:Name="MyComboBox"
+                                      ItemsSource="{Binding Commands, Mode=TwoWay}"
+                                      SelectedItem="{Binding SelectedCommand, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      IsEditable="True"
+                                      />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <TextBlock Grid.Row="1"
-                   Text="{Binding SampleIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                   />
+                   
+                   >
+            Selected row index = 
+            <Run Text="{Binding SampleIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            Selected item command = 
+            <Run Text="{Binding ElementName=MyDataGrid, Path=SelectedItem.SelectedCommand}"/>
+        </TextBlock>
     </Grid>
 </UserControl>
