@@ -10,7 +10,39 @@ namespace WpfApp1.ViewModel
 {
 	internal class CustomDataGridViewModel : ViewModelBase
 	{
-		public ObservableCollection<SampleDataModel> SampleDataCollection { get; set; }
+		protected int _selectedIndex = 0;
+		public int SelectedRowIndex
+		{
+			get => _selectedIndex;
+			set
+			{
+				_selectedIndex = value;
+				RaisePropertyChanged();
+
+				SampleIndex = value;
+			}
+		}
+
+		protected int _selectedIndexToShow = 0;
+		public int SampleIndex
+		{
+			get => _selectedIndexToShow;
+			set
+			{
+				_selectedIndexToShow = value;
+				RaisePropertyChanged();
+			}
+		}
+
+		protected ObservableCollection<SampleDataModel> _sampleDataCollection = null;
+		public ObservableCollection<SampleDataModel> SampleDataCollection
+		{
+			get => _sampleDataCollection;
+			set
+			{
+				_sampleDataCollection = value;
+			}
+		}
 
 		public CustomDataGridViewModel() : base()
 		{

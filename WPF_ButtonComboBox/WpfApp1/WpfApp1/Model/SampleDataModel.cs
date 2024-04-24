@@ -26,11 +26,20 @@ namespace WpfApp1.Model
 			set
 			{
 				_selectedCommand = value;
-				RaisePropertyChanged(nameof(SelectedCommand));
+				RaisePropertyChanged();
 			}
 		}
 
-		public IEnumerable<string> Commands { get; set; }
+		protected IEnumerable<string> _commands;
+		public IEnumerable<string> Commands
+		{
+			get => _commands;
+			set
+			{
+				_commands = value;
+				RaisePropertyChanged();
+			}
+		}
 
 		public SampleDataModel()
 		{

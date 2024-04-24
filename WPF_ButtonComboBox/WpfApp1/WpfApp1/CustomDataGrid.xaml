@@ -4,44 +4,46 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp1"
-             xmlns:vm="clr-namespace:WpfApp1.ViewModel"
+             xmlns:user_mv="clr-namespace:WpfApp1.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
-        <vm:CustomDataGridViewModel />
+        <user_mv:CustomDataGridViewModel />
     </UserControl.DataContext>
     <Grid>
-        <Grid.Resources>
-            <BooleanToVisibilityConverter
-                x:Key="BooleanToVisibilityConverter"/>
-        </Grid.Resources>
-        <DataGrid ItemsSource="{Binding SampleDataCollection}"
-                  x:Name="dataGrid"
-                  AutoGenerateColumns="false"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <DataGrid AutoGenerateColumns="False"
                   CanUserAddRows="False"
-                  CanUserSortColumns="False"
-                  SelectionMode="Single"
+                  CanUserDeleteRows="False"
+                  CanUserReorderColumns="False"
+                  CanUserResizeColumns="False"
+                  ItemsSource="{Binding SampleDataCollection}"
+                  SelectedIndex="{Binding SelectedRowIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  IsReadOnly="True"
                   >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="TitleColumn"
                                     Header="Sample title"
                                     Width="3*"
                                     Binding="{Binding DataTitle}"
-                                    IsReadOnly="True"
+                                    CanUserReorder="False"
                                     />
                 <DataGridTemplateColumn Width="7*"
+                                        CanUserReorder="False"
                                         Header="Sample comboBox column"
                                         >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ComboBox ItemsSource="{Binding Commands, Mode=TwoWay}"
-                                      SelectedItem="{Binding SelectedCommand, Mode=TwoWay}"
-                                      IsEditable="True"
-                                      />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <TextBlock Grid.Row="1"
+                   Text="{Binding SampleIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                   />
     </Grid>
 </UserControl>

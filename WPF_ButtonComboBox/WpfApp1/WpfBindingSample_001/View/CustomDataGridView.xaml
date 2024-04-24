@@ -19,8 +19,8 @@
                   CanUserAddRows="False"
                   CanUserDeleteRows="False"
                   CanUserReorderColumns="False"
-                  ItemsSource="{Binding CustomDataCollection}"
                   CanUserResizeColumns="False"
+                  ItemsSource="{Binding CustomDataCollection}"
                   SelectedIndex="{Binding SelectedRowIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   IsReadOnly="True"
                   >

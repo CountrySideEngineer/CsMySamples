@@ -64,6 +64,7 @@
       <DependentUpon>PropertyPageRow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\CustomDataGridViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Page Include="CustomDataGrid.xaml">
       <SubType>Designer</SubType>

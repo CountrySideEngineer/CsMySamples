@@ -18,7 +18,5 @@
         <local:CustomDataGrid x:Name="CusomtDataGrid"
                               Grid.Row="0"
                               />
-        <TextBlock x:Name="SelectedIndex"
-                   Text="{Binding CurrentINdexCurre}"
     </Grid>
 </Window>
