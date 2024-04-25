@@ -56,6 +56,8 @@
             <Run Text="{Binding SampleIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             Selected item command = 
             <Run Text="{Binding ElementName=MyDataGrid, Path=SelectedItem.SelectedCommand}"/>
+            Selected item command (short) = 
+            <Run Text="{Binding ElementName=MyDataGrid, Path=SelectedItem.DisplayName}"/>
         </TextBlock>
     </Grid>
 </UserControl>
