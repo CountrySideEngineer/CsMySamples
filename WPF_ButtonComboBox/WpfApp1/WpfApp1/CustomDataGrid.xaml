@@ -43,7 +43,7 @@
                             <ComboBox x:Name="MyComboBox"
                                       ItemsSource="{Binding Commands, Mode=TwoWay}"
                                       SelectedItem="{Binding SelectedCommand, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                      IsEditable="True"
+                                      IsEditable="False"
                                       />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -51,7 +51,6 @@
             </DataGrid.Columns>
         </DataGrid>
         <TextBlock Grid.Row="1"
-                   
                    >
             Selected row index = 
             <Run Text="{Binding SampleIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
