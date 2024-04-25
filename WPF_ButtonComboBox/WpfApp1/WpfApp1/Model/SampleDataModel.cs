@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Documents.Serialization;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -26,6 +27,26 @@ namespace WpfApp1.Model
 			set
 			{
 				_selectedCommand = value;
+				RaisePropertyChanged();
+
+				try
+				{
+					DisplayName = value.Substring(0, 3);
+				}
+				catch (Exception)
+				{
+					DisplayName = string.Empty;
+				}
+			}
+		}
+
+		protected string _displayName;
+		public string DisplayName
+		{
+			get => _displayName;
+			set
+			{
+				_displayName = value;
 				RaisePropertyChanged();
 			}
 		}
