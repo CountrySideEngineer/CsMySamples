@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ComboBoxSample.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO.Packaging;
 using System.Linq;
@@ -32,6 +34,17 @@ namespace ComboBoxSample.ViewModel
 			}
 		}
 
+		protected ObservableCollection<SampleModelItem> _sampleDataCollection;
+		public ObservableCollection<SampleModelItem> SampleDataCollection
+		{
+			get => _sampleDataCollection;
+			set
+			{
+				_sampleDataCollection = value;
+				RaisePropertyChanged();
+			}
+		}
+
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
@@ -46,6 +59,25 @@ namespace ComboBoxSample.ViewModel
 				"string item 5"
 			};
 			ComboBoxItems1 = comboBoxItems1;
+
+			SampleDataCollection = new ObservableCollection<SampleModelItem>()
+			{
+				new SampleModelItem()
+				{
+					Name = "item name 001",
+					Content = "Sample model item content 001",
+				},
+				new SampleModelItem()
+				{
+					Name = "item name 002",
+					Content = "Sample model item content 002",
+				},
+				new SampleModelItem()
+				{
+					Name = "item name 003",
+					Content = "Sample model item content 003",
+				},
+			};
 		}
 	}
 }
