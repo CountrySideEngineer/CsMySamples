@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO.Packaging;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,6 +35,17 @@ namespace ComboBoxSample.ViewModel
 			}
 		}
 
+		protected int _sampleDataIndex;
+		public int SampleDataIndex
+		{
+			get => _sampleDataIndex;
+			set
+			{
+				_sampleDataIndex = value;
+				RaisePropertyChanged();
+			}
+		}
+
 		protected ObservableCollection<SampleModelItem> _sampleDataCollection;
 		public ObservableCollection<SampleModelItem> SampleDataCollection
 		{
@@ -41,6 +53,17 @@ namespace ComboBoxSample.ViewModel
 			set
 			{
 				_sampleDataCollection = value;
+				RaisePropertyChanged();
+			}
+		}
+
+		protected string _userInputText;
+		public string UserInputText
+		{
+			get => _userInputText;
+			set
+			{
+				_userInputText = value;
 				RaisePropertyChanged();
 			}
 		}
@@ -78,6 +101,10 @@ namespace ComboBoxSample.ViewModel
 					Content = "Sample model item content 003",
 				},
 			};
+
+			UserInputText = string.Empty;
 		}
+
+
 	}
 }
