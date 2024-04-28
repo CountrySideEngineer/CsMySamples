@@ -67,6 +67,7 @@ namespace ComboBoxSample.ViewModel
 			{
 				if (SampleDataIndex < 0)
 				{
+					// Nothing to do.
 				}
 				else
 				{
