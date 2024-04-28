@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="WPF_ViewSwitchedWithTreeView.View.CustomTreeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:WPF_ViewSwitchedWithTreeView.ViewModel"
+             xmlns:local="clr-namespace:WPF_ViewSwitchedWithTreeView.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.DataContext>
+        <vm:CustomTreeViewModel />
+    </UserControl.DataContext>
+    <Grid>
+        <TreeView ItemsSource="{Binding TreeItems}">
+        </TreeView>
+            
+    </Grid>
+</UserControl>
