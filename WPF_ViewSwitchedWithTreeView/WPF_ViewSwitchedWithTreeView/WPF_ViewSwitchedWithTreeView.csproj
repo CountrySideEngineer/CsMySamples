@@ -61,6 +61,12 @@
     <Compile Include="View\CustomTreeView.xaml.cs">
       <DependentUpon>CustomTreeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CustomUserViewControl_001.xaml.cs">
+      <DependentUpon>CustomUserViewControl_001.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomUserViewControl_002.xaml.cs">
+      <DependentUpon>CustomUserViewControl_002.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -74,6 +80,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\CustomTreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CustomUserViewControl_001.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CustomUserViewControl_002.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
