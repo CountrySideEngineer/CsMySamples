@@ -1,8 +1,10 @@
-﻿using ComboBoxSample.Model;
+﻿using ComboBoxSample.Command;
+using ComboBoxSample.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO.Packaging;
 using System.Linq;
 using System.Security.Policy;
@@ -63,10 +65,19 @@ namespace ComboBoxSample.ViewModel
 			get => _userInputText;
 			set
 			{
-				_userInputText = value;
-				RaisePropertyChanged();
+				if (SampleDataIndex < 0)
+				{
+				}
+				else
+				{
+					_userInputText = value;
+					RaisePropertyChanged();
+				}
 			}
 		}
+
+		public DelegateCommand MySelectionChanged { get; set; }
+
 
 		/// <summary>
 		/// Default constructor.
@@ -103,6 +114,12 @@ namespace ComboBoxSample.ViewModel
 			};
 
 			UserInputText = string.Empty;
+
+			MySelectionChanged = new DelegateCommand(() =>
+			{
+				UserInputText = $"SampleDataIndex = {SampleDataIndex}";
+				Debug.WriteLine(UserInputText);
+			});
 		}
 
 
