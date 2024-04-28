@@ -13,8 +13,6 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-        </Grid.ColumnDefinitions>
         <TextBlock x:Name="TextBlock_001"
                    Grid.Row="0"
                    Grid.Column="0"

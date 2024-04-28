@@ -67,6 +67,12 @@
     <Compile Include="View\CustomUserViewControl_002.xaml.cs">
       <DependentUpon>CustomUserViewControl_002.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CustomUserViewControl_003.xaml.cs">
+      <DependentUpon>CustomUserViewControl_003.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomUserViewControl_004.xaml.cs">
+      <DependentUpon>CustomUserViewControl_004.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -88,6 +94,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CustomUserViewControl_002.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CustomUserViewControl_003.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CustomUserViewControl_004.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
