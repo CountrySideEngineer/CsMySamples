@@ -12,6 +12,15 @@
         <vm:MainWindowViewModel />
     </Window.DataContext>
     <Grid>
-        <uv:CustomTreeView />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <uv:CustomTreeView x:Name="CustomTreeView"
+                           Grid.Column="0" 
+                           />
+        <ContentPresenter x:Name="ContentPresenter"
+                          Grid.Column="1"
+                          />
     </Grid>
 </Window>
