@@ -24,5 +24,14 @@ namespace WPF_ViewSwitchedWithTreeView.View
 		{
 			InitializeComponent();
 		}
+
+		public delegate void SelectedItemNodeChanged(object sender, EventArgs e);
+		public event SelectedItemNodeChanged SelectedItemChangedEventHandler;
+
+		private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+		{
+			object selectedItemIndex = this.TreeView.SelectedItem;
+			SelectedItemChangedEventHandler?.Invoke(this, e);
+		}
 	}
 }

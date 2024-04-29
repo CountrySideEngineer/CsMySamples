@@ -11,8 +11,10 @@
         <vm:CustomTreeViewModel />
     </UserControl.DataContext>
     <Grid>
-        <TreeView ItemsSource="{Binding TreeItems}">
+        <TreeView Name="TreeView"
+                  ItemsSource="{Binding TreeItems}"
+                  SelectedItemChanged="TreeView_SelectedItemChanged"
+                  >
         </TreeView>
-            
     </Grid>
 </UserControl>
