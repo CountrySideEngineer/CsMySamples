@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="Model\TreeNodeItem.cs" />
     <Compile Include="ViewModel\CustomTreeViewModel.cs" />
+    <Compile Include="ViewModel\CustomUserViewControlViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\CustomTreeView.xaml.cs">
