@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF_ViewSwitchedWithTreeView.Model;
 using WPF_ViewSwitchedWithTreeView.View;
 
 namespace WPF_ViewSwitchedWithTreeView
@@ -44,9 +45,10 @@ namespace WPF_ViewSwitchedWithTreeView
 		{
 			var selectedItemInfo = (RoutedPropertyChangedEventArgs<object>)e;
 
-			string selectedItemName = (string)selectedItemInfo.NewValue;
+			var selectedItem = (TreeNodeItem)selectedItemInfo.NewValue;
+			var name = selectedItem.Name;
 
-			var element = GetSelectedPage(selectedItemName);
+			var element = GetSelectedPage(name);
 			ContentPresenter.Content = element;
 		}
 
