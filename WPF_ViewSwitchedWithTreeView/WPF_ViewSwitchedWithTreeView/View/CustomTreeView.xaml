@@ -12,7 +12,8 @@
     </UserControl.DataContext>
     <Grid>
         <TreeView Name="TreeView"
-                  ItemsSource="{Binding TreeItems}"
+                  ItemsSource="{Binding TreeNodeItems}"
+                  DisplayMemberPath="Name"
                   SelectedItemChanged="TreeView_SelectedItemChanged"
                   >
         </TreeView>
