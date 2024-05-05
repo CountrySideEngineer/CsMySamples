@@ -24,7 +24,7 @@
                   ItemsSource="{Binding SampleDataCollection}"
                   SelectedIndex="{Binding SelectedRowIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   IsReadOnly="True"
-                  ColumnHeaderHeight="0"
+                  HeadersVisibility="None"
                   >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="TitleColumn"
