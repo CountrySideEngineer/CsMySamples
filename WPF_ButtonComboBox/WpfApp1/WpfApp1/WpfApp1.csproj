@@ -60,7 +60,6 @@
       <DependentUpon>CustomDataGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\SampleCommandModel.cs" />
-    <Compile Include="Model\SampleDataItemModel.cs" />
     <Compile Include="Model\SampleDataModel.cs" />
     <Compile Include="PropertyPageRow.xaml.cs">
       <DependentUpon>PropertyPageRow.xaml</DependentUpon>
