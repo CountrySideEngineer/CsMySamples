@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Documents.Serialization;
 using System.Windows.Input;
 using System.Windows.Media;
+using WpfApp1.Command;
 using WpfApp1.ViewModel;
 
 namespace WpfApp1.Model 
@@ -59,6 +60,30 @@ namespace WpfApp1.Model
 			{
 				_commands = value;
 				RaisePropertyChanged();
+			}
+		}
+
+		protected IEnumerable<SampleCommandModel> _commandModels;
+		public IEnumerable<SampleCommandModel> CommandModels
+		{
+			get => _commandModels;
+			set
+			{
+				_commandModels = value;
+				RaisePropertyChanged();
+			}
+		}
+
+		protected SampleCommandModel _selectedCommandModel;
+		public SampleCommandModel SampleCommandModel
+		{
+			get => _selectedCommandModel;
+			set
+			{
+				_selectedCommandModel = value;
+				RaisePropertyChanged();
+
+				DisplayName = _selectedCommandModel?.Command();
 			}
 		}
 
