@@ -10,6 +10,15 @@ namespace WpfApp1.Model
 	{
 		public string Title { get; set; } = string.Empty;
 
+		public string Content { get; set; } = string.Empty;
+
 		public Func<string> Command { get; set; } = null;
+
+		public string Execute()
+		{
+			Content = Command?.Invoke();
+
+			return Content;
+		}
 	}
 }
