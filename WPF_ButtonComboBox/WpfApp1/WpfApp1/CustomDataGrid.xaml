@@ -43,11 +43,17 @@
                         <DataTemplate x:Name="MyDataTemplate">
                             <ComboBox x:Name="MyComboBox"
                                       ItemsSource="{Binding CommandModels, Mode=TwoWay}"
-                                      SelectedItem="{Binding SampleCommandModel, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedItem="{Binding SampleCommandModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                       DisplayMemberPath="Title"
-                                      Text="{Binding DisplayName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      Text="{Binding Path=SelectedItem.Content, ElementName=MyComboBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                       IsEditable="True"
-                                      />
+                                      >
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ComboBoxItem}">
+                                        <EventSetter Event="Selected" Handler="MyComboBox_Selected"/>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                            </ComboBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
