@@ -11,6 +11,18 @@ namespace WpfApp1.ViewModel
 {
 	internal class CustomDataGridViewModel : ViewModelBase
 	{
+		protected int _selIndex2 = 0;
+		public int SelIndex2
+		{
+			get => _selIndex2;
+			set
+			{
+				_selIndex2 = value;
+				RaisePropertyChanged();
+			}
+		}
+
+
 		protected int _selectedIndex = 0;
 		public int SelectedRowIndex
 		{
