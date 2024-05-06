@@ -24,6 +24,7 @@
                   ItemsSource="{Binding SampleDataCollection}"
                   SelectedIndex="{Binding SelectedRowIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   IsReadOnly="True"
+                  HeadersVisibility="None"
                   >
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="TitleColumn"
@@ -41,10 +42,18 @@
                         >
                         <DataTemplate x:Name="MyDataTemplate">
                             <ComboBox x:Name="MyComboBox"
-                                      ItemsSource="{Binding Commands, Mode=TwoWay}"
-                                      SelectedItem="{Binding SelectedCommand, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                      IsEditable="False"
-                                      />
+                                      ItemsSource="{Binding CommandModels, Mode=TwoWay}"
+                                      SelectedItem="{Binding SampleCommandModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      DisplayMemberPath="Title"
+                                      Text="{Binding Path=SelectedItem.Content, ElementName=MyComboBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      IsEditable="True"
+                                      >
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="{x:Type ComboBoxItem}">
+                                        <EventSetter Event="Selected" Handler="MyComboBox_Selected"/>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                            </ComboBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
