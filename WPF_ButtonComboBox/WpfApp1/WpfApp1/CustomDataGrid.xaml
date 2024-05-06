@@ -42,9 +42,11 @@
                         >
                         <DataTemplate x:Name="MyDataTemplate">
                             <ComboBox x:Name="MyComboBox"
-                                      ItemsSource="{Binding Commands, Mode=TwoWay}"
-                                      SelectedItem="{Binding SelectedCommand, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                      IsEditable="False"
+                                      ItemsSource="{Binding CommandModels, Mode=TwoWay}"
+                                      SelectedItem="{Binding SampleCommandModel, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                                      DisplayMemberPath="Title"
+                                      Text="{Binding DisplayName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      IsEditable="True"
                                       />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
