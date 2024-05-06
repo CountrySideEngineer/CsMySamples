@@ -83,7 +83,7 @@ namespace WpfApp1.Model
 				_selectedCommandModel = value;
 				RaisePropertyChanged();
 
-				DisplayName = _selectedCommandModel?.Command();
+				DisplayName = _selectedCommandModel?.Execute();
 			}
 		}
 
