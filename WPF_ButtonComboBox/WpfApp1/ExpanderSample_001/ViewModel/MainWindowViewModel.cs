@@ -23,8 +23,8 @@ namespace ExpanderSample_001.ViewModel
 			}
 		}
 
-		protected ObservableCollection<DataItem>? _itemCollection;
-		public ObservableCollection<DataItem>? ItemCollection
+		protected ObservableCollection<object>? _itemCollection;
+		public ObservableCollection<object>? ItemCollection
 		{
 			get => _itemCollection;
 			set
@@ -39,18 +39,18 @@ namespace ExpanderSample_001.ViewModel
 		/// </summary>
 		public MainWindowViewModel() : base()
 		{
-			ItemCollection = new ObservableCollection<DataItem>()
+			ItemCollection = new ObservableCollection<object>()
 			{
-				new DataItem()
+				new DataItem<int>()
 				{
 					Title = "Item_001",
-					InputData = string.Empty,
+					InputData = 0,
 					Command = ((input) =>
 					{
-						return "001";
+						return 1;
 					})
 				},
-				new DataItem()
+				new DataItem<string>()
 				{
 					Title = "Item_002",
 					InputData = string.Empty,
@@ -59,13 +59,13 @@ namespace ExpanderSample_001.ViewModel
 						return "002";
 					})
 				},
-				new DataItem()
+				new DataItem<bool>()
 				{
 					Title = "Item_003",
-					InputData = string.Empty,
+					InputData = false,
 					Command = ((input) =>
 					{
-						return "003";
+						return true;
 					})
 				},
 			};
