@@ -11,14 +11,14 @@ using System.Windows.Xps.Serialization;
 
 namespace ExpanderSample_001.Model
 {
-	internal class DataItem : ViewModelBase
+	internal class DataItem<T> : ViewModelBase
 	{
-		public Func<string, string>? Command { get; set; }
+		public Func<T, T>? Command { get; set; }
 
 		public string Title { get; set; } = string.Empty;
 
-		protected string _inputData = string.Empty;
-		public string InputData
+		protected T _inputData;
+		public T InputData
 		{
 			get => _inputData;
 			set
@@ -51,9 +51,9 @@ namespace ExpanderSample_001.Model
 		/// </summary>
 		public void ItemCommandExecute()
 		{
-			string inputData = InputData;
+			T inputData = InputData;
 
-			InputData = Command?.Invoke(inputData) ?? inputData;
+			InputData = Command.Invoke(inputData) ?? inputData;
 		}
 	}
 }
