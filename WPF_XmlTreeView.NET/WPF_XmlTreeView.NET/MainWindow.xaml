@@ -3,9 +3,37 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WPF_XmlTreeView.NET"
+        xmlns:vm="clr-namespace:WPF_XmlTreeView.NET.ViewModel"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <ResourceDictionary>
+            <XmlDataProvider x:Key="xmlDataProvider" Source="Data\sample_project_file.xml"/>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
+        <Button>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <i:InvokeCommandAction Command="{Binding}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+        <TreeView Margin="4"
+                  Padding="4"
+                  ItemsSource="{Binding Solutions}"
+                  >
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Projects}">
+                    <TextBlock Text="{Binding Name}"/>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+
+
+        </TreeView>
     </Grid>
 </Window>
