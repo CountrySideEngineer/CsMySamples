@@ -28,7 +28,7 @@
                   ItemsSource="{Binding Solutions}"
                   >
             <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Projects}">
+                <HierarchicalDataTemplate ItemsSource="{Binding Items}">
                     <TextBlock Text="{Binding Name}"/>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
