@@ -16,13 +16,6 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <Button>
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="Click">
-                    <i:InvokeCommandAction Command="{Binding}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </Button>
         <TreeView Margin="4"
                   Padding="4"
                   ItemsSource="{Binding Solutions}"
@@ -32,8 +25,11 @@
                     <TextBlock Text="{Binding Name}"/>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
-
-
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectedItemChanged">
+                    <i:InvokeCommandAction Command="{Binding SampleCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </TreeView>
     </Grid>
 </Window>

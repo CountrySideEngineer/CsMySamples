@@ -5,12 +5,43 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WPF_XmlTreeView.NET.Command;
 using WPF_XmlTreeView.NET.Model;
 
 namespace WPF_XmlTreeView.NET.ViewModel
 {
 	internal class MainWindowViewModel : ViewModelBase
 	{
+		protected DelegateCommand? _sampleCommand = null;
+
+		public DelegateCommand? SampleCommand
+		{
+			get
+			{
+				if (_sampleCommand == null)
+				{
+					_sampleCommand = new DelegateCommand(SampleCommandExecute);
+				}
+				return _sampleCommand;
+			}
+		}
+
+		public void SampleCommandExecute()
+		{
+			Console.WriteLine($"{nameof(SampleCommandExecute)} property executed");
+		}
+
+		protected ProjectItem? _selectedItem;
+		public ProjectItem? SelectedItem
+		{
+			get => _selectedItem;
+			set
+			{
+				_selectedItem = value;
+				RaisePropertyChanged();
+			}
+		}
+
 		public ObservableCollection<SolutionData> Solutions
 		{
 			get;
