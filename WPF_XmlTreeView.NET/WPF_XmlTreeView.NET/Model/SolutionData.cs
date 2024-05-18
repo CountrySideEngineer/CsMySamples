@@ -29,5 +29,8 @@ namespace WPF_XmlTreeView.NET.Model
 
 		[XmlElement("Item")]
 		public IEnumerable<ProjectItem>? Items { get; set; } = null;
+
+		[XmlAttribute(nameof(TypeName))]
+		public string? TypeName { get; set; } = string.Empty;
 	}
 }
