@@ -68,12 +68,15 @@ namespace WPF_XmlTreeView.NET.ViewModel
 								new ProjectItem()
 								{
 									Name = "Name_001_001",
+									TypeName = "Control_001"
 								},
 								new ProjectItem()
 								{
 									Name = "Name_001_002",
+									TypeName = "Control_001"
 								},
-							}
+							},
+							TypeName = "Control_001"
 						},
 						new ProjectItem()
 						{
@@ -84,21 +87,26 @@ namespace WPF_XmlTreeView.NET.ViewModel
 								new ProjectItem()
 								{
 									Name = "Name_002_001",
+									TypeName = "Control_002"
 								},
 								new ProjectItem()
 								{
 									Name = "Name_002_002",
+									TypeName = "Control_002"
 								},
 								new ProjectItem()
 								{
 									Name = "Name_002_003",
+									TypeName = "Control_002"
 								},
-							}
+							},
+							TypeName = "Control_002"
 						},
 						new ProjectItem()
 						{
 							Name ="Name_003",
 							Path ="Path_003",
+							TypeName = "Control_001"
 						},
 					}
 				}
