@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,14 @@ namespace WPF_XmlTreeView.NET.ViewModel
 {
 	internal class CustomControlViewModel_001 : ViewModelBase
 	{
+		public string TypeName
+		{
+			get
+			{
+				return GetType().Name;
+			}
+		}
+
 		protected DelegateCommand? _customCommand = null;
 		public DelegateCommand? CustomCommand
 		{
