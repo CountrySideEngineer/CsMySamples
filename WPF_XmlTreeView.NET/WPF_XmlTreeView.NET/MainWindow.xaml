@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:WPF_XmlTreeView.NET.ViewModel"
+        xmlns:ucc="clr-namespace:WPF_XmlTreeView.NET.View.CustomControl"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
@@ -16,8 +17,21 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <DataTemplate x:Key="A">
+                <ucc:CustomControl_001/>
+            </DataTemplate>
+            <DataTemplate x:Key="B">
+                <ucc:CustomControl_002/>
+            </DataTemplate>
+        </Grid.Resources>
         <TreeView Margin="4"
                   Padding="4"
+                  Grid.Row="0"
                   ItemsSource="{Binding Solutions}"
                   >
             <TreeView.ItemTemplate>
@@ -31,5 +45,8 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </TreeView>
+        <UserControl ContentTemplate="{StaticResource A}"
+                     Content="{Binding}"
+                     Grid.Column="1"/>
     </Grid>
 </Window>
