@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:WPF_XmlTreeView.NET.ViewModel"
         xmlns:ucc="clr-namespace:WPF_XmlTreeView.NET.View.CustomControl"
+        xmlns:ccs="clr-namespace:WPF_XmlTreeView.NET.Selector"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
@@ -14,6 +15,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <XmlDataProvider x:Key="xmlDataProvider" Source="Data\sample_project_file.xml"/>
+            <ccs:ControlContentSelector x:Key="ControlContentSelector"/>
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
@@ -45,7 +47,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </TreeView>
-        <UserControl ContentTemplate="{StaticResource A}"
+        <UserControl ContentTemplateSelector="{StaticResource ControlContentSelector}"
                      Content="{Binding}"
                      Grid.Column="1"/>
     </Grid>
