@@ -35,20 +35,16 @@
                   Padding="4"
                   Grid.Row="0"
                   ItemsSource="{Binding Solutions}"
+                  SelectedItemChanged="TreeView_SelectedItemChanged"
                   >
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Items}">
                     <TextBlock Text="{Binding Name}"/>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectedItemChanged">
-                    <i:InvokeCommandAction Command="{Binding SampleCommand}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
         </TreeView>
         <UserControl ContentTemplateSelector="{StaticResource ControlContentSelector}"
-                     Content="{Binding}"
+                     Content="{Binding SelectedItem}"
                      Grid.Column="1"/>
     </Grid>
 </Window>

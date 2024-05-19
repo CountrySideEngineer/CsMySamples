@@ -8,6 +8,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF_XmlTreeView.NET.Model;
+using WPF_XmlTreeView.NET.ViewModel;
 
 namespace WPF_XmlTreeView.NET
 {
@@ -20,5 +22,12 @@ namespace WPF_XmlTreeView.NET
 		{
 			InitializeComponent();
 		}
-	}
+
+		private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+		{
+			MainWindowViewModel viewModel = (MainWindowViewModel)DataContext;
+			viewModel.SelectedItem = (ProjectItem)e.NewValue;
+
+        }
+    }
 }
