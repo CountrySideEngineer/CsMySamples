@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using WPF_XmlTreeView.NET.Model;
 using WPF_XmlTreeView.NET.ViewModel;
 
 namespace WPF_XmlTreeView.NET.Selector
@@ -14,21 +15,30 @@ namespace WPF_XmlTreeView.NET.Selector
 		public override DataTemplate? SelectTemplate(object item, DependencyObject container)
 		{
 			var element = container as FrameworkElement;
-			var viewModel = item as MainWindowViewModel;
-			if (element == null || viewModel == null)
+			var content = item as ProjectItem;
+			if (element == null || content == null)
 			{
 				return null;
 			}
 
 			string templateType = "";
-			switch (viewModel.SelectedItem)
+			switch (content.TypeName)
 			{
+				case "Control_001":
+					templateType = "A";
+					break;
+
+				case "Control_002":
+					templateType = "B";
+					break;
+
 				default:
 					templateType = "";
 					break;
 			}
 
-			return templateType == "" ? null : element.FindResource(templateType) as DataTemplate;
+			DataTemplate? template = templateType == "" ? null : element.FindResource(templateType) as DataTemplate;
+			return template;
 		}
 	}
 }
