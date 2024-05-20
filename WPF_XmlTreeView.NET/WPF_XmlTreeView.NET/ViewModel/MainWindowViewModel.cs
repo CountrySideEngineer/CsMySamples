@@ -48,6 +48,38 @@ namespace WPF_XmlTreeView.NET.ViewModel
 			set;
 		}
 
+		protected ProjectItem _sampleItem_001 = new ProjectItem()
+		{
+			Name = "SampleItem_001",
+			TypeName = "Control_001",
+		};
+
+		public ProjectItem SampleItem_001
+		{
+			get => _sampleItem_001;
+			set
+			{
+				_sampleItem_001 = value;
+				RaisePropertyChanged();
+			}
+		}
+
+		protected ProjectItem _sampleItem_002 = new ProjectItem()
+		{
+			Name = "SampleItem_002",
+			TypeName = "Control_002",
+		};
+
+		public ProjectItem SampleItem_002
+		{
+			get => _sampleItem_001;
+			set
+			{
+				_sampleItem_001 = value;
+				RaisePropertyChanged();
+			}
+		}
+
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
@@ -75,6 +107,7 @@ namespace WPF_XmlTreeView.NET.ViewModel
 									Name = "Name_001_002",
 									TypeName = "Control_001"
 								},
+								_sampleItem_001,
 							},
 							TypeName = "Control_001"
 						},
@@ -99,6 +132,7 @@ namespace WPF_XmlTreeView.NET.ViewModel
 									Name = "Name_002_003",
 									TypeName = "Control_002"
 								},
+								_sampleItem_002,
 							},
 							TypeName = "Control_002"
 						},
