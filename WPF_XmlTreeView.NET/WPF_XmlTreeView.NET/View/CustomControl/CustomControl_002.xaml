@@ -21,6 +21,7 @@
             >
             <TextBlock Grid.Row="0"
                     Margin="4"
+                       Text="{Binding Path=TypeName}"
                     />
         </Border>
         <Border Grid.Row="1"
@@ -30,7 +31,8 @@
                 Margin="8, 4, 8, 8"
                 >
             <TextBlock Grid.Row="0"
-                    Margin="4"
+                       Margin="4"
+                       Text="{Binding Path=Name}"
                     />
         </Border>
         <Button Grid.Row="3"

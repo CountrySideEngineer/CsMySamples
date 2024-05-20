@@ -21,6 +21,7 @@
                 >
             <TextBlock Grid.Row="0"
                        Margin="4"
+                       Text="{Binding Path=Name}"
                        />
         </Border>
         <Border Grid.Row="1"
@@ -31,10 +32,12 @@
                 >
             <TextBlock Grid.Row="0"
                        Margin="4"
+                       Text="{Binding Path=Path}"
                        />
         </Border>
         <Button Grid.Row="3"
                 Margin="8"
+                Content="{Binding Path=TypeName}"
                 />
     </Grid>
 </UserControl>
