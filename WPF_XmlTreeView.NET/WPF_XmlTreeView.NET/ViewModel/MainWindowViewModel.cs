@@ -132,7 +132,7 @@ namespace WPF_XmlTreeView.NET.ViewModel
 									Name = "Name_002_003",
 									TypeName = "Control_002"
 								},
-								_sampleItem_002,
+								_sampleItem_001,
 							},
 							TypeName = "Control_002"
 						},
