@@ -10,6 +10,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition Height="48"/>
+            <RowDefinition Height="48"/>
             <RowDefinition/>
             <RowDefinition Height="48"/>
         </Grid.RowDefinitions>
@@ -35,7 +36,20 @@
                        Text="{Binding Path=Path}"
                        />
         </Border>
-        <Button Grid.Row="3"
+        <Border Grid.Row="2"
+                BorderThickness="1"
+                BorderBrush="Black"
+                Background="White"
+                Margin="8, 4, 8, 8"
+                >
+            <TextBox Grid.Row="2"
+                     BorderThickness="1"
+                     BorderBrush="AliceBlue"
+                     Background="White"
+                     Text="{Binding Path=Path, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 />
+        </Border>
+        <Button Grid.Row="4"
                 Margin="8"
                 Content="{Binding Path=TypeName}"
                 />
