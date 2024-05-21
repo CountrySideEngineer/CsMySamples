@@ -40,6 +40,8 @@ namespace WPF_XmlTreeView.NET.Selector
 			DataTemplate? template = templateType == "" ? null : element.FindResource(templateType) as DataTemplate;
 			UserControl userControl = (UserControl)template.LoadContent();
 			userControl.DataContext = content;
+
+			content.Name += "_001";
 			
 			return template;
 		}
