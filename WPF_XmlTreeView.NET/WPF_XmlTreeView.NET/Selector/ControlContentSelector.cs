@@ -37,13 +37,21 @@ namespace WPF_XmlTreeView.NET.Selector
 					break;
 			}
 
-			DataTemplate? template = templateType == "" ? null : element.FindResource(templateType) as DataTemplate;
-			UserControl userControl = (UserControl)template.LoadContent();
-			userControl.DataContext = content;
+			try
+			{
+				DataTemplate template = (DataTemplate)element.FindResource(templateType);
+				UserControl userControl = (UserControl)template.LoadContent();
+				userControl.DataContext = content;
 
-			content.Name += "_001";
-			
-			return template;
+				return template;
+			}
+			catch (Exception ex)
+			when ((ex is InvalidCastException)
+				|| (ex is NullReferenceException)
+				|| (ex is ResourceReferenceKeyNotFoundException))
+			{
+				return null;
+			}
 		}
 	}
 }
