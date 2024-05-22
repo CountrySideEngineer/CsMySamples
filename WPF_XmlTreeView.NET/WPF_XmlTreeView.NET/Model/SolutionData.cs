@@ -12,15 +12,6 @@ using WPF_XmlTreeView.NET.ViewModel;
 namespace WPF_XmlTreeView.NET.Model
 {
 	[XmlRoot("TestSolution")]
-	internal class SolutionData
-	{
-		[XmlAttribute(nameof(Name))]
-		public string Name { get; set; } = "";
-
-		[XmlElement("TestProject")]
-		public IEnumerable<ProjectItem>? Items { get; set; } = null;
-	}
-
 	internal class ProjectItem : ViewModelBase
 	{
 		protected string _name = string.Empty;
