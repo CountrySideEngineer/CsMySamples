@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestSolution Name="テストソリューション">
+	<TestProject Name="TestProjectName_001"
+	             Path="Test/Spec/File/Path"
+				 >
+	</TestProject>
+	<TestProject Name="TestProjectName_002"
+	             Path="Test/Spec/File/Path"
+				 >
+	</TestProject>
+	<TestProject Name="TestProjectName_003"
+	             Path="Test/Spec/File/Path"
+				 >
+	</TestProject>
+</TestSolution>
+  
