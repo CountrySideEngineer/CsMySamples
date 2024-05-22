@@ -42,7 +42,7 @@ namespace WPF_XmlTreeView.NET.ViewModel
 			}
 		}
 
-		public ObservableCollection<SolutionData> Solutions
+		public ObservableCollection<ProjectItem> Solutions
 		{
 			get;
 			set;
@@ -64,7 +64,7 @@ namespace WPF_XmlTreeView.NET.ViewModel
 			}
 		}
 
-		protected ProjectItem _sampleItem_002 = new ProjectItem()
+		protected ProjectItem _sampleItem_002 = new ProjectItemEx()
 		{
 			Name = "SampleItem_002",
 			TypeName = "Control_002",
@@ -72,7 +72,7 @@ namespace WPF_XmlTreeView.NET.ViewModel
 
 		public ProjectItem SampleItem_002
 		{
-			get => _sampleItem_001;
+			get => _sampleItem_002;
 			set
 			{
 				_sampleItem_001 = value;
@@ -84,9 +84,9 @@ namespace WPF_XmlTreeView.NET.ViewModel
 		/// Default constructor.
 		/// </summary>
 		public MainWindowViewModel() {
-			Solutions = new ObservableCollection<SolutionData>()
+			Solutions = new ObservableCollection<ProjectItem>()
 			{
-				new SolutionData
+				new ProjectItem
 				{
 					Name = "Sample solution",
 					Items = new List<ProjectItem>()
@@ -111,28 +111,31 @@ namespace WPF_XmlTreeView.NET.ViewModel
 							},
 							TypeName = "Control_001"
 						},
-						new ProjectItem()
+						new ProjectItemEx()
 						{
 							Name ="Name_002",
 							Path ="Path_002",
 							Items = new List<ProjectItem>()
 							{
-								new ProjectItem()
+								new ProjectItemEx()
 								{
 									Name = "Name_002_001",
-									TypeName = "Control_002"
+									TypeName = "Control_002",
+									ExName = string.Empty
 								},
-								new ProjectItem()
+								new ProjectItemEx()
 								{
 									Name = "Name_002_002",
-									TypeName = "Control_002"
+									TypeName = "Control_002",
+									ExName = string.Empty
 								},
-								new ProjectItem()
+								new ProjectItemEx()
 								{
 									Name = "Name_002_003",
-									TypeName = "Control_002"
+									TypeName = "Control_002",
+									ExName = string.Empty
 								},
-								_sampleItem_001,
+								_sampleItem_002,
 							},
 							TypeName = "Control_002"
 						},
