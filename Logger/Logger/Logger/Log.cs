@@ -13,37 +13,37 @@ namespace CSEngineer.Logger
 		/// </summary>
 		/// <param name="sender">Object sender.</param>
 		/// <param name="e">Log message event.</param>
-		public delegate void LogMessageDelegate(object sender, EventArgs e);
+		public delegate void LogMessageEventHandler(object sender, EventArgs e);
 
 		/// <summary>
 		/// TRACE log level event handler.
 		/// </summary>
-		protected event LogMessageDelegate TraceLogDelegate;
+		protected event LogMessageEventHandler TraceLogEventHandler;
 
 		/// <summary>
 		/// DEBUG log level event handler.
 		/// </summary>
-		protected event LogMessageDelegate DebugLogDelegate;
+		protected event LogMessageEventHandler DebugLogEventHandler;
 
 		/// <summary>
 		/// INFO log level event handler.
 		/// </summary>
-		protected event LogMessageDelegate InfoLogDelegate;
+		protected event LogMessageEventHandler InfoLogEventHandler;
 
 		/// <summary>
 		/// WARNING log level event handler.
 		/// </summary>
-		protected event LogMessageDelegate WarnLogDelegate;
+		protected event LogMessageEventHandler WarnLogEventHandler;
 
 		/// <summary>
 		/// ERROR log level event handler.
 		/// </summary>
-		protected event LogMessageDelegate ErrorLogDelegate;
+		protected event LogMessageEventHandler ErrorLogEventHandler;
 
 		/// <summary>
 		/// FATAL log level event handler.
 		/// </summary>
-		protected event LogMessageDelegate FatalLogDelegate;
+		protected event LogMessageEventHandler FatalLogEventHandler;
 
 		/// <summary>
 		/// Default constructor.
@@ -80,7 +80,7 @@ namespace CSEngineer.Logger
 			)
 		{
 			var log = Log.GetInstance();
-			RaiseLogEvent(log.TraceLogDelegate, message);
+			RaiseLogEvent(log.TraceLogEventHandler, message, filePath, lineNumber, memberName);
 		}
 
 		/// <summary>
@@ -90,7 +90,7 @@ namespace CSEngineer.Logger
 		public static void DEBUG(string message)
 		{
 			var log = Log.GetInstance();
-			RaiseLogEvent(log.DebugLogDelegate, message);
+			RaiseLogEvent(log.DebugLogEventHandler, message);
 		}
 
 		/// <summary>
@@ -100,7 +100,7 @@ namespace CSEngineer.Logger
 		public static void INFO(string message)
 		{
 			var log = Log.GetInstance();
-			RaiseLogEvent(log.InfoLogDelegate, message);
+			RaiseLogEvent(log.InfoLogEventHandler, message);
 		}
 
 		/// <summary>
@@ -110,7 +110,7 @@ namespace CSEngineer.Logger
 		public static void WARN(string message)
 		{
 			var log = Log.GetInstance();
-			RaiseLogEvent(log.WarnLogDelegate, message);
+			RaiseLogEvent(log.WarnLogEventHandler, message);
 		}
 
 		/// <summary>
@@ -120,7 +120,7 @@ namespace CSEngineer.Logger
 		public static void ERROR(string message)
 		{
 			var log = Log.GetInstance();
-			RaiseLogEvent(log.ErrorLogDelegate, message);
+			RaiseLogEvent(log.ErrorLogEventHandler, message);
 		}
 
 		/// <summary>
@@ -130,7 +130,7 @@ namespace CSEngineer.Logger
 		public static void FATAL(string message)
 		{
 			var log = Log.GetInstance();
-			RaiseLogEvent(log.FatalLogDelegate, message);
+			RaiseLogEvent(log.FatalLogEventHandler, message);
 		}
 
 		/// <summary>
@@ -139,7 +139,7 @@ namespace CSEngineer.Logger
 		/// <param name="eventHandler">Log event handler (delegate).</param>
 		/// <param name="message">Log message</param>
 		protected static void RaiseLogEvent(
-			LogMessageDelegate eventHandler, 
+			LogMessageEventHandler eventHandler, 
 			string message,
 			string filePath = "",
 			int lineNumber = 0,
@@ -158,12 +158,12 @@ namespace CSEngineer.Logger
 		{
 			var log = Log.GetInstance();
 
-			log.TraceLogDelegate += logger.TRACE;
-			log.DebugLogDelegate += logger.DEBUG;
-			log.InfoLogDelegate += logger.INFO;
-			log.WarnLogDelegate += logger.WARN;
-			log.ErrorLogDelegate += logger.ERROR;
-			log.FatalLogDelegate += logger.FATAL;
+			log.TraceLogEventHandler += logger.TRACE;
+			log.DebugLogEventHandler += logger.DEBUG;
+			log.InfoLogEventHandler += logger.INFO;
+			log.WarnLogEventHandler += logger.WARN;
+			log.ErrorLogEventHandler += logger.ERROR;
+			log.FatalLogEventHandler += logger.FATAL;
 		}
 	}
 }
