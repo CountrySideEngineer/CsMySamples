@@ -71,54 +71,84 @@ namespace CSEngineer.Logger
 		/// TRACE level log.
 		/// </summary>
 		/// <param name="message">Log message.</param>
-		public void TRACE(string message)
+		public void _TRACE(string message)
 		{
-			LogEvent(TraceLogEventHandler, message);
+			_LogEvent(TraceLogEventHandler, message);
 		}
+
+		public static void TRACE(string message)
+		{
+		}
+
+
 
 		/// <summary>
 		/// DEBUG level log.
 		/// </summary>
 		/// <param name="message">Log message.</param>
-		public void DEBUG(string message)
+		public void _DEBUG(string message)
 		{
-			LogEvent(DebugLogEventHandler, message);
+			_LogEvent(DebugLogEventHandler, message);
+		}
+
+		public static void DEBUG(string message)
+		{
 		}
 
 		/// <summary>
 		/// INFO (information) level log.
 		/// </summary>
 		/// <param name="message">Log message.</param>
-		public void INFO(string message)
+		public void _INFO(string message)
 		{
-			LogEvent(InfoLogEventHandler, message);
+			_LogEvent(InfoLogEventHandler, message);
+		}
+
+		public static void INFO(string message)
+		{
+
 		}
 
 		/// <summary>
 		/// WARN (warning) level log.
 		/// </summary>
 		/// <param name="message">Log message.</param>
-		public void WARN(string message)
+		public void _WARN(string message)
 		{
-			LogEvent(WarnLogEventHandler, message);
+			_LogEvent(WarnLogEventHandler, message);
+		}
+
+		public static void WARN(string message)
+		{
+
 		}
 
 		/// <summary>
 		/// ERROR level log.
 		/// </summary>
 		/// <param name="message">Log message.</param>
-		public void ERROR(string message)
+		public void _ERROR(string message)
 		{
-			LogEvent(ErrorLogEventHandler, message);
+			_LogEvent(ErrorLogEventHandler, message);
+		}
+
+		public static void ERROR(string message)
+		{
+
 		}
 
 		/// <summary>
 		/// FATAL level log.
 		/// </summary>
 		/// <param name="message">Log message.</param>
-		public void FATAL(string message)
+		public void _FATAL(string message)
 		{
-			LogEvent(FatalLogEventHandler, message);
+			_LogEvent(FatalLogEventHandler, message);
+		}
+
+		public static void FATAL(string message)
+		{
+
 		}
 
 		/// <summary>
@@ -126,10 +156,32 @@ namespace CSEngineer.Logger
 		/// </summary>
 		/// <param name="eventHandler">Log event handler (delegate).</param>
 		/// <param name="message">Log message</param>
-		protected void LogEvent(LogEventHandler eventHandler, string message)
+		protected void _LogEvent(LogEventHandler eventHandler, string message)
 		{
 			var eventArg = new LogEventArgs(message);
 			eventHandler?.Invoke(this, eventArg);
+		}
+
+		protected static void LogEvent(LogEventHandler eventHandler, string message)
+		{
+			var eventArg = new LogEventArgs(message);
+			eventHandler?.Invoke(Log.GetInstance(), eventArg);
+		}
+
+		/// <summary>
+		/// Setup event handler.
+		/// </summary>
+		/// <param name="logger"></param>
+		public static void AddLogger(ALog logger)
+		{
+			var log = Log.GetInstance();
+
+			log.TraceLogEventHandler += logger.TRACE;
+			log.DebugLogEventHandler += logger.DEBUG;
+			log.InfoLogEventHandler += logger.INFO;
+			log.WarnLogEventHandler += logger.WARN;
+			log.ErrorLogEventHandler += logger.ERROR;
+			log.FatalLogEventHandler += logger.FATAL;
 		}
 	}
 }
