@@ -14,12 +14,9 @@ namespace CSEngineer.Logger.Console
 		/// </summary>
 		/// <param name="level">Log level in string.</param>
 		/// <param name="message">Log message.</param>
-		public override void Output(string level, string message)
+		public override void Output(string message)
 		{
-			string timeStamp = GetTimeStamp();
-			string log = $"[{level}][{timeStamp}]:{message}";
-
-			System.Console.WriteLine(log);
+			System.Console.WriteLine(message);
 		}
 	}
 }

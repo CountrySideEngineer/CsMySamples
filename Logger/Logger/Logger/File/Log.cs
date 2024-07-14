@@ -34,15 +34,13 @@ namespace CSEngineer.Logger.File
 		/// </summary>
 		/// <param name="level">Log level in string.</param>
 		/// <param name="message"></param>
-		public override void Output(string level, string message)
+		public override void Output(string message)
 		{
 			try
 			{
 				using (var stream = new StreamWriter(FilePath, true))
 				{
-					string timeStamp = GetTimeStamp();
-					string log = $"[{level}][{timeStamp}]:{message}";
-					stream.WriteLine(log);
+					stream.WriteLine(message);
 				}
 			}
 			catch (Exception)
