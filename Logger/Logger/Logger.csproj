@@ -11,4 +11,8 @@
     <Compile Remove="Logger.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Logger\ALog.cs.bak" />
+  </ItemGroup>
+
 </Project>

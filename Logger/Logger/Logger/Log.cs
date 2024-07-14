@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 using CSEngineer.Logger.EventArg;
 
@@ -8,46 +9,41 @@ namespace CSEngineer.Logger
 	public class Log
 	{
 		/// <summary>
-		/// Log singleton object.
-		/// </summary>
-		private static Log _instance = null;
-
-		/// <summary>
 		/// Deleagate event handler to raise log message event.
 		/// </summary>
 		/// <param name="sender">Object sender.</param>
 		/// <param name="e">Log message event.</param>
-		public delegate void LogEventHandler(object sender, EventArgs e);
+		public delegate void LogMessageDelegate(object sender, EventArgs e);
 
 		/// <summary>
 		/// TRACE log level event handler.
 		/// </summary>
-		public event LogEventHandler TraceLogEventHandler;
+		protected event LogMessageDelegate TraceLogDelegate;
 
 		/// <summary>
 		/// DEBUG log level event handler.
 		/// </summary>
-		public event LogEventHandler DebugLogEventHandler;
+		protected event LogMessageDelegate DebugLogDelegate;
 
 		/// <summary>
 		/// INFO log level event handler.
 		/// </summary>
-		public event LogEventHandler InfoLogEventHandler;
+		protected event LogMessageDelegate InfoLogDelegate;
 
 		/// <summary>
 		/// WARNING log level event handler.
 		/// </summary>
-		public event LogEventHandler WarnLogEventHandler;
+		protected event LogMessageDelegate WarnLogDelegate;
 
 		/// <summary>
 		/// ERROR log level event handler.
 		/// </summary>
-		public event LogEventHandler ErrorLogEventHandler;
+		protected event LogMessageDelegate ErrorLogDelegate;
 
 		/// <summary>
 		/// FATAL log level event handler.
 		/// </summary>
-		public event LogEventHandler FatalLogEventHandler;
+		protected event LogMessageDelegate FatalLogDelegate;
 
 		/// <summary>
 		/// Default constructor.
@@ -55,10 +51,15 @@ namespace CSEngineer.Logger
 		private Log() { }
 
 		/// <summary>
+		/// Log singleton object.
+		/// </summary>
+		private static Log _instance = null;
+
+		/// <summary>
 		/// Static method to get singleton Log object.
 		/// </summary>
 		/// <returns>Log object.</returns>
-		public static Log GetInstance()
+		protected static Log GetInstance()
 		{
 			if (null == Log._instance)
 			{
@@ -71,84 +72,65 @@ namespace CSEngineer.Logger
 		/// TRACE level log.
 		/// </summary>
 		/// <param name="message">Log message.</param>
-		public void _TRACE(string message)
+		public static void TRACE(
+			string message, 
+			[CallerFilePath] string filePath = "", 
+			[CallerLineNumber] int lineNumber = 0, 
+			[CallerMemberName] string memberName = ""
+			)
 		{
-			_LogEvent(TraceLogEventHandler, message);
+			var log = Log.GetInstance();
+			RaiseLogEvent(log.TraceLogDelegate, message);
 		}
-
-		public static void TRACE(string message)
-		{
-		}
-
-
 
 		/// <summary>
 		/// DEBUG level log.
 		/// </summary>
 		/// <param name="message">Log message.</param>
-		public void _DEBUG(string message)
-		{
-			_LogEvent(DebugLogEventHandler, message);
-		}
-
 		public static void DEBUG(string message)
 		{
+			var log = Log.GetInstance();
+			RaiseLogEvent(log.DebugLogDelegate, message);
 		}
 
 		/// <summary>
 		/// INFO (information) level log.
 		/// </summary>
 		/// <param name="message">Log message.</param>
-		public void _INFO(string message)
-		{
-			_LogEvent(InfoLogEventHandler, message);
-		}
-
 		public static void INFO(string message)
 		{
-
+			var log = Log.GetInstance();
+			RaiseLogEvent(log.InfoLogDelegate, message);
 		}
 
 		/// <summary>
 		/// WARN (warning) level log.
 		/// </summary>
 		/// <param name="message">Log message.</param>
-		public void _WARN(string message)
-		{
-			_LogEvent(WarnLogEventHandler, message);
-		}
-
 		public static void WARN(string message)
 		{
-
+			var log = Log.GetInstance();
+			RaiseLogEvent(log.WarnLogDelegate, message);
 		}
 
 		/// <summary>
 		/// ERROR level log.
 		/// </summary>
 		/// <param name="message">Log message.</param>
-		public void _ERROR(string message)
-		{
-			_LogEvent(ErrorLogEventHandler, message);
-		}
-
 		public static void ERROR(string message)
 		{
-
+			var log = Log.GetInstance();
+			RaiseLogEvent(log.ErrorLogDelegate, message);
 		}
 
 		/// <summary>
 		/// FATAL level log.
 		/// </summary>
 		/// <param name="message">Log message.</param>
-		public void _FATAL(string message)
-		{
-			_LogEvent(FatalLogEventHandler, message);
-		}
-
 		public static void FATAL(string message)
 		{
-
+			var log = Log.GetInstance();
+			RaiseLogEvent(log.FatalLogDelegate, message);
 		}
 
 		/// <summary>
@@ -156,15 +138,15 @@ namespace CSEngineer.Logger
 		/// </summary>
 		/// <param name="eventHandler">Log event handler (delegate).</param>
 		/// <param name="message">Log message</param>
-		protected void _LogEvent(LogEventHandler eventHandler, string message)
+		protected static void RaiseLogEvent(
+			LogMessageDelegate eventHandler, 
+			string message,
+			string filePath = "",
+			int lineNumber = 0,
+			string memberName = ""
+			)
 		{
-			var eventArg = new LogEventArgs(message);
-			eventHandler?.Invoke(this, eventArg);
-		}
-
-		protected static void LogEvent(LogEventHandler eventHandler, string message)
-		{
-			var eventArg = new LogEventArgs(message);
+			var eventArg = new LogEventArgs(message, filePath, lineNumber, memberName);
 			eventHandler?.Invoke(Log.GetInstance(), eventArg);
 		}
 
@@ -176,12 +158,12 @@ namespace CSEngineer.Logger
 		{
 			var log = Log.GetInstance();
 
-			log.TraceLogEventHandler += logger.TRACE;
-			log.DebugLogEventHandler += logger.DEBUG;
-			log.InfoLogEventHandler += logger.INFO;
-			log.WarnLogEventHandler += logger.WARN;
-			log.ErrorLogEventHandler += logger.ERROR;
-			log.FatalLogEventHandler += logger.FATAL;
+			log.TraceLogDelegate += logger.TRACE;
+			log.DebugLogDelegate += logger.DEBUG;
+			log.InfoLogDelegate += logger.INFO;
+			log.WarnLogDelegate += logger.WARN;
+			log.ErrorLogDelegate += logger.ERROR;
+			log.FatalLogDelegate += logger.FATAL;
 		}
 	}
 }
