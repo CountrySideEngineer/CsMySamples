@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CSEngineer.Logger.Interface
 {
@@ -14,7 +12,7 @@ namespace CSEngineer.Logger.Interface
 		/// </summary>
 		/// <param name="sende">Event sender.</param>
 		/// <param name="e">Event argument.</param>
-		void TRACE(object sende, EventArgs e);
+		void TRACE(object sender, EventArgs e);
 
 		/// <summary>
 		/// DEBUG level log event handler

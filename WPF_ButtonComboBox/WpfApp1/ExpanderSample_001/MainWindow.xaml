@@ -7,6 +7,9 @@
         xmlns:vm="clr-namespace:ExpanderSample_001.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolVisibilityConverter"/>
+    </Window.Resources>
     <Window.DataContext>
         <vm:MainWindowViewModel />
     </Window.DataContext>
@@ -19,6 +22,7 @@
         </Grid.RowDefinitions>
         <Expander Grid.Row="0"
                   Grid.Column="0"
+                  Header="Sample Expander"
                   >
             <DataGrid AutoGenerateColumns="False"
                       CanUserAddRows="False"
@@ -56,6 +60,7 @@
                                             Content="..."
                                             Padding="8, 0, 8, 0"
                                             Command="{Binding ItemCommand}"
+                                            Visibility="{Binding Path=IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType=DataGridRow}, Converter={StaticResource BoolVisibilityConverter}}"
                                             />
                                 </Grid>
                             </DataTemplate>
