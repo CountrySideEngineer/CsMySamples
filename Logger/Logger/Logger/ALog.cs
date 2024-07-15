@@ -1,8 +1,6 @@
 ﻿using CSEngineer.Logger.EventArg;
 using CSEngineer.Logger.Interface;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CSEngineer.Logger
 {
@@ -43,7 +41,7 @@ namespace CSEngineer.Logger
 		/// </summary>
 		/// <param name="sender">Sender object.</param>
 		/// <param name="e">Log event argument.</param>
-		public void DEBUG(object sender, EventArgs e)
+		public virtual void DEBUG(object sender, EventArgs e)
 		{
 			Output(ALog._DEBUG, e);
 		}
@@ -52,9 +50,9 @@ namespace CSEngineer.Logger
 		/// DEBUG level log.
 		/// </summary>
 		/// <param name="message">Log message.</param>
-		public void DEBUG(string message)
+		public virtual void DEBUG(string message)
 		{
-			Output(ALog._DEBUG, message);
+			DEBUG(ALog._DEBUG, new LogEventArgs(message));
 		}
 
 		/// <summary>
@@ -62,7 +60,7 @@ namespace CSEngineer.Logger
 		/// </summary>
 		/// <param name="sender">Sender object.</param>
 		/// <param name="e">Log event argument.</param>
-		public void ERROR(object sender, EventArgs e)
+		public virtual void ERROR(object sender, EventArgs e)
 		{
 			Output(ALog._ERROR, e);
 		}
@@ -71,9 +69,9 @@ namespace CSEngineer.Logger
 		/// ERROR level log.
 		/// </summary>
 		/// <param name="message">Log message.</param>
-		public void ERROR(string message)
+		public virtual void ERROR(string message)
 		{
-			Output(ALog._ERROR, message);
+			ERROR(ALog._ERROR, new LogEventArgs(message));
 		}
 
 		/// <summary>
@@ -81,7 +79,7 @@ namespace CSEngineer.Logger
 		/// </summary>
 		/// <param name="sender">Sender object.</param>
 		/// <param name="e">Log event argument.</param>
-		public void FATAL(object sender, EventArgs e)
+		public virtual void FATAL(object sender, EventArgs e)
 		{
 			Output(ALog._FATAL, e);
 		}
@@ -90,9 +88,9 @@ namespace CSEngineer.Logger
 		/// FATAL level log.
 		/// </summary>
 		/// <param name="message">Log message.</param>
-		public void FATAL(string message)
+		public virtual void FATAL(string message)
 		{
-			Output(ALog._FATAL, message);
+			FATAL(ALog._FATAL, new LogEventArgs(message));
 		}
 
 		/// <summary>
@@ -100,7 +98,7 @@ namespace CSEngineer.Logger
 		/// </summary>
 		/// <param name="sender">Sender object.</param>
 		/// <param name="e">Log event argument.</param>
-		public void INFO(object sender, EventArgs e)
+		public virtual void INFO(object sender, EventArgs e)
 		{
 			Output(ALog._INFO, e);
 		}
@@ -109,9 +107,9 @@ namespace CSEngineer.Logger
 		/// INFO (information) level log.
 		/// </summary>
 		/// <param name="message">Log message.</param>
-		public void INFO(string message)
+		public virtual void INFO(string message)
 		{
-			Output(ALog._INFO, message);
+			INFO(ALog._INFO, new LogEventArgs(message));
 		}
 
 		/// <summary>
@@ -119,7 +117,7 @@ namespace CSEngineer.Logger
 		/// </summary>
 		/// <param name="sender">Sender object.</param>
 		/// <param name="e">Log event argument.</param>
-		public void TRACE(object sende, EventArgs e)
+		public virtual void TRACE(object sende, EventArgs e)
 		{
 			Output(ALog._TRACE, e);
 		}
@@ -128,9 +126,9 @@ namespace CSEngineer.Logger
 		/// TRACE level log.
 		/// </summary>
 		/// <param name="message">Log message.</param>
-		public void TRACE(string message)
+		public virtual void TRACE(string message)
 		{
-			Output(ALog._TRACE, message);
+			Output(ALog._TRACE, new LogEventArgs(message));
 		}
 
 		/// <summary>
@@ -138,7 +136,7 @@ namespace CSEngineer.Logger
 		/// </summary>
 		/// <param name="sender">Sender object.</param>
 		/// <param name="e">Log event argument.</param>
-		public void WARN(object sender, EventArgs e)
+		public virtual void WARN(object sender, EventArgs e)
 		{
 			Output(ALog._WARN, e);
 		}
@@ -147,9 +145,9 @@ namespace CSEngineer.Logger
 		/// WARN (warning) level log.
 		/// </summary>
 		/// <param name="message">Log message.</param>
-		public void WARN(string message)
+		public virtual void WARN(string message)
 		{
-			Output(ALog._WARN, message);
+			WARN(ALog._WARN, new LogEventArgs(message));
 		}
 
 		/// <summary>
@@ -157,7 +155,7 @@ namespace CSEngineer.Logger
 		/// </summary>
 		/// <param name="e">Event argument.</param>
 		/// <returns>Log message.</returns>
-		protected string ExtractMessage(EventArgs e)
+		protected virtual string ExtractMessage(EventArgs e)
 		{
 			try
 			{
@@ -180,14 +178,47 @@ namespace CSEngineer.Logger
 		}
 
 		/// <summary>
+		/// Generate message from event arguments.
+		/// </summary>
+		/// <param name="e">Message source event argument.</param>
+		/// <returns>Message</returns>
+		protected virtual string GenerateMessage(string level, EventArgs e)
+		{
+			string timeStamp = GetTimeStamp();
+			string logMessage = $"[{level}][{timeStamp}]";
+
+			try
+			{
+				var logEventArg = (LogEventArgs)e;
+				if ((!string.IsNullOrEmpty(logEventArg.FileName))
+					&& (0 != logEventArg.LineNumber)
+					&& (!string.IsNullOrEmpty(logEventArg.MemberName))
+					)
+				{
+					string optLog = $"[{logEventArg.FileName}({logEventArg.LineNumber,4})][{logEventArg.MemberName}]";
+					logMessage += optLog;
+				}
+				logMessage += $":{logEventArg.Message}";
+
+				return logMessage;
+			}
+			catch (Exception ex)
+			when ((ex is InvalidCastException) || (ex is NullReferenceException))
+			{
+				throw new NotSupportedException("Log message invalid.");
+			}
+
+		}
+
+		/// <summary>
 		/// Output message from event argument.
 		/// </summary>
 		/// <param name="level">Log level.</param>
 		/// <param name="e">Event argument.</param>
 		protected virtual void Output(string level, EventArgs e)
 		{
-			string message = ExtractMessage(e);
-			Output(level, message);
+			string message = GenerateMessage(level, e);
+			Output(message);
 		}
 
 		/// <summary>
@@ -195,7 +226,7 @@ namespace CSEngineer.Logger
 		/// </summary>
 		/// <param name="level">Log level.</param>
 		/// <param name="message">Log message.</param>
-		public abstract void Output(string level, string message);
+		public abstract void Output(string message);
 
 		/// <summary>
 		/// Default time stamp format.
