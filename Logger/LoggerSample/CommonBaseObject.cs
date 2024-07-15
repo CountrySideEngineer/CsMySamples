@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LoggerSample
 {
-	public class CommonBaseObject : ILogger
+	public class CommonBaseObject : ALog
 	{
 		/// <summary>
 		/// DEBUG level log.
