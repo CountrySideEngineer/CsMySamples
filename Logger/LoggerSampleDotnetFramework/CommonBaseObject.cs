@@ -17,7 +17,7 @@ namespace LoggerSample
 		public void DEBUG(string message)
 		{
 			var logger = Log.GetInstance();
-			logger.DEBUG(message);
+			logger._DEBUG(message);
 		}
 
 		/// <summary>
@@ -27,7 +27,7 @@ namespace LoggerSample
 		public void ERROR(string message)
 		{
 			var logger = Log.GetInstance();
-			logger.ERROR(message);
+			logger._ERROR(message);
 		}
 
 		/// <summary>
@@ -37,7 +37,7 @@ namespace LoggerSample
 		public void FATAL(string message)
 		{
 			var logger = Log.GetInstance();
-			logger.FATAL(message);
+			logger._FATAL(message);
 		}
 
 		/// <summary>
@@ -47,7 +47,7 @@ namespace LoggerSample
 		public void INFO(string message)
 		{
 			var logger = Log.GetInstance();
-			logger.INFO(message);
+			logger._INFO(message);
 		}
 
 		/// <summary>
@@ -57,7 +57,7 @@ namespace LoggerSample
 		public void TRACE(string message)
 		{
 			var logger = Log.GetInstance();
-			logger.TRACE(message);
+			logger._TRACE(message);
 		}
 
 		/// <summary>
@@ -67,7 +67,7 @@ namespace LoggerSample
 		public void WARN(string message)
 		{
 			var logger = Log.GetInstance();
-			logger.WARN(message);
+			logger._WARN(message);
 		}
 	}
 }

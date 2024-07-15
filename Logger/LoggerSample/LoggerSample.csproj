@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CommonBaseObject.cs" />
+    <Compile Remove="ILogger.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Logger">
       <HintPath>..\Logger\bin\Release\netcoreapp3.1\Logger.dll</HintPath>
     </Reference>
