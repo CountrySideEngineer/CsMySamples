@@ -22,7 +22,15 @@ namespace LoggerSample
 
 		static void Main(string[] args)
 		{
-			SetUpLogger(new CSEngineer.Logger.Console.Log());
+			SetUpLogger(new CSEngineer.Logger.Console.Log()
+			{
+				TraceOfTrace = true,
+				TraceOn = true,
+				TraceOfDebug = true,
+				DebugOn = false,
+				TraceOfFatal = true,
+				ErrorOn = false
+			});
 			SetUpLogger(new CSEngineer.Logger.File.Log());
 
 			var sampleClass = new LoggerSampleClass();
