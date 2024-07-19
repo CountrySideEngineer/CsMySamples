@@ -24,7 +24,15 @@ namespace LoggerSample
 		{
 			ILogEvent fileLog = new CSEngineer.Logger.File.Log();
 
-			SetUpLogger(new CSEngineer.Logger.Console.Log());
+			SetUpLogger(new CSEngineer.Logger.Console.Log()
+			{
+				TraceOfTrace = false,
+				TraceOn = true,
+				TraceOfDebug = true,
+				DebugOn = true,
+				TraceOfError = true,
+				ErrorOn = false
+			});
 			SetUpLogger(new CSEngineer.Logger.File.Log());
 
 			var sampleClass = new LoggerSampleClass();
