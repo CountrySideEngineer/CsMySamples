@@ -87,50 +87,75 @@ namespace CSEngineer.Logger
 		/// DEBUG level log.
 		/// </summary>
 		/// <param name="message">Log message.</param>
-		public static void DEBUG(string message)
+		public static void DEBUG(
+			string message,
+			[CallerFilePath] string filePath = "",
+			[CallerLineNumber] int lineNumber = 0,
+			[CallerMemberName] string memberName = ""
+			)
 		{
 			var log = Log.GetInstance();
-			RaiseLogEvent(log.DebugLogEventHandler, message);
+			RaiseLogEvent(log.DebugLogEventHandler, message, filePath, lineNumber, memberName);
 		}
 
 		/// <summary>
 		/// INFO (information) level log.
 		/// </summary>
 		/// <param name="message">Log message.</param>
-		public static void INFO(string message)
+		public static void INFO(
+			string message,
+			[CallerFilePath] string filePath = "",
+			[CallerLineNumber] int lineNumber = 0,
+			[CallerMemberName] string memberName = ""
+			)
 		{
 			var log = Log.GetInstance();
-			RaiseLogEvent(log.InfoLogEventHandler, message);
+			RaiseLogEvent(log.InfoLogEventHandler, message, filePath, lineNumber, memberName);
 		}
 
 		/// <summary>
 		/// WARN (warning) level log.
 		/// </summary>
 		/// <param name="message">Log message.</param>
-		public static void WARN(string message)
+		public static void WARN(
+			string message,
+			[CallerFilePath] string filePath = "",
+			[CallerLineNumber] int lineNumber = 0,
+			[CallerMemberName] string memberName = ""
+			)
 		{
 			var log = Log.GetInstance();
-			RaiseLogEvent(log.WarnLogEventHandler, message);
+			RaiseLogEvent(log.WarnLogEventHandler, message, filePath, lineNumber, memberName);
 		}
 
 		/// <summary>
 		/// ERROR level log.
 		/// </summary>
 		/// <param name="message">Log message.</param>
-		public static void ERROR(string message)
+		public static void ERROR(
+			string message,
+			[CallerFilePath] string filePath = "",
+			[CallerLineNumber] int lineNumber = 0,
+			[CallerMemberName] string memberName = ""
+			)
 		{
 			var log = Log.GetInstance();
-			RaiseLogEvent(log.ErrorLogEventHandler, message);
+			RaiseLogEvent(log.ErrorLogEventHandler, message, filePath, lineNumber, memberName);
 		}
 
 		/// <summary>
 		/// FATAL level log.
 		/// </summary>
 		/// <param name="message">Log message.</param>
-		public static void FATAL(string message)
+		public static void FATAL(
+			string message,
+			[CallerFilePath] string filePath = "",
+			[CallerLineNumber] int lineNumber = 0,
+			[CallerMemberName] string memberName = ""
+			)
 		{
 			var log = Log.GetInstance();
-			RaiseLogEvent(log.FatalLogEventHandler, message);
+			RaiseLogEvent(log.FatalLogEventHandler, message, filePath, lineNumber, memberName);
 		}
 
 		/// <summary>
