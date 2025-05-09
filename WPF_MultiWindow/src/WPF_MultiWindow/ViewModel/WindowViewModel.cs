@@ -12,42 +12,22 @@ namespace WPF_MultiWindow.ViewModel
         public delegate void NotifyClosingWindow(object sender, EventArgs e);
         public NotifyClosingWindow? NotifyClosingWindowDelegate;
 
-        public delegate void CloseWindowDelegate(object sender, EventArgs e);
-        public event CloseWindowDelegate? CloseWindowEvent;
-
-
-        protected DelegateCommand? _closeWindowCommand = null;
-        public DelegateCommand CloseWindowCommand
-        {
-            get
-            {
-                if (null == _closeWindowCommand)
-                {
-                    _closeWindowCommand = new DelegateCommand(CloseWindowCommandExecute);
-
-                }
-                return _closeWindowCommand;
-            }
-        }
+        public delegate void ClosingWindowDelegate(object sender, EventArgs e);
+        public event ClosingWindowDelegate? ClosingWindowEvent;
 
         public virtual void OnClosingWindowEventHandler(object sender, EventArgs e)
         {
             NotifyClosingWindowDelegate?.Invoke(this, e);
         }
 
-        protected virtual void RaiseCloseWindowEvent()
+        protected virtual void RaiseClosingWindowEvent()
         {
-            CloseWindowEvent?.Invoke(this, new EventArgs());
-        }
-
-        public virtual void CloseWindowCommandExecute()
-        {
-            RaiseCloseWindowEvent();
+            ClosingWindowEvent?.Invoke(this, new EventArgs());
         }
 
         public virtual void ClosingWindowCommandExecute()
         {
-            RaiseCloseWindowEvent();
+            RaiseClosingWindowEvent();
         }
     }
 }
