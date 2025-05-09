@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPF_MultiWindow.ViewModel;
 
 namespace WPF_MultiWindow.View
 {
@@ -22,6 +24,19 @@ namespace WPF_MultiWindow.View
         public SubWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            var context = (SubWindowViewModel)e.NewValue;
+            context.NotifyClosingWindowDelegate += OnNotifyClosingWindowEventHandler;
+        }
+
+        private void OnNotifyClosingWindowEventHandler(object sender, EventArgs e)
+        {
+            Debug.WriteLine($"{nameof(OnNotifyClosingWindowEventHandler)} called.");
+
+            this.Close();
         }
     }
 }

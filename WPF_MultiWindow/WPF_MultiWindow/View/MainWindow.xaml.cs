@@ -32,5 +32,12 @@ namespace WPF_MultiWindow
                 WindowService = service
             };
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            WindowViewModel? viewModel = DataContext as WindowViewModel;
+            viewModel?.ClosingWindowCommandExecute();
+            
+        }
     }
 }

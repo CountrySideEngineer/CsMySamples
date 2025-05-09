@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WPF_MultiWindow.ViewModel
 {
-    internal class SubWindowViewModel : ViewModelBase
+    internal class SubWindowViewModel : WindowViewModel
     {
     }
 }

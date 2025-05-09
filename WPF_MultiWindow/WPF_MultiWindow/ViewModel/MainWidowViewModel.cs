@@ -9,7 +9,7 @@ using WPF_MultiWindow.Service;
 
 namespace WPF_MultiWindow.ViewModel
 {
-    internal class MainWindowViewModel : ViewModelBase
+    internal class MainWindowViewModel : WindowViewModel
     {
         public IWindowService<SubWindowViewModel>? WindowService { get; set; } = null;
 
@@ -30,6 +30,8 @@ namespace WPF_MultiWindow.ViewModel
         public virtual void OpenNewDialogCommandExecute()
         {
             var subViewModel = new SubWindowViewModel();
+            this.CloseWindowEvent += subViewModel.OnClosingWindowEventHandler;
+
             WindowService?.ShowNew(subViewModel);
         }
     }
