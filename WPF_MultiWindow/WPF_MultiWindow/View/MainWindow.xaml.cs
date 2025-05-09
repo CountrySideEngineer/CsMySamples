@@ -8,6 +8,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF_MultiWindow.Service;
+using WPF_MultiWindow.View;
+using WPF_MultiWindow.ViewModel;
 
 namespace WPF_MultiWindow
 {
@@ -19,6 +22,15 @@ namespace WPF_MultiWindow
         public MainWindow()
         {
             InitializeComponent();
+
+            IWindowService<SubWindowViewModel> service = new SubWindowService<SubWindow, SubWindowViewModel>()
+            {
+                Owner = this
+            };
+            this.DataContext = new MainWindowViewModel()
+            {
+                WindowService = service
+            };
         }
     }
 }
