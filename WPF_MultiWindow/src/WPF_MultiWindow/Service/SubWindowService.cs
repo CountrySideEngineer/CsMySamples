@@ -20,6 +20,17 @@ namespace WPF_MultiWindow.Service
             throw new NotImplementedException();
         }
 
+        protected List<TWindow> _windows = [];
+        protected List<TViewModel> _contexts = [];
+
+        public void CloseAll()
+        {
+            foreach (var window in _windows)
+            {
+                window.Close();
+            }
+        }
+
         public bool? ShowNew(TViewModel context)
         {
             var window = new TWindow()
@@ -27,6 +38,7 @@ namespace WPF_MultiWindow.Service
                 //Owner = Owner,
                 DataContext = context
             };
+            _windows.Add(window);
 
             window.Show();
 

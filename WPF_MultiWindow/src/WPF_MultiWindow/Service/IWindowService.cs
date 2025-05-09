@@ -10,5 +10,6 @@ namespace WPF_MultiWindow.Service
     {
         bool? ShowNew(TContext context);
         void Close(TContext context);
+        void CloseAll();
     }
 }
