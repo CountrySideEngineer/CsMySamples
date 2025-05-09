@@ -30,7 +30,7 @@
                  HorizontalContentAlignment="Right"
                  VerticalAlignment="Stretch"
                  VerticalContentAlignment="Center"
-                 Text="10"
+                 Text="{Binding SampleContent}"
                  BorderThickness="1"
                  BorderBrush="Black"
                  />
