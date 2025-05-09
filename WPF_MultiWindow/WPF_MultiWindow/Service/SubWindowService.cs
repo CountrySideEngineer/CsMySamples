@@ -22,7 +22,7 @@ namespace WPF_MultiWindow.Service
         {
             var window = new TWindow()
             {
-                Owner = Owner,
+                //Owner = Owner,
                 DataContext = context
             };
             window.Show();
