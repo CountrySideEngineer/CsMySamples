@@ -37,7 +37,6 @@ namespace WPF_MultiWindow
         {
             WindowViewModel? viewModel = DataContext as WindowViewModel;
             viewModel?.ClosingWindowCommandExecute();
-            
         }
     }
 }
