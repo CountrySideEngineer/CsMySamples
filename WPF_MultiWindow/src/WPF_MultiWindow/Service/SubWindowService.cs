@@ -21,7 +21,6 @@ namespace WPF_MultiWindow.Service
         }
 
         protected List<TWindow> _windows = [];
-        protected List<TViewModel> _contexts = [];
 
         public void CloseAll()
         {
