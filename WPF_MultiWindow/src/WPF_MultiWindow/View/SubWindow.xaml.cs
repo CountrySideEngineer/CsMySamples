@@ -26,17 +26,12 @@ namespace WPF_MultiWindow.View
             InitializeComponent();
         }
 
-        private void Window_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            var context = (SubWindowViewModel)e.NewValue;
-            context.NotifyClosingWindowDelegate += OnNotifyClosingWindowEventHandler;
-        }
+            var viewModel = (SubWindowViewModel)DataContext;
+            viewModel.ClosingWindowCommandExecute();
 
-        private void OnNotifyClosingWindowEventHandler(object sender, EventArgs e)
-        {
-            Debug.WriteLine($"{nameof(OnNotifyClosingWindowEventHandler)} called.");
 
-            this.Close();
         }
     }
 }

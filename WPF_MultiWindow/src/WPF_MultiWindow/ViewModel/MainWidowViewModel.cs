@@ -30,9 +30,13 @@ namespace WPF_MultiWindow.ViewModel
         public virtual void OpenNewDialogCommandExecute()
         {
             var subViewModel = new SubWindowViewModel();
-            this.ClosingWindowEvent += subViewModel.OnClosingWindowEventHandler;
 
             WindowService?.ShowNew(subViewModel);
+        }
+
+        public override void ClosingWindowCommandExecute()
+        {
+            WindowService?.CloseAll();
         }
     }
 }

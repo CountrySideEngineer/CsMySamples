@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,6 +39,12 @@ namespace WPF_MultiWindow.ViewModel
             ulong content = SampleModel.UpdateValue();
 
             SampleContent = content;
+        }
+
+        public override void ClosingWindowCommandExecute()
+        {
+            Debug.WriteLine($"{nameof(ClosingWindowCommandExecute)} is called.");
+            _timer.Stop();
         }
     }
 }
